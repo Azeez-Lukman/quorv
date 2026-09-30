@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Selected Concepts & Archive | QUORV Brand Studio{% endblock %}
+{% block meta_description %}Selected design concepts demonstrating the visual identity, typography, and web architecture Quorv builds for premium beauty businesses.{% endblock %}
+
+{% block content %}
+<section class="py-20 md:py-28 border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="max-w-3xl mb-16">
+      <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-[#E4C388] uppercase mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#E4C388]"></span>
+        <span>Studio Archive</span>
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight text-[#FAF8F5] mb-6">
+        Selected Concepts
+      </h1>
+      <p class="text-lg text-[#B2B5C4] leading-relaxed font-light mb-4">
+        A curated archive of design systems and digital concepts crafted to demonstrate our aesthetic standards, typographic restraint, and conversion architecture.
+      </p>
+      <div class="p-4 rounded-lg bg-[#0E1015] border border-white/[0.08] text-xs font-mono text-[#8C8F9F]">
+        Transparency Notice: These represent studio design concepts and architecture frameworks. Completed client case studies will be documented here as engagements conclude.
+      </div>
+    </div>
+
+    <!-- Concepts Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for concept in concepts %}
+      <div class="rounded-2xl overflow-hidden bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388]/40 transition-all duration-300 flex flex-col justify-between group">
+        <div>
+          <div class="aspect-[16/10] overflow-hidden relative">
+            <img src="{{ concept.image_url }}" alt="{{ concept.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0E1015] via-transparent to-transparent"></div>
+            <div class="absolute top-4 right-4 bg-[#08090C]/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#E4C388]/40 text-[10px] font-mono tracking-widest uppercase text-[#E4C388]">
+              CONCEPT
+            </div>
+          </div>
+
+          <div class="p-8">
+            <span class="text-xs font-mono text-[#E4C388] tracking-widest uppercase block mb-2">{{ concept.client_type }}</span>
+            <h2 class="text-2xl font-bold text-[#FAF8F5] mb-3">{{ concept.title }}</h2>
+            <p class="text-sm text-[#8C8F9F] leading-relaxed mb-6">{{ concept.concept_summary }}</p>
+            <div class="text-xs font-mono text-white/60 border-t border-white/[0.06] pt-4">
+              Scope: {{ concept.deliverables }}
+            </div>
+          </div>
+        </div>
+
+        <div class="px-8 pb-8">
+          <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%20like%20the%20style%20of%20the%20{{ concept.title|urlencode }}%20concept%20and%20would%20like%20to%20discuss%20something%20similar%20for%20my%20business." target="_blank" rel="noopener noreferrer" class="block text-center py-3 rounded-lg border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono uppercase tracking-wider text-[#FAF8F5] transition-colors">
+            Inquire About Similar Direction →
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Founding Partner Invitation -->
+    <div class="mt-20 p-10 rounded-2xl bg-[#08090C] border border-[#E4C388]/30 max-w-3xl mx-auto text-center">
+      <span class="text-xs font-mono uppercase tracking-widest text-[#E4C388] block mb-2">Founding Partnerships</span>
+      <h3 class="text-2xl font-serif text-[#FAF8F5] mb-4">Become a Featured Quorv Case Study</h3>
+      <p class="text-sm text-[#B2B5C4] leading-relaxed mb-6">
+        We are selectively onboarding premier salons, aesthetic clinics, and beauty entrepreneurs who desire a bespoke digital presence.
+      </p>
+      <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20becoming%20a%20founding%20client%20partner%20for%20my%20beauty%20business." target="_blank" rel="noopener noreferrer" class="btn-whatsapp px-8 py-3.5 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold inline-block">
+        Chat with Quorv on WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Capabilities & Services | QUORV Brand Studio{% endblock %}
+{% block meta_description %}Explore Quorv's specialist services for beauty businesses: Brand Identity, Custom Websites, Booking Experiences, Content Systems, and Local Search.{% endblock %}
+
+{% block content %}
+<section class="py-20 md:py-28 border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="max-w-3xl mb-16">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-3">Our Capabilities</span>
+      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight text-[#FAF8F5] mb-6">
+        Specialist Services for Beauty Businesses
+      </h1>
+      <p class="text-lg text-[#B2B5C4] leading-relaxed font-light">
+        We build the connected digital system around your salon, clinic, or beauty practice. Every service is calibrated to justify premium pricing and turn visitors into booked appointments.
+      </p>
+    </div>
+
+    <!-- Categories -->
+    <div class="flex flex-col gap-20">
+      {% for cat in categories %}
+      <div class="border-t border-white/[0.08] pt-12">
+        <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4 mb-8">
+          <div>
+            <span class="font-mono text-xs text-[#E4C388] tracking-widest uppercase">CATEGORY {{ cat.code }}</span>
+            <h2 class="text-3xl font-bold tracking-wide text-[#FAF8F5] mt-1">{{ cat.name }}</h2>
+          </div>
+          <p class="text-sm font-mono text-[#8C8F9F] max-w-md">
+            “{{ cat.outcome_statement }}”
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {% for service in cat.services.all %}
+          <div class="p-8 rounded-xl bg-[#0E1015] border border-white/[0.06] hover:border-[#E4C388]/30 transition-all flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-[#FAF8F5] mb-2">{{ service.title }}</h3>
+              <p class="text-xs text-[#E4C388] font-mono mb-4">{{ service.tagline }}</p>
+              <p class="text-sm text-[#8C8F9F] leading-relaxed mb-6">{{ service.outcome }}</p>
+
+              {% if service.get_deliverables_list %}
+              <div class="border-t border-white/[0.06] pt-4 mb-6">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-white/50 block mb-2">Scope:</span>
+                <ul class="flex flex-col gap-1.5 text-xs text-[#B2B5C4]">
+                  {% for deliverable in service.get_deliverables_list %}
+                  <li class="flex items-center gap-2">
+                    <span class="text-[#E4C388] text-[10px]">•</span> {{ deliverable }}
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+              <a href="{% url 'service_detail' service.slug %}" class="text-xs font-mono text-white/80 hover:text-[#E4C388] transition-colors">
+                View Service Details →
+              </a>
+              <a href="https://wa.me/447352789073?text={{ service.whatsapp_prompt|urlencode }}" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-[#E4C388]">
+                WhatsApp Quote
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="py-20 bg-[#08090C] text-center border-t border-white/[0.06]">
+  <div class="max-w-3xl mx-auto px-6">
+    <h2 class="text-2xl sm:text-4xl font-serif text-[#FAF8F5] mb-6">Discuss your service requirements with Quorv</h2>
+    <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp inline-flex items-center gap-3 px-8 py-3.5 rounded-lg text-xs font-semibold tracking-wider uppercase font-mono shadow-md">
+      Chat with Quorv on WhatsApp
+    </a>
+  </div>
+</section>
+{% endblock %}

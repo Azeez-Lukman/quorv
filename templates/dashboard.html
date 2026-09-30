@@ -1,0 +1,409 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Intelligence Dashboard | QUORV Brand Studio</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="icon" type="image/jpeg" href="{% static 'images/quorv-logo.jpg' %}">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS v4 Runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-obsidian-950: #08090C;
+      --color-obsidian-900: #0E1015;
+      --color-obsidian-850: #12141C;
+      --color-obsidian-800: #181A24;
+      --color-champagne-400: #E4C388;
+      --color-champagne-500: #CBA565;
+      --font-serif: 'Italiana', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Space Grotesk', monospace;
+    }
+  </style>
+
+  <style>
+    body {
+      background-color: #08090C;
+      color: #FAF8F5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-mono {
+      font-family: 'Space Grotesk', monospace;
+    }
+    .font-serif {
+      font-family: 'Italiana', Georgia, serif;
+    }
+    ::selection {
+      background: #CBA565;
+      color: #08090C;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#08090C] text-[#FAF8F5] flex flex-col antialiased">
+
+  <!-- Dashboard Top Navigation Bar -->
+  <header class="border-b border-white/[0.08] bg-[#0E1015] sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
+      
+      <!-- Studio Brand Mark & Title -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-9 h-9 rounded-full p-[1.5px] bg-[#E4C388] overflow-hidden">
+          <img src="{% static 'images/quorv-logo.jpg' %}" alt="QUORV Emblem" class="w-full h-full object-cover rounded-full">
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2">
+            <span class="font-bold tracking-widest text-[#FAF8F5] text-sm">QUORV</span>
+            <span class="text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-[#E4C388]/15 text-[#E4C388] border border-[#E4C388]/30">Live Intelligence</span>
+          </div>
+          <span class="font-mono text-[9px] tracking-wider text-[#8C8F9F] uppercase">Owner Conversion Dashboard</span>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-3">
+        <a href="{% url 'home' %}" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono text-[#FAF8F5] transition-colors">
+          <span>Public Website</span>
+          <span class="text-[#E4C388]">↗</span>
+        </a>
+        <a href="/admin/" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono text-[#FAF8F5] transition-colors">
+          <span>Django Admin</span>
+          <span class="text-[#E4C388]">↗</span>
+        </a>
+        <a href="{% url 'export_leads_csv' %}" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white/[0.06] hover:bg-[#E4C388] hover:text-[#08090C] border border-white/[0.1] text-xs font-mono font-medium transition-all">
+          <span>Export Leads CSV ↓</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Dashboard Content -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-8 flex flex-col gap-8">
+    
+    <!-- Top Welcome & Time Ribbon -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-white/[0.06]">
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight text-[#FAF8F5]">Client Pipeline & Interaction Analytics</h1>
+        <p class="text-xs text-[#8C8F9F] font-mono mt-0.5">Real-time visitor interactions, WhatsApp triggers, and beauty business inquiries.</p>
+      </div>
+      <div class="flex items-center gap-3 text-xs font-mono text-[#8C8F9F]">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-emerald-400">Tracking Active</span>
+        </span>
+        <span>•</span>
+        <span>Studio Operator: <strong class="text-white">{{ user.username }}</strong></span>
+      </div>
+    </div>
+
+    <!-- Row 1: Key Performance Metric Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      
+      <!-- Card 1: Total Inquiries -->
+      <div class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.08] flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-[#8C8F9F]">Total Inquiries</span>
+          <span class="text-xs font-mono text-[#E4C388]">Leads</span>
+        </div>
+        <div class="text-3xl font-bold text-white tracking-tight my-1">{{ total_leads }}</div>
+        <div class="text-[11px] font-mono text-[#8C8F9F] flex items-center justify-between pt-2 border-t border-white/[0.04]">
+          <span>Today: <strong class="text-white">+{{ leads_today }}</strong></span>
+          <span class="text-emerald-400 font-medium">{{ new_leads }} Untouched</span>
+        </div>
+      </div>
+
+      <!-- Card 2: WhatsApp Conversions -->
+      <div class="p-6 rounded-xl bg-[#0E1015] border border-[#25D366]/30 flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-emerald-400">WhatsApp Clicks</span>
+          <span class="text-xs">💬</span>
+        </div>
+        <div class="text-3xl font-bold text-white tracking-tight my-1">{{ total_whatsapp }}</div>
+        <div class="text-[11px] font-mono text-[#8C8F9F] flex items-center justify-between pt-2 border-t border-white/[0.04]">
+          <span>Primary Conversion</span>
+          <span class="text-emerald-400">+44 7352 789073</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Total Interaction Events -->
+      <div class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.08] flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-[#8C8F9F]">Interaction Events</span>
+          <span class="text-xs font-mono text-[#E4C388]">Live</span>
+        </div>
+        <div class="text-3xl font-bold text-white tracking-tight my-1">{{ total_events }}</div>
+        <div class="text-[11px] font-mono text-[#8C8F9F] flex items-center justify-between pt-2 border-t border-white/[0.04]">
+          <span>Events Today: <strong class="text-white">{{ events_today }}</strong></span>
+          <span>Emails: <strong class="text-white">{{ total_emails }}</strong></span>
+        </div>
+      </div>
+
+      <!-- Card 4: Inquiry Pipeline Status -->
+      <div class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.08] flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-[#8C8F9F]">Pipeline Status</span>
+          <span class="text-xs font-mono text-amber-400">Active</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 my-1 text-center font-mono">
+          <div class="bg-black/40 p-1.5 rounded border border-white/[0.04]">
+            <div class="text-xs font-bold text-emerald-400">{{ new_leads }}</div>
+            <div class="text-[9px] text-[#8C8F9F]">New</div>
+          </div>
+          <div class="bg-black/40 p-1.5 rounded border border-white/[0.04]">
+            <div class="text-xs font-bold text-amber-400">{{ in_discussion_leads }}</div>
+            <div class="text-[9px] text-[#8C8F9F]">Talking</div>
+          </div>
+          <div class="bg-black/40 p-1.5 rounded border border-white/[0.04]">
+            <div class="text-xs font-bold text-blue-400">{{ contacted_leads }}</div>
+            <div class="text-[9px] text-[#8C8F9F]">Replied</div>
+          </div>
+        </div>
+        <div class="text-[10px] font-mono text-[#8C8F9F] pt-2 border-t border-white/[0.04]">
+          Closed: {{ closed_leads }} clients
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Row 2: Two Split Columns (Inquiry Inbox + Live Interaction Feed) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column: Lead Inquiries Table (7 cols) -->
+      <div class="lg:col-span-7 bg-[#0E1015] border border-white/[0.08] rounded-2xl p-6 sm:p-7 flex flex-col gap-6">
+        <div class="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+          <div>
+            <h2 class="text-lg font-bold text-white tracking-wide">Client Inquiry Inbox</h2>
+            <p class="text-xs text-[#8C8F9F] font-mono">Direct incoming submissions from beauty businesses</p>
+          </div>
+          <span class="text-xs font-mono text-[#E4C388]">{{ total_leads }} total leads</span>
+        </div>
+
+        {% if recent_leads %}
+        <div class="flex flex-col gap-4">
+          {% for lead in recent_leads %}
+          <div class="p-5 rounded-xl bg-[#08090C] border border-white/[0.06] hover:border-white/[0.15] transition-all flex flex-col gap-3">
+            
+            <!-- Lead Header -->
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <span class="font-bold text-white text-sm">{{ lead.name }}</span>
+                {% if lead.business_name %}
+                <span class="text-xs font-mono text-[#E4C388]">({{ lead.business_name }})</span>
+                {% endif %}
+              </div>
+
+              <!-- Status Dropdown Selector -->
+              <div class="flex items-center gap-2">
+                <select class="lead-status-select bg-[#12141C] border border-white/[0.1] text-xs font-mono rounded px-2.5 py-1 text-white outline-none" 
+                        data-lead-id="{{ lead.id }}">
+                  <option value="new" {% if lead.status == 'new' %}selected{% endif %}>🟢 New</option>
+                  <option value="contacted" {% if lead.status == 'contacted' %}selected{% endif %}>🔵 Contacted</option>
+                  <option value="in_discussion" {% if lead.status == 'in_discussion' %}selected{% endif %}>🟡 In Discussion</option>
+                  <option value="closed" {% if lead.status == 'closed' %}selected{% endif %}>⚪ Closed</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Lead Meta -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono text-[#8C8F9F]">
+              <div>Sector: <span class="text-white">{{ lead.get_business_type_display }}</span></div>
+              <div>Country: <span class="text-white">{{ lead.country|default:"Unspecified" }}</span></div>
+              <div>Email: <a href="mailto:{{ lead.email }}" class="text-[#E4C388] hover:underline">{{ lead.email }}</a></div>
+              <div>Phone: <span class="text-white">{{ lead.phone|default:"None" }}</span></div>
+            </div>
+
+            <!-- Message Preview -->
+            <div class="text-xs text-[#B2B5C4] bg-white/[0.02] p-3 rounded border border-white/[0.04] leading-relaxed">
+              <span class="block text-[9px] font-mono text-white/40 uppercase tracking-widest mb-1">Message:</span>
+              {{ lead.message }}
+            </div>
+
+            <!-- Bottom Actions -->
+            <div class="flex items-center justify-between pt-2 text-xs font-mono">
+              <span class="text-[10px] text-[#8C8F9F]">{{ lead.created_at|date:"M d, Y • H:i" }}</span>
+              
+              <div class="flex items-center gap-3">
+                {% if lead.phone %}
+                <a href="https://wa.me/{{ lead.phone|cut:' '|cut:'+'|cut:'-' }}?text=Hi%20{{ lead.name|urlencode }}%2C%20thank%20you%20for%20reaching%20out%20to%20QUORV%20Brand%20Studio%20regarding%20{{ lead.business_name|urlencode }}." 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="btn-whatsapp px-3 py-1 rounded text-[11px] font-semibold tracking-wider uppercase">
+                  💬 Reply on WhatsApp
+                </a>
+                {% endif %}
+                <a href="mailto:{{ lead.email }}?subject=QUORV%20Brand%20Studio%20Discussion" class="text-white/70 hover:text-white transition-colors text-[11px]">
+                  Email Client →
+                </a>
+              </div>
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-12 text-[#8C8F9F] font-mono text-xs">
+          No inquiries yet. Direct submissions from your contact form will appear here in real time.
+        </div>
+        {% endif %}
+
+      </div>
+
+      <!-- Right Column: Live Interaction Feed & CTA Analytics (5 cols) -->
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        
+        <!-- Live Visitor Interaction Stream -->
+        <div class="bg-[#0E1015] border border-white/[0.08] rounded-2xl p-6 sm:p-7 flex flex-col gap-4">
+          <div class="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#E4C388] animate-pulse"></span>
+              <h3 class="text-base font-bold text-white tracking-wide">Live Visitor Activity</h3>
+            </div>
+            <span class="text-[10px] font-mono text-[#8C8F9F]">Real-time Stream</span>
+          </div>
+
+          <div class="flex flex-col gap-3 max-h-[380px] overflow-y-auto pr-1" id="eventStream">
+            {% for ev in recent_events %}
+            <div class="p-3 rounded-lg bg-[#08090C] border border-white/[0.04] flex items-start justify-between gap-3 text-xs">
+              <div class="flex items-start gap-2.5">
+                {% if ev.event_type == 'whatsapp_click' %}
+                <span class="text-emerald-400 font-bold mt-0.5 text-sm">💬</span>
+                {% elif ev.event_type == 'lead_submit' %}
+                <span class="text-amber-400 font-bold mt-0.5 text-sm">✉</span>
+                {% elif ev.event_type == 'email_click' %}
+                <span class="text-blue-400 font-bold mt-0.5 text-sm">@</span>
+                {% else %}
+                <span class="text-[#E4C388] font-bold mt-0.5 text-sm">●</span>
+                {% endif %}
+                
+                <div>
+                  <div class="font-medium text-white">{{ ev.event_label }}</div>
+                  <div class="text-[10px] font-mono text-[#8C8F9F] flex items-center gap-2 mt-0.5">
+                    <span>{{ ev.get_event_type_display }}</span>
+                    {% if ev.ip_address %}
+                    <span>• IP: {{ ev.ip_address }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+
+              <span class="text-[10px] font-mono text-white/40 whitespace-nowrap">
+                {{ ev.created_at|date:"H:i:s" }}
+              </span>
+            </div>
+            {% empty %}
+            <div class="text-center py-8 text-[#8C8F9F] font-mono text-xs">
+              No live events logged yet. Clicks on WhatsApp CTAs across your site will stream here.
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Top Performing WhatsApp CTA Locations -->
+        <div class="bg-[#0E1015] border border-white/[0.08] rounded-2xl p-6 sm:p-7 flex flex-col gap-4">
+          <div class="pb-3 border-b border-white/[0.08]">
+            <h3 class="text-sm font-bold text-white tracking-wide">Top WhatsApp Conversion Triggers</h3>
+            <p class="text-[11px] font-mono text-[#8C8F9F]">Which buttons and services convert the most visitors</p>
+          </div>
+
+          <div class="flex flex-col gap-3">
+            {% for cta in top_ctas %}
+            <div class="flex flex-col gap-1.5 text-xs font-mono">
+              <div class="flex items-center justify-between text-white/90">
+                <span class="truncate max-w-[220px]">{{ cta.event_label }}</span>
+                <span class="text-[#E4C388] font-bold">{{ cta.total }} clicks</span>
+              </div>
+              <div class="w-full bg-[#08090C] h-1.5 rounded-full overflow-hidden border border-white/[0.04]">
+                <div class="bg-[#E4C388] h-full rounded-full" style="width: {% widthratio cta.total total_whatsapp 100 %}%;"></div>
+              </div>
+            </div>
+            {% empty %}
+            <p class="text-xs text-[#8C8F9F] font-mono">Data populates as visitors interact with CTAs.</p>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Inquiries by Beauty Sector Distribution -->
+        <div class="bg-[#0E1015] border border-white/[0.08] rounded-2xl p-6 sm:p-7 flex flex-col gap-4">
+          <div class="pb-3 border-b border-white/[0.08]">
+            <h3 class="text-sm font-bold text-white tracking-wide">Inquiries by Beauty Sector</h3>
+            <p class="text-[11px] font-mono text-[#8C8F9F]">Distribution across salons, clinics, and professionals</p>
+          </div>
+
+          <div class="flex flex-col gap-2.5">
+            {% for item in sector_counts %}
+            <div class="flex items-center justify-between text-xs font-mono bg-[#08090C] px-3.5 py-2 rounded border border-white/[0.04]">
+              <span class="text-white">{{ item.name }}</span>
+              <span class="text-[#E4C388] font-bold">{{ item.total }} leads</span>
+            </div>
+            {% empty %}
+            <p class="text-xs text-[#8C8F9F] font-mono">Awaiting incoming leads.</p>
+            {% endfor %}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Interactive AJAX Status Updater Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const selects = document.querySelectorAll('.lead-status-select');
+      selects.forEach(select => {
+        select.addEventListener('change', async (e) => {
+          const leadId = select.getAttribute('data-lead-id');
+          const newStatus = select.value;
+          const originalBorder = select.style.borderColor;
+          select.style.borderColor = '#E4C388';
+
+          try {
+            const res = await fetch(`/dashboard/lead/${leadId}/status/`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken') || '',
+              },
+              body: JSON.stringify({ status: newStatus }),
+            });
+            const data = await res.json();
+            if (data.status === 'ok') {
+              select.style.borderColor = '#22c55e';
+              setTimeout(() => { select.style.borderColor = originalBorder; }, 1500);
+            } else {
+              select.style.borderColor = '#ef4444';
+            }
+          } catch (err) {
+            select.style.borderColor = '#ef4444';
+          }
+        });
+      });
+
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+    });
+  </script>
+
+</body>
+</html>

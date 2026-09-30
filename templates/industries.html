@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Industries We Serve · Websites & Digital Systems for Beauty Businesses | Quorv{% endblock %}
+{% block meta_description %}Quorv builds premium websites and digital systems for salons, aesthetic clinics, med spas, nail studios, and beauty practices.{% endblock %}
+
+{% block content %}
+<section class="py-20 md:py-28 border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs font-mono text-[#8C8F9F] mb-8" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}" class="hover:text-white transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-[#E4C388]">Industries</span>
+    </nav>
+
+    <div class="max-w-3xl mb-16">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-3">Sectors & Disciplines</span>
+      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight text-[#FAF8F5] mb-6">
+        Specialist Digital Systems for Beauty Businesses
+      </h1>
+      <p class="text-lg text-[#B2B5C4] leading-relaxed font-light">
+        Quorv works exclusively in the beauty sector. Our web architecture, booking integrations, and visual systems are engineered specifically for salons, aesthetic clinics, med spas, and independent beauty specialists.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for ind in industries %}
+      <div class="p-8 rounded-2xl bg-[#0E1015] border border-white/[0.06] hover:border-[#E4C388]/40 transition-colors flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-mono text-[#E4C388] block mb-2">Sector 0{{ forloop.counter }}</span>
+          <h2 class="text-2xl font-bold text-[#FAF8F5] mb-2">{{ ind.title }}</h2>
+          <p class="text-xs font-mono text-[#8C8F9F] mb-6">{{ ind.subtitle }}</p>
+
+          <div class="mb-4">
+            <span class="text-xs font-mono text-white/50 block mb-1">The Friction:</span>
+            <p class="text-xs text-[#8C8F9F] leading-relaxed">{{ ind.the_challenge }}</p>
+          </div>
+
+          <div>
+            <span class="text-xs font-mono text-[#E4C388] block mb-1">The Quorv Architecture:</span>
+            <p class="text-xs text-[#B2B5C4] leading-relaxed">{{ ind.the_solution }}</p>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-white/[0.06] flex items-center justify-between">
+          <a href="{% url 'industry_detail' ind.slug %}" class="text-xs font-mono text-white hover:text-[#E4C388] transition-colors">
+            {{ ind.title }} Web Systems →
+          </a>
+          <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%20run%20a%20{{ ind.title|urlencode }}%20and%20would%20like%20to%20discuss%20improving%20our%20digital%20presence." target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-[#E4C388]">
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

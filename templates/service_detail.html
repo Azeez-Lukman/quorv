@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.title }} for Beauty Businesses · Quorv{% endblock %}
+{% block meta_description %}{{ service.title }} by Quorv: {{ service.outcome }} Engineered for salons, aesthetic clinics, med spas, and beauty businesses.{% endblock %}
+
+{% block content %}
+<section class="py-20 md:py-28 border-b border-white/[0.06] bg-[#08090C]">
+  <div class="max-w-5xl mx-auto px-6">
+    
+    <!-- Breadcrumb with semantic links -->
+    <nav class="flex items-center gap-2 text-xs font-mono text-[#8C8F9F] mb-8" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}" class="hover:text-white transition-colors">Home</a>
+      <span>/</span>
+      <a href="{% url 'services_index' %}" class="hover:text-white transition-colors">Services</a>
+      <span>/</span>
+      <span class="text-[#E4C388]">{{ service.title }}</span>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="mb-12">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-3">Service Capability · Category {{ service.category.code }}</span>
+      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight text-[#FAF8F5] mb-6">
+        {{ service.title }} for Beauty Businesses
+      </h1>
+      <p class="text-xl text-[#E4C388] font-light leading-relaxed mb-6 max-w-3xl">
+        {{ service.tagline }}
+      </p>
+    </div>
+
+    <!-- Independent Standalone Overview Card (GEO Extractable Definition) -->
+    <div class="p-8 sm:p-10 rounded-2xl bg-[#0E1015] border border-white/[0.08] mb-12">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-4">Direct Overview</span>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-[#B2B5C4] leading-relaxed font-light">
+        <div>
+          <h2 class="text-base font-bold text-[#FAF8F5] mb-2 font-mono uppercase text-xs">What It Is & Who It Is For</h2>
+          <p class="mb-4">
+            A specialist digital service designed specifically for salons, aesthetic clinics, med spas, and independent beauty practices seeking an authoritative digital presence.
+          </p>
+          <p>
+            <strong class="text-white font-mono text-xs uppercase text-[#E4C388]">Target Businesses:</strong> Hair salons, aesthetic clinics, medspas, nail and lash studios, wellness day spas, and emerging beauty brands.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-bold text-[#FAF8F5] mb-2 font-mono uppercase text-xs">What Quorv Delivers</h2>
+          <p class="mb-4">
+            {{ service.outcome }}
+          </p>
+          <p>
+            <strong class="text-white font-mono text-xs uppercase text-[#E4C388]">Integration:</strong> Connects directly with scheduling software (Fresha, Phorest, Vagaro, Boulevard, Jane App, Acuity) and local search foundations.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- In-Depth Strategy & Deliverables Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pt-6">
+      
+      <!-- Left Column: Strategy & Integration -->
+      <div class="md:col-span-7 flex flex-col gap-6 text-[#B2B5C4] leading-relaxed font-light">
+        <h2 class="text-2xl font-bold text-[#FAF8F5]">How This Connects to Your Digital System</h2>
+        <p>
+          {{ service.full_description }}
+        </p>
+        <p>
+          In the luxury beauty sector, client trust is fragile. If a website takes five seconds to load, lacks clear treatment descriptions, or redirects abruptly to a clunky generic booking portal, clients leave. Quorv ensures the journey from first impression to confirmed appointment feels seamless, tactile, and completely aligned with your physical space.
+        </p>
+
+        <!-- Primary Action -->
+        <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+          <a href="{% url 'contact' %}" class="btn-whatsapp inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-xs font-semibold tracking-wider uppercase font-mono shadow-md w-full sm:w-auto">
+            <span>Start a Project</span>
+            <span>→</span>
+          </a>
+          <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono uppercase tracking-wider text-[#FAF8F5] transition-colors w-full sm:w-auto">
+            <span>Chat on WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Deliverables Checklist -->
+      <div class="md:col-span-5 bg-[#0E1015] border border-white/[0.08] p-8 rounded-2xl flex flex-col justify-between">
+        <div>
+          <h3 class="text-xs font-mono uppercase tracking-widest text-[#E4C388] mb-4">Included Deliverables</h3>
+          <ul class="flex flex-col gap-3 text-sm text-[#FAF8F5]">
+            {% for deliverable in service.get_deliverables_list %}
+            <li class="flex items-start gap-2.5">
+              <span class="text-[#E4C388] text-base leading-none font-bold">✓</span>
+              <span class="font-light text-xs text-[#FAF8F5]">{{ deliverable }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/[0.06] text-xs font-mono text-[#8C8F9F]">
+          Engagement: Tailored scope and transparent quote. You collaborate directly with Quorv directors.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Related Capabilities -->
+    {% if related_services %}
+    <div class="mt-20 pt-12 border-t border-white/[0.08]">
+      <span class="font-mono text-xs uppercase tracking-widest text-[#E4C388] block mb-2">Connected System</span>
+      <h3 class="text-xl font-bold text-[#FAF8F5] mb-6">Related Capabilities in {{ service.category.name }}</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {% for rel in related_services %}
+        <a href="{% url 'service_detail' rel.slug %}" class="p-6 rounded-xl bg-[#08090C] border border-white/[0.06] hover:border-[#E4C388]/30 transition-all flex flex-col justify-between group">
+          <div>
+            <span class="text-base font-bold text-[#FAF8F5] mb-1 block group-hover:text-[#E4C388] transition-colors">{{ rel.title }}</span>
+            <p class="text-xs text-[#8C8F9F] line-clamp-2">{{ rel.outcome }}</p>
+          </div>
+          <span class="text-xs font-mono text-[#E4C388] mt-4 block">View Capability →</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- Page-specific Service & Breadcrumb Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://quorv.com/services/{{ service.slug }}/#webpage",
+      "url": "https://quorv.com/services/{{ service.slug }}/",
+      "name": "{{ service.title }} for Beauty Businesses · Quorv",
+      "description": "{{ service.outcome }}",
+      "isPartOf": {
+        "@id": "https://quorv.com/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://quorv.com/services/{{ service.slug }}/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://quorv.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://quorv.com/services/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ service.title }}",
+          "item": "https://quorv.com/services/{{ service.slug }}/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "{{ service.title }}",
+      "provider": {
+        "@id": "https://quorv.com/#organization"
+      },
+      "serviceType": "Beauty Business Digital Service",
+      "description": "{{ service.outcome }}",
+      "offers": {
+        "@type": "Offer",
+        "description": "Custom quoted based on scope and business requirements."
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}

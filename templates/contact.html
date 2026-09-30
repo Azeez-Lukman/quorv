@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Start a Dialogue | QUORV Brand Studio{% endblock %}
+{% block meta_description %}Connect with Quorv to elevate the digital presence of your salon, aesthetic clinic, or beauty practice. Direct WhatsApp and inquiry form.{% endblock %}
+
+{% block content %}
+<section class="py-20 md:py-28 border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      
+      <!-- Left Column: Primary Contact -->
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388]">Direct Dialogue</span>
+        <h1 class="text-4xl sm:text-5xl font-medium tracking-tight text-[#FAF8F5]">
+          Let’s discuss your beauty business.
+        </h1>
+        <p class="text-base text-[#B2B5C4] leading-relaxed font-light">
+          Whether you're launching a new salon, upgrading an established aesthetic practice, or eliminating manual booking headaches, we’re ready to help.
+        </p>
+
+        <!-- Primary Action -->
+        <div class="pt-2">
+          <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp inline-flex items-center gap-3 px-8 py-4 rounded-xl text-xs font-semibold tracking-wider uppercase font-mono shadow-md w-full justify-center sm:w-auto">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.18-.077.355.101.174.45 1.082 1.341 1.564.444.24.78.361.954.417.174.056.276.049.378-.069.102-.118.434-.506.55-.679.116-.173.232-.144.39-.087.159.058 1.009.477 1.182.564.173.087.289.13.332.203.044.072.044.419-.1 0.824zM12.012 2C6.486 2 2 6.478 2 12c0 1.93.55 3.731 1.503 5.257L2 22l4.887-1.464C8.362 21.46 10.134 22 12.012 22c5.526 0 10.012-4.478 10.012-10S17.538 2 12.012 2zm0 18.257c-1.636 0-3.176-.464-4.493-1.267l-.322-.196-2.895.868.868-2.825-.213-.341C6.074 15.118 5.58 13.593 5.58 12c0-3.552 2.884-6.442 6.432-6.442 3.551 0 6.441 2.89 6.441 6.442 0 3.551-2.89 6.442-6.441 6.442z"/>
+            </svg>
+            <span>Chat Directly on WhatsApp</span>
+          </a>
+        </div>
+
+        <div class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.06] flex flex-col gap-4 text-xs font-mono text-[#8C8F9F]">
+          <div>
+            <span class="block text-white/50 text-[10px] uppercase tracking-widest mb-1">WhatsApp Hotline</span>
+            <span class="text-white text-sm">+44 7352 789073</span>
+          </div>
+          <div>
+            <span class="block text-white/50 text-[10px] uppercase tracking-widest mb-1">Studio Email</span>
+            <span class="text-white text-sm">quorv911@gmail.com</span>
+          </div>
+          <div>
+            <span class="block text-white/50 text-[10px] uppercase tracking-widest mb-1">International Support</span>
+            <span class="text-[#FAF8F5]">United Kingdom • United States • Canada • UAE • Australia</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Secondary Form -->
+      <div class="lg:col-span-7 bg-[#0E1015] border border-white/[0.08] p-8 sm:p-10 rounded-2xl shadow-xl">
+        <span class="text-xs font-mono uppercase tracking-widest text-[#E4C388] block mb-2">Secondary Option</span>
+        <h2 class="text-2xl font-bold text-[#FAF8F5] mb-2">Send an Inquiry Form</h2>
+        <p class="text-xs text-[#8C8F9F] mb-6">If you prefer email correspondence, complete this form and we’ll reply promptly.</p>
+
+        <form id="contactPageForm" class="flex flex-col gap-4">
+          {% csrf_token %}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="cName" class="block text-xs font-mono text-[#8C8F9F] mb-1">Your Name *</label>
+              <input type="text" id="cName" name="name" required class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded-lg px-4 py-2.5 text-sm text-[#FAF8F5] outline-none">
+            </div>
+            <div>
+              <label for="cEmail" class="block text-xs font-mono text-[#8C8F9F] mb-1">Email Address *</label>
+              <input type="email" id="cEmail" name="email" required class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded-lg px-4 py-2.5 text-sm text-[#FAF8F5] outline-none">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="cBusiness" class="block text-xs font-mono text-[#8C8F9F] mb-1">Business Name</label>
+              <input type="text" id="cBusiness" name="business_name" class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded-lg px-4 py-2.5 text-sm text-[#FAF8F5] outline-none">
+            </div>
+            <div>
+              <label for="cType" class="block text-xs font-mono text-[#8C8F9F] mb-1">Business Type</label>
+              <select id="cType" name="business_type" class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded-lg px-4 py-2.5 text-sm text-[#FAF8F5] outline-none">
+                <option value="salon">Hair / Beauty Salon</option>
+                <option value="aesthetic_clinic">Aesthetic Clinic / Medspa</option>
+                <option value="hairstylist">Independent Stylist / Colorist</option>
+                <option value="nail_lash">Nail / Lash Studio</option>
+                <option value="spa_wellness">Spa & Wellness Sanctuary</option>
+                <option value="beauty_brand">Independent Beauty Brand</option>
+                <option value="other">Other Beauty Professional</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="cCountry" class="block text-xs font-mono text-[#8C8F9F] mb-1">Country / City</label>
+              <input type="text" id="cCountry" name="country" placeholder="e.g. London, UK / Dubai, UAE" class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded-lg px-4 py-2.5 text-sm text-[#FAF8F5] outline-none">
+            </div>
+            <div>
+              <label for="cService" class="block text-xs font-mono text-[#8C8F9F] mb-1">Primary Interest</label>
+              <input type="text" id="cService" name="service_interest" placeholder="e.g. Website + Booking Integration" class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded-lg px-4 py-2.5 text-sm text-[#FAF8F5] outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label for="cMessage" class="block text-xs font-mono text-[#8C8F9F] mb-1">Message & Goals *</label>
+            <textarea id="cMessage" name="message" rows="4" required placeholder="Tell us about your brand and what you're seeking to achieve..." class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded-lg px-4 py-2.5 text-sm text-[#FAF8F5] outline-none resize-none"></textarea>
+          </div>
+
+          <button type="submit" id="cSubmitBtn" class="mt-2 w-full py-3 rounded-lg bg-white/[0.06] hover:bg-[#E4C388] hover:text-[#08090C] border border-white/[0.1] text-xs font-mono uppercase tracking-wider font-semibold text-[#FAF8F5] transition-all">
+            Submit Inquiry
+          </button>
+          
+          <div id="cStatusMsg" class="hidden text-xs font-mono text-center py-2"></div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactPageForm');
+    const statusMsg = document.getElementById('cStatusMsg');
+    const submitBtn = document.getElementById('cSubmitBtn');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+          const res = await fetch("{% url 'lead_submit' %}", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
+            },
+            body: JSON.stringify(data),
+          });
+
+          const json = await res.json();
+          statusMsg.classList.remove('hidden');
+
+          if (res.ok && json.status === 'success') {
+            statusMsg.className = 'text-xs font-mono text-center py-2 text-[#E4C388]';
+            statusMsg.textContent = '✓ ' + json.message;
+            form.reset();
+          } else {
+            statusMsg.className = 'text-xs font-mono text-center py-2 text-red-400';
+            statusMsg.textContent = '⚠ ' + (json.message || 'Submission failed. Please message via WhatsApp.');
+          }
+        } catch (err) {
+          statusMsg.classList.remove('hidden');
+          statusMsg.className = 'text-xs font-mono text-center py-2 text-red-400';
+          statusMsg.textContent = '⚠ Network error. Please message us directly on WhatsApp.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Inquiry';
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,429 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Quorv · The Digital System Behind Premium Beauty Businesses{% endblock %}</title>
+  
+  <meta name="description" content="{% block meta_description %}Quorv builds premium websites and connected digital experiences for salons, aesthetic clinics, med spas, beauty clinics and premium beauty businesses.{% endblock %}">
+  <meta name="keywords" content="beauty website design, salon website design, med spa website design, aesthetic clinic web design, beauty clinic digital systems, salon booking integrations, Fresha website integration">
+  <meta name="author" content="Quorv">
+  <meta name="robots" content="{% block robots %}index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1{% endblock %}">
+  <link rel="canonical" href="https://quorv.com{{ request.path }}">
+
+  <!-- Favicon using the authentic Quorv emblem -->
+  <link rel="icon" type="image/jpeg" href="{% static 'images/quorv-logo.jpg' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/quorv-logo.jpg' %}">
+
+  <!-- OpenGraph & Twitter Cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Quorv">
+  <meta property="og:title" content="{% block og_title %}Quorv · The Digital System Behind Premium Beauty Businesses{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Quorv builds premium websites and connected digital experiences for salons, aesthetic clinics, med spas, beauty clinics and premium beauty businesses.{% endblock %}">
+  <meta property="og:image" content="https://quorv.com{% static 'images/quorv-logo.jpg' %}">
+  <meta property="og:url" content="https://quorv.com{{ request.path }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts: Italiana (Editorial Display Serif), Plus Jakarta Sans (Clean Modern Sans), Space Grotesk (Understated Utility) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS v4 Browser Runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-obsidian-950: #08090C;
+      --color-obsidian-900: #0E1015;
+      --color-obsidian-850: #12141C;
+      --color-obsidian-800: #181A24;
+      --color-obsidian-700: #232635;
+      
+      --color-champagne-300: #F5E5C9;
+      --color-champagne-400: #E4C388;
+      --color-champagne-500: #CBA565;
+      --color-champagne-600: #A8813C;
+
+      --color-cream-50: #FAF8F5;
+      --color-cream-100: #F3EFE9;
+      --color-cream-200: #E8E1D5;
+      --color-cream-300: #D8CEBE;
+
+      --color-charcoal-400: #8C8F9F;
+      --color-charcoal-300: #B2B5C4;
+      --color-charcoal-200: #D8DAE5;
+
+      --font-serif: 'Italiana', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Grotesk', monospace;
+    }
+  </style>
+
+  <style>
+    /* Custom Micro-Styling & Transitions */
+    body {
+      background-color: #08090C;
+      color: #FAF8F5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-serif {
+      font-family: 'Italiana', Georgia, serif;
+    }
+
+    .font-mono {
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    ::selection {
+      background: #CBA565;
+      color: #08090C;
+    }
+
+    /* Subtle hair-thin borders */
+    .border-gold-subtle {
+      border-color: rgba(228, 195, 136, 0.22);
+    }
+    
+    .border-gold-hover:hover {
+      border-color: rgba(228, 195, 136, 0.6);
+    }
+
+    /* WhatsApp Button Treatment: Elegant, restrained luxury with recognizable accent */
+    .btn-whatsapp {
+      background: #E4C388;
+      color: #08090C;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-whatsapp:hover {
+      background: #F5E5C9;
+      transform: translateY(-1.5px);
+      box-shadow: 0 8px 24px rgba(228, 195, 136, 0.25);
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+
+  <!-- Schema.org JSON-LD Structured Data for Entity Recognition & GEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://quorv.com/#organization",
+        "name": "Quorv",
+        "alternateName": ["QUORV Digital Studio", "QUORV"],
+        "url": "https://quorv.com",
+        "logo": "https://quorv.com{% static 'images/quorv-logo.jpg' %}",
+        "description": "Quorv builds premium websites and connected digital systems for salons, aesthetic clinics, med spas, beauty clinics and beauty businesses.",
+        "telephone": "+447352789073",
+        "email": "quorv911@gmail.com",
+        "areaServed": [
+          "United Kingdom",
+          "United States",
+          "Canada",
+          "United Arab Emirates",
+          "Australia"
+        ],
+        "knowsAbout": [
+          "Salon Website Design",
+          "Med Spa Website Design",
+          "Aesthetic Clinic Web Design",
+          "Beauty Clinic Digital Systems",
+          "Booking System Integrations",
+          "Fresha Integration",
+          "Phorest Integration",
+          "Vagaro Integration",
+          "Boulevard Integration",
+          "Jane App Integration",
+          "Acuity Scheduling Integration",
+          "Beauty Business Local SEO"
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+447352789073",
+            "contactType": "customer service",
+            "availableLanguage": ["English"]
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://quorv.com/#website",
+        "url": "https://quorv.com",
+        "name": "Quorv",
+        "publisher": {
+          "@id": "https://quorv.com/#organization"
+        },
+        "description": "The digital system behind premium beauty businesses."
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col bg-[#08090C] text-[#FAF8F5] antialiased selection:bg-[#CBA565] selection:text-[#08090C]">
+
+  <!-- Top Announcement / Positioning Bar -->
+  <div class="border-b border-white/[0.06] bg-[#0B0D12] text-xs font-mono tracking-wider py-2 px-4 text-center text-[#B2B5C4] flex items-center justify-center gap-3">
+    <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#E4C388]"></span>
+    <span>Specialist Brand & Digital Studio for Premium Beauty Businesses</span>
+    <span class="hidden md:inline text-white/30">•</span>
+    <span class="hidden md:inline text-[#8C8F9F]">London • New York • Dubai • Toronto • Sydney</span>
+  </div>
+
+  <!-- Main Navigation -->
+  <header id="mainHeader" class="sticky top-0 z-50 transition-all duration-300 backdrop-blur-md bg-[#08090C]/85 border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo / Wordmark -->
+      <a href="{% url 'home' %}" class="flex items-center gap-3.5 group" aria-label="QUORV Brand Studio Homepage">
+        <div class="w-10 h-10 rounded-full p-[1.5px] bg-gradient-to-tr from-[#E4C388] via-black to-[#E4C388]/40 overflow-hidden shadow-sm group-hover:scale-105 transition-transform duration-300">
+          <img src="{% static 'images/quorv-logo.jpg' %}" alt="QUORV Brand Studio Logo" class="w-full h-full object-cover rounded-full">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-sans font-bold text-lg tracking-[0.18em] text-[#FAF8F5] leading-tight group-hover:text-[#E4C388] transition-colors">QUORV</span>
+          <span class="font-mono text-[9px] tracking-[0.24em] text-[#E4C388] uppercase opacity-90">Brand Studio</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium tracking-wide text-[#B2B5C4]" aria-label="Primary Navigation">
+        <a href="/#system" class="hover:text-white transition-colors duration-200">The System</a>
+        <a href="/#services" class="hover:text-white transition-colors duration-200">Services</a>
+        <a href="/#industries" class="hover:text-white transition-colors duration-200">Who We Serve</a>
+        <a href="{% url 'insights_index' %}" class="hover:text-white transition-colors duration-200">Insights</a>
+        <a href="/#work" class="hover:text-white transition-colors duration-200">Concepts</a>
+        <a href="/#process" class="hover:text-white transition-colors duration-200">Process</a>
+        <a href="/#faq" class="hover:text-white transition-colors duration-200">FAQ</a>
+      </nav>
+
+      <!-- Desktop Primary CTA: Elegant WhatsApp Link -->
+      <div class="hidden sm:flex items-center gap-4">
+        <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn-whatsapp inline-flex items-center gap-2.5 px-5 py-2.5 rounded-lg text-xs font-semibold tracking-wider uppercase font-mono shadow-sm"
+           aria-label="Chat on WhatsApp with Quorv">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.18-.077.355.101.174.45 1.082 1.341 1.564.444.24.78.361.954.417.174.056.276.049.378-.069.102-.118.434-.506.55-.679.116-.173.232-.144.39-.087.159.058 1.009.477 1.182.564.173.087.289.13.332.203.044.072.044.419-.1 0.824zM12.012 2C6.486 2 2 6.478 2 12c0 1.93.55 3.731 1.503 5.257L2 22l4.887-1.464C8.362 21.46 10.134 22 12.012 22c5.526 0 10.012-4.478 10.012-10S17.538 2 12.012 2zm0 18.257c-1.636 0-3.176-.464-4.493-1.267l-.322-.196-2.895.868.868-2.825-.213-.341C6.074 15.118 5.58 13.593 5.58 12c0-3.552 2.884-6.442 6.432-6.442 3.551 0 6.441 2.89 6.441 6.442 0 3.551-2.89 6.442-6.441 6.442z"/>
+          </svg>
+          <span>Chat on WhatsApp</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="lg:hidden p-2 text-[#FAF8F5] focus:outline-none" aria-label="Toggle mobile menu" aria-expanded="false">
+        <svg id="menuIcon" class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Drawer -->
+    <div id="mobileDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#0B0D12] px-6 py-6 transition-all duration-300">
+      <nav class="flex flex-col gap-4 text-base font-medium text-[#FAF8F5]">
+        <a href="/#system" class="py-2 border-b border-white/5 hover:text-[#E4C388]">The System</a>
+        <a href="/#services" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Services</a>
+        <a href="/#industries" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Who We Serve</a>
+        <a href="{% url 'insights_index' %}" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Insights</a>
+        <a href="/#work" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Concepts</a>
+        <a href="/#process" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Process</a>
+        <a href="/#faq" class="py-2 border-b border-white/5 hover:text-[#E4C388]">FAQ</a>
+        <div class="pt-4">
+          <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business." 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn-whatsapp w-full flex items-center justify-center gap-2 py-3 rounded-lg text-xs font-semibold tracking-wider uppercase font-mono">
+            <span>Chat on WhatsApp</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="flex-grow">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Persistent Contextual WhatsApp Trigger for Mobile (Subtle & Restrained) -->
+  <div class="fixed bottom-6 right-6 z-40 md:hidden">
+    <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="flex items-center gap-2 bg-[#E4C388] text-[#08090C] px-4 py-2.5 rounded-full shadow-lg font-mono text-xs font-semibold uppercase tracking-wider"
+       aria-label="Direct WhatsApp message to Quorv">
+      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.18-.077.355.101.174.45 1.082 1.341 1.564.444.24.78.361.954.417.174.056.276.049.378-.069.102-.118.434-.506.55-.679.116-.173.232-.144.39-.087.159.058 1.009.477 1.182.564.173.087.289.13.332.203.044.072.044.419-.1 0.824zM12.012 2C6.486 2 2 6.478 2 12c0 1.93.55 3.731 1.503 5.257L2 22l4.887-1.464C8.362 21.46 10.134 22 12.012 22c5.526 0 10.012-4.478 10.012-10S17.538 2 12.012 2zm0 18.257c-1.636 0-3.176-.464-4.493-1.267l-.322-.196-2.895.868.868-2.825-.213-.341C6.074 15.118 5.58 13.593 5.58 12c0-3.552 2.884-6.442 6.432-6.442 3.551 0 6.441 2.89 6.441 6.442 0 3.551-2.89 6.442-6.441 6.442z"/>
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- Master Editorial Footer -->
+  <footer class="bg-[#050608] border-t border-white/[0.08] pt-20 pb-12 text-[#FAF8F5]">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- Top Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/[0.08]">
+        
+        <!-- Brand Stature Column -->
+        <div class="lg:col-span-2 flex flex-col gap-6 pr-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-[#E4C388] via-black to-[#E4C388]/40 overflow-hidden">
+              <img src="{% static 'images/quorv-logo.jpg' %}" alt="QUORV Brand Studio Emblem" class="w-full h-full object-cover rounded-full">
+            </div>
+            <div class="flex flex-col">
+              <span class="font-sans font-bold text-xl tracking-[0.2em] text-[#FAF8F5]">QUORV</span>
+              <span class="font-mono text-[10px] tracking-[0.26em] text-[#E4C388] uppercase">Brand Studio</span>
+            </div>
+          </div>
+          
+          <p class="text-sm text-[#8C8F9F] leading-relaxed max-w-md">
+            We build the connected digital system behind premium beauty businesses. Helping salons, aesthetic clinics, and beauty professionals look premium, get discovered, and get booked.
+          </p>
+
+          <div class="flex items-center gap-3 text-xs font-mono text-[#E4C388]">
+            <span class="w-2 h-2 rounded-full bg-[#E4C388]"></span>
+            <span>Serving beauty businesses internationally</span>
+          </div>
+        </div>
+
+        <!-- System & Navigation Column -->
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-widest text-[#E4C388] mb-5">The System</h4>
+          <ul class="flex flex-col gap-3 text-sm text-[#8C8F9F]">
+            <li><a href="/#system" class="hover:text-white transition-colors">Look Premium</a></li>
+            <li><a href="/#system" class="hover:text-white transition-colors">Get Discovered</a></li>
+            <li><a href="/#system" class="hover:text-white transition-colors">Get Booked</a></li>
+            <li><a href="{% url 'insights_index' %}" class="hover:text-white transition-colors">Studio Insights</a></li>
+            <li><a href="/#process" class="hover:text-white transition-colors">5-Stage Process</a></li>
+          </ul>
+        </div>
+
+        <!-- Specialization Column -->
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-widest text-[#E4C388] mb-5">Who We Serve</h4>
+          <ul class="flex flex-col gap-3 text-sm text-[#8C8F9F]">
+            <li><a href="/#industries" class="hover:text-white transition-colors">Salons & Hair Studios</a></li>
+            <li><a href="/#industries" class="hover:text-white transition-colors">Aesthetic Clinics</a></li>
+            <li><a href="/#industries" class="hover:text-white transition-colors">Medspas</a></li>
+            <li><a href="/#industries" class="hover:text-white transition-colors">Independent Stylists</a></li>
+            <li><a href="/#industries" class="hover:text-white transition-colors">Nail & Lash Studios</a></li>
+            <li><a href="/#industries" class="hover:text-white transition-colors">Spas & Wellness</a></li>
+          </ul>
+        </div>
+
+        <!-- Direct Channels Column -->
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-widest text-[#E4C388] mb-5">Start a Dialogue</h4>
+          <ul class="flex flex-col gap-3.5 text-sm text-[#8C8F9F]">
+            <li>
+              <span class="block text-xs font-mono text-white/50 mb-1">Direct WhatsApp</span>
+              <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business." target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#E4C388] transition-colors font-mono">
+                +44 7352 789073
+              </a>
+            </li>
+            <li>
+              <span class="block text-xs font-mono text-white/50 mb-1">Studio Email</span>
+              <a href="mailto:quorv911@gmail.com" class="text-white hover:text-[#E4C388] transition-colors font-mono">
+                quorv911@gmail.com
+              </a>
+            </li>
+            <li>
+              <span class="block text-xs font-mono text-white/50 mb-1">Primary Markets</span>
+              <span class="text-xs text-[#8C8F9F]">UK • US • Canada • UAE • Australia</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8C8F9F] font-mono">
+        <div>
+          © 2026 QUORV BRAND STUDIO. All rights reserved.
+        </div>
+        <div class="flex items-center gap-4 flex-wrap">
+          <a href="{% url 'privacy_policy' %}" class="hover:text-white transition-colors">Privacy Policy</a>
+          <span>·</span>
+          <a href="{% url 'terms_of_service' %}" class="hover:text-white transition-colors">Terms of Engagement</a>
+          <span>·</span>
+          <a href="/#faq" class="hover:text-white transition-colors">Inquiries & FAQ</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Minimalist Mobile Menu Controller -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('mobileMenuBtn');
+      const drawer = document.getElementById('mobileDrawer');
+      if (btn && drawer) {
+        btn.addEventListener('click', () => {
+          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', !isExpanded);
+          drawer.classList.toggle('hidden');
+        });
+      }
+    });
+
+    // Lightweight Conversion Event Tracker (WhatsApp, Email)
+    (function() {
+      function logConversion(eventType, eventLabel) {
+        try {
+          const payload = JSON.stringify({
+            event_type: eventType,
+            event_label: eventLabel,
+            page_url: window.location.href
+          });
+          if (navigator.sendBeacon) {
+            navigator.sendBeacon('/api/analytics/event/', new Blob([payload], { type: 'application/json' }));
+          } else {
+            fetch('/api/analytics/event/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: payload,
+              keepalive: true
+            }).catch(() => {});
+          }
+        } catch (e) {}
+      }
+
+      document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a');
+        if (!anchor) return;
+        const href = anchor.getAttribute('href') || '';
+
+        if (href.includes('wa.me')) {
+          const label = anchor.getAttribute('aria-label') || anchor.innerText.trim() || anchor.id || 'WhatsApp Link';
+          logConversion('whatsapp_click', label.substring(0, 100));
+        } else if (href.startsWith('mailto:')) {
+          logConversion('email_click', href.replace('mailto:', ''));
+        }
+      });
+    })();
+  </script>
+
+  {% block extra_scripts %}
+  {% endblock %}
+</body>
+</html>
+

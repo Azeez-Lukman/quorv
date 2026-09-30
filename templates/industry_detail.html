@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Premium Websites for {{ industry.title }} · Quorv{% endblock %}
+{% block meta_description %}Quorv builds premium websites and connected digital systems for {{ industry.title|lower }}. We integrate booking software like Fresha, Phorest, and Vagaro to convert visitors into appointments.{% endblock %}
+
+{% block content %}
+<section class="py-20 md:py-28 border-b border-white/[0.06] bg-[#08090C]">
+  <div class="max-w-5xl mx-auto px-6">
+    
+    <!-- Breadcrumb with Schema markup -->
+    <nav class="flex items-center gap-2 text-xs font-mono text-[#8C8F9F] mb-8" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}" class="hover:text-white transition-colors">Home</a>
+      <span>/</span>
+      <a href="{% url 'industries_index' %}" class="hover:text-white transition-colors">Industries</a>
+      <span>/</span>
+      <span class="text-[#E4C388]">{{ industry.title }}</span>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="mb-14">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-3">Industry Blueprint</span>
+      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight text-[#FAF8F5] mb-6">
+        Quorv builds premium websites for {{ industry.title|lower }}.
+      </h1>
+      <p class="text-lg sm:text-xl text-[#B2B5C4] font-light leading-relaxed max-w-3xl">
+        {{ industry.subtitle }}
+      </p>
+    </div>
+
+    <!-- Direct Answer Block for AI and Human Visitors -->
+    <div class="p-8 rounded-2xl bg-[#0E1015] border border-white/[0.08] mb-12">
+      <span class="font-mono text-xs text-[#E4C388] uppercase tracking-wider block mb-2">Direct Overview</span>
+      <h2 class="text-xl font-bold text-[#FAF8F5] mb-3">What does a {{ industry.title|lower }} need from its website?</h2>
+      <p class="text-sm text-[#B2B5C4] leading-relaxed mb-4 font-light">
+        A {{ industry.title|lower }} requires more than an aesthetic brochure. It requires a dedicated digital home that communicates treatment mastery, establishes pricing authority, and directs high-intent visitors smoothly into your booking calendar without manual messaging friction.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/[0.06] text-xs font-mono text-[#FAF8F5]">
+        <div><span class="text-[#E4C388]">•</span> Visual Prestige & Authority</div>
+        <div><span class="text-[#E4C388]">•</span> Seamless Booking Integration</div>
+        <div><span class="text-[#E4C388]">•</span> Local Search Visibility</div>
+      </div>
+    </div>
+
+    <!-- Challenge vs Quorv Solution -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      <div class="p-8 rounded-2xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="text-xs font-mono uppercase tracking-widest text-red-400/90 block mb-2">The Common Problem</span>
+        <h3 class="text-lg font-bold text-[#FAF8F5] mb-3">Where existing websites fall short</h3>
+        <p class="text-sm text-[#8C8F9F] leading-relaxed font-light">
+          {{ industry.the_challenge }}
+        </p>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-[#0E1015] border border-[#E4C388]/30">
+        <span class="text-xs font-mono uppercase tracking-widest text-[#E4C388] block mb-2">The Quorv Architecture</span>
+        <h3 class="text-lg font-bold text-[#FAF8F5] mb-3">How Quorv builds the solution</h3>
+        <p class="text-sm text-[#FAF8F5] leading-relaxed font-light">
+          {{ industry.the_solution }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Digital Systems & Booking Integrations -->
+    <div class="p-8 sm:p-10 rounded-2xl bg-[#0E1015] border border-white/[0.06] mb-12">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-2">Booking Infrastructure</span>
+      <h2 class="text-2xl font-bold text-[#FAF8F5] mb-3">How booking systems integrate with your website</h2>
+      <p class="text-sm text-[#B2B5C4] leading-relaxed font-light mb-6">
+        We connect your website directly with your preferred scheduling platform: including <strong>Fresha, Phorest, Vagaro, Boulevard, Jane App, or Acuity Scheduling</strong>. If you do not have software yet, we set up the ideal platform or establish a direct automated WhatsApp reservation flow with deposit links.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-white/[0.06] text-xs">
+        <div>
+          <h4 class="font-bold text-[#FAF8F5] mb-1 font-mono uppercase text-[#E4C388]">For Clients With Existing Software:</h4>
+          <p class="text-[#8C8F9F] leading-relaxed">
+            Your clients explore treatment details and photography on your bespoke website before transitioning smoothly into your scheduling system, without any disruption to your day-to-day operations.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#FAF8F5] mb-1 font-mono uppercase text-[#E4C388]">For Clients Without Software:</h4>
+          <p class="text-[#8C8F9F] leading-relaxed">
+            We guide you in selecting the right software for your team or create an automated direct booking pipeline with consultation intake and deposit requests.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Journey Walkthrough -->
+    <div class="p-8 sm:p-10 rounded-2xl bg-[#0B0D12] border border-white/[0.06] mb-12">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-2">Client Experience</span>
+      <h2 class="text-2xl font-bold text-[#FAF8F5] mb-6">The ideal customer journey for {{ industry.title|lower }}</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs leading-relaxed">
+        <div class="p-5 rounded-xl bg-[#08090C] border border-white/[0.04]">
+          <span class="font-mono text-[#E4C388] block mb-2 font-bold text-sm">Stage 1: Discovery & Trust</span>
+          <p class="text-[#8C8F9F]">
+            The client finds your website via organic Google search or social profile. The editorial design immediately conveys clinical cleanliness, creative mastery, and premium pricing credibility.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-[#08090C] border border-white/[0.04]">
+          <span class="font-mono text-[#E4C388] block mb-2 font-bold text-sm">Stage 2: Treatment Exploration</span>
+          <p class="text-[#8C8F9F]">
+            Clear treatment menus, practitioner credentials, and before-and-after imagery answer their questions, eliminating uncertainty and hesitation.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-[#08090C] border border-white/[0.04]">
+          <span class="font-mono text-[#E4C388] block mb-2 font-bold text-sm">Stage 3: Frictionless Booking</span>
+          <p class="text-[#8C8F9F]">
+            With one tap, the client transitions into a live booking slot or sends a pre-filled consultation inquiry, securing deposits and saving your staff hours of manual DM back-and-forth.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conversion & Project Start CTA -->
+    <div class="p-10 rounded-2xl bg-[#0E1015] border border-[#E4C388]/30 flex flex-col sm:flex-row items-center justify-between gap-8">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-[#E4C388] block mb-1">Start a Project</span>
+        <h3 class="text-2xl font-bold text-[#FAF8F5] mb-2">Ready to elevate your {{ industry.title|lower }} online?</h3>
+        <p class="text-sm text-[#8C8F9F] font-light">
+          Tell us about your space, your current software, and where you want your brand to go.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0">
+        <a href="{% url 'contact' %}" class="btn-whatsapp px-7 py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold">
+          Start a Project →
+        </a>
+        <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%20run%20a%20{{ industry.title|urlencode }}%20and%20would%20like%20to%20discuss%20improving%20our%20digital%20presence." target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono uppercase tracking-wider text-[#FAF8F5] transition-colors">
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Page-specific Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://quorv.com/industries/{{ industry.slug }}/#webpage",
+      "url": "https://quorv.com/industries/{{ industry.slug }}/",
+      "name": "Premium Websites for {{ industry.title }} · Quorv",
+      "description": "Quorv builds premium websites and connected digital systems for {{ industry.title|lower }}.",
+      "isPartOf": {
+        "@id": "https://quorv.com/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://quorv.com/industries/{{ industry.slug }}/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://quorv.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Industries",
+          "item": "https://quorv.com/industries/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ industry.title }}",
+          "item": "https://quorv.com/industries/{{ industry.slug }}/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Digital Systems & Websites for {{ industry.title }}",
+      "provider": {
+        "@id": "https://quorv.com/#organization"
+      },
+      "serviceType": "Beauty Business Website Design & Digital Architecture",
+      "description": "{{ industry.the_solution }}"
+    }
+  ]
+}
+</script>
+{% endblock %}

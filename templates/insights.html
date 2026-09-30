@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Studio Insights · Web Architecture & Booking Systems for Beauty Businesses | Quorv{% endblock %}
+{% block meta_description %}Authoritative resources and strategic guides on salon website design, med spa digital architecture, booking integrations, and customer journeys.{% endblock %}
+
+{% block content %}
+<section class="py-20 md:py-28 border-b border-white/[0.06] bg-[#08090C]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs font-mono text-[#8C8F9F] mb-8" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}" class="hover:text-white transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-[#E4C388]">Insights</span>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="max-w-3xl mb-16">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-3">Knowledge & Strategy</span>
+      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight text-[#FAF8F5] mb-6">
+        Studio Insights
+      </h1>
+      <p class="text-lg text-[#B2B5C4] leading-relaxed font-light">
+        Authoritative analysis, architectural breakdowns, and strategic guides on building high-converting websites, integrating booking software, and designing digital customer journeys for premium beauty businesses.
+      </p>
+    </div>
+
+    <!-- Insights Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+      {% for ins in insights %}
+      <article class="p-8 sm:p-10 rounded-2xl bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388]/40 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between gap-4 mb-4">
+            <span class="text-xs font-mono text-[#E4C388] uppercase tracking-wider bg-white/[0.03] px-3 py-1 rounded-full border border-white/[0.06]">
+              {{ ins.category }}
+            </span>
+            <span class="text-xs font-mono text-[#8C8F9F]">{{ ins.read_time }}</span>
+          </div>
+
+          <h2 class="text-2xl font-bold text-[#FAF8F5] mb-3 group-hover:text-[#E4C388] transition-colors">
+            <a href="{% url 'insight_detail' ins.slug %}">
+              {{ ins.title }}
+            </a>
+          </h2>
+
+          <p class="text-xs font-mono text-[#8C8F9F] mb-4">
+            {{ ins.subtitle }}
+          </p>
+
+          <p class="text-sm text-[#B2B5C4] leading-relaxed font-light mb-6">
+            {{ ins.summary }}
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/[0.06] flex items-center justify-between">
+          <a href="{% url 'insight_detail' ins.slug %}" class="text-xs font-mono text-white group-hover:text-[#E4C388] transition-colors flex items-center gap-1.5">
+            <span>Read Architectural Guide</span>
+            <span>→</span>
+          </a>
+          <span class="text-xs font-mono text-[#8C8F9F]">{{ ins.published_date|date:"F Y" }}</span>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <!-- Bottom Dialogue Banner -->
+    <div class="p-10 rounded-2xl bg-[#0B0D12] border border-[#E4C388]/30 flex flex-col sm:flex-row items-center justify-between gap-8">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-[#E4C388] block mb-1">Direct Consulting</span>
+        <h3 class="text-2xl font-bold text-[#FAF8F5] mb-2">Have a specific question about your beauty business website?</h3>
+        <p class="text-sm text-[#8C8F9F] font-light">
+          We discuss custom website architecture, Fresha/Phorest integrations, and local search strategy directly via WhatsApp.
+        </p>
+      </div>
+
+      <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp px-8 py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold flex-shrink-0">
+        Chat with Quorv
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- BreadcrumbList Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://quorv.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Insights",
+      "item": "https://quorv.com/insights/"
+    }
+  ]
+}
+</script>
+{% endblock %}

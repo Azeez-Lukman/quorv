@@ -1,0 +1,886 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- ===================================================================
+     SECTION 1: HERO (High-Fashion Tactile Beauty Composition)
+     =================================================================== -->
+<section class="relative pt-10 pb-16 md:pt-16 md:pb-20 overflow-hidden border-b border-white/[0.06]">
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-[#E4C388]/[0.04] blur-[120px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      
+      <!-- Left Column: Copy & CTAs -->
+      <div class="lg:col-span-7 flex flex-col gap-5">
+        <div class="inline-flex items-center gap-2.5 text-xs font-mono tracking-[0.25em] uppercase text-[#E4C388]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#E4C388]"></span>
+          <span>QUORV · DIGITAL STUDIO</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-medium tracking-[-0.02em] text-[#FAF8F5] leading-[1.12]">
+          The digital system behind premium beauty businesses.
+        </h1>
+
+        <p class="text-base sm:text-lg text-[#B2B5C4] leading-relaxed max-w-xl font-light">
+          Quorv builds premium websites and connected digital experiences for salons, aesthetic clinics, med spas, beauty clinics and other premium beauty businesses.
+        </p>
+
+        <!-- Primary CTAs -->
+        <div class="pt-2 flex flex-wrap items-center gap-4">
+          <a href="{% url 'contact' %}" 
+             class="btn-whatsapp inline-flex items-center gap-2.5 px-7 py-3 rounded-lg text-xs font-semibold tracking-wider uppercase font-mono shadow-md"
+             id="heroStartProjectCta">
+            <span>Start a Project</span>
+            <span>→</span>
+          </a>
+
+          <a href="{{ whatsapp_url }}" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/[0.15] hover:border-[#E4C388] text-xs font-semibold tracking-wider uppercase font-mono text-[#FAF8F5] transition-all hover:bg-white/[0.03]"
+             id="heroWhatsAppCta">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.18-.077.355.101.174.45 1.082 1.341 1.564.444.24.78.361.954.417.174.056.276.049.378-.069.102-.118.434-.506.55-.679.116-.173.232-.144.39-.087.159.058 1.009.477 1.182.564.173.087.289.13.332.203.044.072.044.419-.1 0.824zM12.012 2C6.486 2 2 6.478 2 12c0 1.93.55 3.731 1.503 5.257L2 22l4.887-1.464C8.362 21.46 10.134 22 12.012 22c5.526 0 10.012-4.478 10.012-10S17.538 2 12.012 2zm0 18.257c-1.636 0-3.176-.464-4.493-1.267l-.322-.196-2.895.868.868-2.825-.213-.341C6.074 15.118 5.58 13.593 5.58 12c0-3.552 2.884-6.442 6.432-6.442 3.551 0 6.441 2.89 6.441 6.442 0 3.551-2.89 6.442-6.441 6.442z"/>
+            </svg>
+            <span>Chat on WhatsApp</span>
+          </a>
+
+          <a href="#services" 
+             class="inline-flex items-center gap-1.5 text-xs font-mono text-[#E4C388] hover:text-white transition-colors underline-offset-4 hover:underline">
+            <span>Explore Services ↓</span>
+          </a>
+        </div>
+
+        <div class="pt-2 flex items-center gap-6 text-xs text-[#8C8F9F] font-mono">
+          <div class="flex items-center gap-2">
+            <span class="text-[#E4C388]">✓</span>
+            <span>Direct WhatsApp reply</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[#E4C388]">✓</span>
+            <span>Specialized solely in beauty</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Editorial Visual Composition -->
+      <div class="lg:col-span-5 relative">
+        <div class="relative mx-auto max-w-md lg:max-w-none">
+          <div class="relative rounded-2xl overflow-hidden border border-white/[0.12] bg-[#0E1015] shadow-2xl">
+            <div class="aspect-[4/4.5] relative overflow-hidden group">
+              <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1000&q=85" 
+                   alt="Luxury architectural beauty studio interior" 
+                   class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter brightness-95">
+              
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08090C] via-transparent to-black/25"></div>
+
+              <!-- Brand Emblem Overlay Badge -->
+              <div class="absolute top-5 left-5 flex items-center gap-3 bg-[#08090C]/85 backdrop-blur-md border border-[#E4C388]/30 px-3 py-1.5 rounded-full shadow-lg">
+                <div class="w-7 h-7 rounded-full overflow-hidden p-[1px] bg-[#E4C388]">
+                  <img src="{% static 'images/quorv-logo.jpg' %}" alt="QUORV Mark" class="w-full h-full object-cover rounded-full">
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-[10px] font-bold tracking-widest text-[#FAF8F5]">QUORV</span>
+                  <span class="text-[7.5px] font-mono tracking-widest text-[#E4C388] uppercase">Studio Archive</span>
+                </div>
+              </div>
+
+              <!-- Bottom Editorial Label -->
+              <div class="absolute bottom-5 left-5 right-5 bg-[#08090C]/90 backdrop-blur-md border border-white/[0.08] p-4 rounded-xl">
+                <span class="block text-[9px] font-mono text-[#E4C388] tracking-widest uppercase mb-1">Positioning & Strategy</span>
+                <p class="text-xs sm:text-sm font-medium text-[#FAF8F5] leading-snug">
+                  Moving beauty clients from seeing your work to trusting your pricing and booking without friction.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 2: CORE POSITIONING (High-Authority Banner)
+     =================================================================== -->
+<section class="py-14 md:py-16 bg-[#0B0D12] border-b border-white/[0.06]">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-[#E4C388] block mb-3">Core Positioning</span>
+    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#FAF8F5] leading-tight mb-4">
+      “We build the digital system behind premium beauty businesses.”
+    </h2>
+    <p class="text-sm sm:text-base text-[#B2B5C4] leading-relaxed max-w-2xl mx-auto font-light mb-6">
+      Quorv sits at the intersection of premium aesthetics, branding, websites, content, marketing and technology. We help beauty businesses look premium, get discovered and get booked.
+    </p>
+    <div class="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-mono text-[#8C8F9F]">
+      <span class="text-white/60 line-through decoration-[#E4C388]/50">Not just a logo designer</span>
+      <span class="text-white/30">•</span>
+      <span class="text-white/60 line-through decoration-[#E4C388]/50">Not just a web builder</span>
+      <span class="text-white/30">•</span>
+      <span class="text-[#E4C388] font-semibold">An integrated digital system</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 3: CONSOLIDATED TRANSFORMATION & THE PROBLEM
+     (Refined Deep Charcoal & Warm Slate Editorial Layout)
+     =================================================================== -->
+<section class="py-16 md:py-20 bg-[#0E1017] text-[#FAF8F5] border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#E4C388] block mb-2 font-semibold">The Transformation</span>
+        <h2 class="text-3xl sm:text-4xl font-medium tracking-tight text-[#FAF8F5] leading-snug">
+          “Your business looks better in person than it does online.”
+        </h2>
+      </div>
+      <p class="text-sm text-[#B2B5C4] max-w-md font-light">
+        The problem isn't that your business isn't good enough. <strong class="text-white font-medium">The problem is that your current digital experience isn't communicating its value.</strong>
+      </p>
+    </div>
+
+    <!-- Side-by-Side Comparison Box -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+      
+      <!-- The Fragmented Reality -->
+      <div class="p-8 rounded-2xl bg-[#141620] border border-white/[0.06] flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-white/[0.06]">
+            <span class="text-xs font-mono uppercase tracking-widest text-[#8C8F9F]">Current State</span>
+            <span class="text-xs font-mono text-red-400/80">✕ Fragmented</span>
+          </div>
+
+          <ul class="flex flex-col gap-4 text-sm text-[#8C8F9F]">
+            <li class="flex items-start gap-3">
+              <span class="text-red-400 font-bold text-xs mt-1">✕</span>
+              <span><strong class="text-[#D8DAE5]">Beautiful work, weak website:</strong> Clients leave in awe, but your website looks like a generic template that fails to justify premium pricing.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-red-400 font-bold text-xs mt-1">✕</span>
+              <span><strong class="text-[#D8DAE5]">Manual DM chaos:</strong> Spending late nights answering pricing questions in Instagram DMs and chasing calendar slots.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-red-400 font-bold text-xs mt-1">✕</span>
+              <span><strong class="text-[#D8DAE5]">Invisible on Google:</strong> High-value searchers in your city book with lower-skilled competitors because they show up first.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-white/[0.06] text-xs font-mono text-[#8C8F9F]">
+          Result: High effort, lost bookings, price resistance.
+        </div>
+      </div>
+
+      <!-- The Quorv Connected System -->
+      <div class="p-8 rounded-2xl bg-[#08090C] text-[#FAF8F5] border border-[#E4C388]/35 flex flex-col justify-between shadow-xl relative">
+        <div class="absolute -top-3 right-6 bg-[#E4C388] text-[#08090C] px-3 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase">
+          Quorv Standard
+        </div>
+        <div>
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-white/[0.08]">
+            <span class="text-xs font-mono uppercase tracking-widest text-[#E4C388]">With Quorv</span>
+            <span class="text-xs font-mono text-[#E4C388]">✓ Connected System</span>
+          </div>
+
+          <ul class="flex flex-col gap-4 text-sm text-[#B2B5C4]">
+            <li class="flex items-start gap-3">
+              <span class="text-[#E4C388] font-bold text-xs mt-1">✓</span>
+              <span><strong class="text-white">Authoritative Digital Flagship:</strong> A bespoke, editorial website that makes your standard of care unmistakable from the first click.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#E4C388] font-bold text-xs mt-1">✓</span>
+              <span><strong class="text-white">Automated Booking Flow:</strong> Unified integration with Fresha, Timely, Phorest, or Vagaro with transparent service menus and deposit clarity.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#E4C388] font-bold text-xs mt-1">✓</span>
+              <span><strong class="text-white">Local Search Visibility:</strong> Optimized Google Business Profile and treatment SEO capturing ready-to-book local clients.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-white/[0.08] flex items-center justify-between">
+          <span class="text-xs font-mono text-[#E4C388]">SEE → TRUST → BOOK</span>
+          <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-white hover:text-[#E4C388] transition-colors">
+            Discuss Your System →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 4: THE QUORV SYSTEM (Compact 3 Pillars)
+     =================================================================== -->
+<section id="system" class="py-16 md:py-20 bg-[#08090C] border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="font-mono text-xs uppercase tracking-[0.24em] text-[#E4C388] block mb-2">The Architecture</span>
+      <h2 class="text-3xl sm:text-4xl font-medium tracking-tight text-[#FAF8F5] mb-3">
+        The Quorv System
+      </h2>
+      <p class="text-sm text-[#8C8F9F]">
+        Three interconnected pillars engineered to turn attention into scheduled appointments.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Pillar 1 -->
+      <div class="p-7 rounded-xl bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388]/40 transition-colors flex flex-col justify-between">
+        <div>
+          <span class="font-mono text-[11px] text-[#E4C388] tracking-widest uppercase block mb-3">Pillar 01 · Brand</span>
+          <h3 class="text-xl font-bold text-[#FAF8F5] mb-2">LOOK PREMIUM</h3>
+          <p class="text-xs text-[#8C8F9F] leading-relaxed mb-4">
+            Brand identity, visual direction, bespoke typography, and content guidelines that position your business at the pinnacle of your market.
+          </p>
+        </div>
+        <div class="text-[11px] font-mono text-[#E4C388] pt-3 border-t border-white/[0.06]">
+          Justifies premium pricing instantly.
+        </div>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="p-7 rounded-xl bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388]/40 transition-colors flex flex-col justify-between">
+        <div>
+          <span class="font-mono text-[11px] text-[#E4C388] tracking-widest uppercase block mb-3">Pillar 02 · Visibility</span>
+          <h3 class="text-xl font-bold text-[#FAF8F5] mb-2">GET DISCOVERED</h3>
+          <p class="text-xs text-[#8C8F9F] leading-relaxed mb-4">
+            Search engine architecture, Google Business Profile presence, and local discovery targeting high-intent clients seeking your exact specialties.
+          </p>
+        </div>
+        <div class="text-[11px] font-mono text-[#E4C388] pt-3 border-t border-white/[0.06]">
+          Captures steady search demand.
+        </div>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="p-7 rounded-xl bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388]/40 transition-colors flex flex-col justify-between">
+        <div>
+          <span class="font-mono text-[11px] text-[#E4C388] tracking-widest uppercase block mb-3">Pillar 03 · Software</span>
+          <h3 class="text-xl font-bold text-[#FAF8F5] mb-2">GET BOOKED</h3>
+          <p class="text-xs text-[#8C8F9F] leading-relaxed mb-4">
+            Custom websites, landing pages, and friction-free booking journeys integrated with your salon or clinic software (Fresha, Timely, Phorest).
+          </p>
+        </div>
+        <div class="text-[11px] font-mono text-[#E4C388] pt-3 border-t border-white/[0.06]">
+          Zero manual DM friction.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 5: SPECIALIST SERVICES (Interactive Category Tabs)
+     (Cuts ~2,500px of scrolling while maintaining rich content)
+     =================================================================== -->
+<section id="services" class="py-16 md:py-20 bg-[#0B0D12] border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-2">Capabilities</span>
+        <h2 class="text-3xl sm:text-4xl font-medium tracking-tight text-[#FAF8F5]">
+          Specialist Services
+        </h2>
+      </div>
+
+      <!-- Interactive Tab Selector -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0" id="categoryTabNav">
+        {% for cat in categories %}
+        <button type="button" 
+                class="category-tab-btn px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap {% if forloop.first %}bg-[#E4C388] text-[#08090C] font-semibold{% else %}bg-white/[0.04] text-[#8C8F9F] hover:text-white border border-white/[0.06]{% endif %}" 
+                data-cat-code="{{ cat.code }}">
+          {{ cat.code }} {{ cat.name }}
+        </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Tabbed Service Category Panels -->
+    <div id="categoryTabPanels">
+      {% for cat in categories %}
+      <div class="category-panel {% if not forloop.first %}hidden{% endif %} transition-opacity duration-300" id="panel-{{ cat.code }}">
+        
+        <!-- Category Outcome Lead -->
+        <div class="p-5 rounded-xl bg-[#08090C] border border-white/[0.08] mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-mono text-[#E4C388] uppercase tracking-wider block mb-1">CATEGORY {{ cat.code }} STRATEGY:</span>
+            <p class="text-sm sm:text-base text-[#FAF8F5] font-light">“{{ cat.outcome_statement }}”</p>
+          </div>
+          <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27d%20like%20to%20discuss%20Category%20{{ cat.code }}%20{{ cat.name }}%20services." target="_blank" rel="noopener noreferrer" class="btn-whatsapp px-4 py-2 rounded text-xs font-mono uppercase tracking-wider whitespace-nowrap">
+            WhatsApp Quote
+          </a>
+        </div>
+
+        <!-- Services in this Category -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {% for service in cat.services.all %}
+          <div class="p-7 rounded-xl bg-[#08090C] border border-white/[0.06] hover:border-[#E4C388]/30 transition-all flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-[#FAF8F5] mb-2">{{ service.title }}</h3>
+              <p class="text-xs text-[#E4C388] font-mono mb-4">{{ service.tagline }}</p>
+              <p class="text-xs text-[#8C8F9F] leading-relaxed mb-6">{{ service.outcome }}</p>
+
+              {% if service.get_deliverables_list %}
+              <div class="border-t border-white/[0.06] pt-4 mb-4">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-white/50 block mb-2">Scope includes:</span>
+                <ul class="flex flex-col gap-1.5 text-xs text-[#B2B5C4]">
+                  {% for deliverable in service.get_deliverables_list %}
+                  <li class="flex items-center gap-2">
+                    <span class="text-[#E4C388] text-[9px]">•</span> {{ deliverable }}
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+              <a href="{% url 'service_detail' service.slug %}" class="text-xs font-mono text-white/70 hover:text-[#E4C388] transition-colors">
+                Details →
+              </a>
+              <a href="https://wa.me/447352789073?text={{ service.whatsapp_prompt|urlencode }}" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-[#E4C388]">
+                Direct Quote
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 6: WHO WE SERVE (Interactive Sector Spotlight)
+     (Replaces 6 tall stacked cards with an interactive Webflow-quality selector)
+     =================================================================== -->
+<section id="industries" class="py-16 md:py-20 bg-[#08090C] border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="max-w-2xl mb-12">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-2">Specialization</span>
+      <h2 class="text-3xl sm:text-4xl font-medium tracking-tight text-[#FAF8F5] mb-2">
+        Built for beauty businesses.
+      </h2>
+      <p class="text-sm text-[#8C8F9F]">
+        Select your sector below to see how Quorv solves your specific digital friction:
+      </p>
+    </div>
+
+    <!-- Sector Spotlight Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left: Sector List Buttons -->
+      <div class="lg:col-span-5 flex flex-col gap-2" id="sectorListNav">
+        {% for ind in industries %}
+        <button type="button" 
+                class="sector-btn text-left p-4 rounded-xl transition-all border flex items-center justify-between group {% if forloop.first %}bg-[#0E1015] border-[#E4C388]/50 text-white{% else %}bg-[#0E1015]/40 border-white/[0.04] text-[#8C8F9F] hover:text-white hover:border-white/[0.15]{% endif %}" 
+                data-sector-index="{{ forloop.counter0 }}">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs text-[#E4C388]">0{{ forloop.counter }}</span>
+            <span class="text-sm font-semibold tracking-wide">{{ ind.title }}</span>
+          </div>
+          <span class="text-xs text-[#E4C388] opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+        </button>
+        {% endfor %}
+      </div>
+
+      <!-- Right: Active Sector Spotlight Card -->
+      <div class="lg:col-span-7 bg-[#0E1015] border border-white/[0.08] p-8 sm:p-10 rounded-2xl relative min-h-[380px] flex flex-col justify-between" id="sectorSpotlight">
+        {% for ind in industries %}
+        <div class="sector-content-card {% if not forloop.first %}hidden{% endif %} flex-col justify-between h-full" id="sector-content-{{ forloop.counter0 }}">
+          <div>
+            <div class="flex items-center justify-between pb-3 mb-6 border-b border-white/[0.08]">
+              <span class="text-xs font-mono text-[#E4C388] uppercase tracking-widest">Sector Blueprint 0{{ forloop.counter }}</span>
+              <span class="text-xs font-mono text-[#8C8F9F]">Dedicated Beauty Focus</span>
+            </div>
+
+            <h3 class="text-2xl font-bold text-[#FAF8F5] mb-2">{{ ind.title }}</h3>
+            <p class="text-xs font-mono text-[#E4C388] mb-6">{{ ind.subtitle }}</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div class="p-4 rounded-lg bg-[#08090C] border border-white/[0.04]">
+                <span class="text-[10px] font-mono text-red-400/80 uppercase tracking-widest block mb-1">Common Pitfall:</span>
+                <p class="text-xs text-[#8C8F9F] leading-relaxed">{{ ind.the_challenge }}</p>
+              </div>
+
+              <div class="p-4 rounded-lg bg-[#08090C] border border-[#E4C388]/20">
+                <span class="text-[10px] font-mono text-[#E4C388] uppercase tracking-widest block mb-1">Quorv Architecture:</span>
+                <p class="text-xs text-[#B2B5C4] leading-relaxed">{{ ind.the_solution }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+            <span class="text-xs font-mono text-[#8C8F9F]">Key focus: <span class="text-white">{{ ind.key_focus }}</span></span>
+            <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%20run%20a%20{{ ind.title|urlencode }}%20and%20would%20like%20to%20discuss%20our%20digital%20presence." target="_blank" rel="noopener noreferrer" class="btn-whatsapp px-4 py-2 rounded text-xs font-mono uppercase tracking-wider">
+              Chat
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 7: SELECTED CONCEPTS (Portfolio Archive - Compact Showcase)
+     =================================================================== -->
+<section id="work" class="py-16 md:py-20 bg-[#0B0D12] border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-[#E4C388] uppercase mb-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#E4C388]"></span>
+          <span>Studio Archive</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-medium tracking-tight text-[#FAF8F5]">
+          Selected Concepts
+        </h2>
+      </div>
+      <span class="text-xs font-mono text-[#8C8F9F] bg-white/[0.03] px-3.5 py-1.5 rounded border border-white/[0.08]">
+        Notice: Clearly labelled design concepts. Client case studies archived as completed.
+      </span>
+    </div>
+
+    <!-- 3 Concepts in Clean Responsive Row -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for concept in concepts %}
+      <div class="rounded-xl overflow-hidden bg-[#08090C] border border-white/[0.08] hover:border-[#E4C388]/40 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="aspect-[16/10] overflow-hidden relative">
+            <img src="{{ concept.image_url }}" alt="{{ concept.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#08090C] via-transparent to-transparent"></div>
+            <div class="absolute top-3 right-3 bg-[#08090C]/90 px-2.5 py-1 rounded text-[9px] font-mono tracking-widest uppercase text-[#E4C388] border border-[#E4C388]/30">
+              CONCEPT
+            </div>
+          </div>
+
+          <div class="p-6">
+            <span class="text-[11px] font-mono text-[#E4C388] uppercase tracking-wider block mb-1">{{ concept.client_type }}</span>
+            <h3 class="text-lg font-bold text-[#FAF8F5] mb-2">{{ concept.title }}</h3>
+            <p class="text-xs text-[#8C8F9F] leading-relaxed mb-4">{{ concept.concept_summary }}</p>
+            <div class="text-[11px] font-mono text-white/50 border-t border-white/[0.06] pt-3">
+              Scope: {{ concept.deliverables }}
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 pt-0">
+          <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%20like%20the%20style%20of%20the%20{{ concept.title|urlencode }}%20concept%20and%20would%20like%20to%20discuss%20something%20similar%20for%20my%20business." target="_blank" rel="noopener noreferrer" class="block text-center py-2.5 rounded border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono uppercase tracking-wider text-[#FAF8F5] transition-colors">
+            Inquire About Similar Direction →
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 8: THE 5-STAGE PROCESS (Single Compact Horizontal Progression)
+     =================================================================== -->
+<section id="process" class="py-16 md:py-20 bg-[#08090C] border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="text-center max-w-xl mx-auto mb-10">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-2">Methodology</span>
+      <h2 class="text-3xl font-medium tracking-tight text-[#FAF8F5] mb-2">
+        Five-Stage Process
+      </h2>
+      <p class="text-xs text-[#8C8F9F]">
+        A deliberate, unhurried workflow ensuring nothing is left to chance.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="p-5 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="font-mono text-[11px] text-[#E4C388] tracking-widest block mb-2">01 DISCOVER</span>
+        <h3 class="text-sm font-bold text-white mb-2">Immersion & Goals</h3>
+        <p class="text-xs text-[#8C8F9F]">Understand your space, signature treatments, pricing, and client demographics.</p>
+      </div>
+
+      <div class="p-5 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="font-mono text-[11px] text-[#E4C388] tracking-widest block mb-2">02 STRATEGIZE</span>
+        <h3 class="text-sm font-bold text-white mb-2">Architecture & Booking</h3>
+        <p class="text-xs text-[#8C8F9F]">Map treatment menus, scheduling logic, and local search keyword targets.</p>
+      </div>
+
+      <div class="p-5 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="font-mono text-[11px] text-[#E4C388] tracking-widest block mb-2">03 CREATE</span>
+        <h3 class="text-sm font-bold text-white mb-2">Identity & Web</h3>
+        <p class="text-xs text-[#8C8F9F]">Design visual identity, editorial typography, and the custom digital experience.</p>
+      </div>
+
+      <div class="p-5 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="font-mono text-[11px] text-[#E4C388] tracking-widest block mb-2">04 LAUNCH</span>
+        <h3 class="text-sm font-bold text-white mb-2">Testing & Live Cutover</h3>
+        <p class="text-xs text-[#8C8F9F]">Device testing, speed optimization, booking platform verification, and launch.</p>
+      </div>
+
+      <div class="p-5 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="font-mono text-[11px] text-[#E4C388] tracking-widest block mb-2">05 GROW</span>
+        <h3 class="text-sm font-bold text-white mb-2">Visibility & Retention</h3>
+        <p class="text-xs text-[#8C8F9F]">Local Google search visibility, content capture guidance, and recurring client growth.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 8B: STUDIO INSIGHTS (Topical Authority Architecture)
+     =================================================================== -->
+<section id="insights" class="py-16 md:py-20 bg-[#08090C] border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-2">Knowledge & Strategy</span>
+        <h2 class="text-3xl font-medium text-[#FAF8F5]">
+          Architectural Insights for Beauty Businesses
+        </h2>
+      </div>
+      <a href="{% url 'insights_index' %}" class="text-xs font-mono text-[#E4C388] hover:text-white transition-colors flex items-center gap-1.5 flex-shrink-0">
+        <span>View All Guides & Analysis</span>
+        <span>→</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for ins in featured_insights %}
+      <article class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.06] hover:border-[#E4C388]/30 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between text-xs font-mono text-[#8C8F9F] mb-3">
+            <span class="text-[#E4C388]">{{ ins.category }}</span>
+            <span>{{ ins.read_time }}</span>
+          </div>
+          <h3 class="text-lg font-bold text-[#FAF8F5] mb-2 group-hover:text-[#E4C388] transition-colors">
+            <a href="{% url 'insight_detail' ins.slug %}">
+              {{ ins.title }}
+            </a>
+          </h3>
+          <p class="text-xs text-[#8C8F9F] leading-relaxed line-clamp-3 font-light">
+            {{ ins.summary }}
+          </p>
+        </div>
+
+        <div class="pt-4 mt-6 border-t border-white/[0.04]">
+          <a href="{% url 'insight_detail' ins.slug %}" class="text-xs font-mono text-white group-hover:text-[#E4C388] transition-colors flex items-center gap-1">
+            <span>Read Strategy Guide</span>
+            <span>→</span>
+          </a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 9: FAQ (Curated Accordion)
+     =================================================================== -->
+<section id="faq" class="py-16 md:py-20 bg-[#0B0D12] border-b border-white/[0.06]">
+  <div class="max-w-4xl mx-auto px-6">
+    
+    <div class="text-center max-w-xl mx-auto mb-10">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-2">Clarity & Transparency</span>
+      <h2 class="text-3xl font-medium text-[#FAF8F5] mb-2">
+        Frequently Asked Questions
+      </h2>
+      <p class="text-xs text-[#8C8F9F]">
+        Honest answers regarding scope, custom pricing, software integrations, and international reach.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-3" id="faqAccordion">
+      {% for faq in faqs %}
+      <div class="faq-item rounded-xl bg-[#08090C] border border-white/[0.06] overflow-hidden transition-colors">
+        <button type="button" class="faq-toggle w-full p-5 text-left flex items-center justify-between gap-4 focus:outline-none" aria-expanded="false">
+          <span class="text-sm font-semibold text-[#FAF8F5]">{{ faq.question }}</span>
+          <svg class="faq-chevron w-4 h-4 text-[#E4C388] transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="faq-content hidden px-5 pb-5 text-xs text-[#B2B5C4] leading-relaxed border-t border-white/[0.04] pt-3 whitespace-pre-line">
+          {{ faq.answer|linebreaksbr }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- FAQPage Schema.org JSON-LD for AI Search & Answer Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {% for faq in faqs %}
+        {
+          "@type": "Question",
+          "name": "{{ faq.question|escapejs }}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ faq.answer|escapejs }}"
+          }
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+    </script>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 10: FINAL CTA & DIRECT INQUIRY
+     =================================================================== -->
+<section id="contact" class="py-16 md:py-24 bg-[#08090C] relative">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      
+      <!-- Primary Dialogue Invitation -->
+      <div class="lg:col-span-6 flex flex-col gap-5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full p-[1.5px] bg-[#E4C388] overflow-hidden">
+            <img src="{% static 'images/quorv-logo.jpg' %}" alt="QUORV Mark" class="w-full h-full object-cover rounded-full">
+          </div>
+          <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388]">Start a Dialogue</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#FAF8F5] leading-tight">
+          “Let’s make your business look as good online as it does in real life.”
+        </h2>
+
+        <p class="text-sm sm:text-base text-[#B2B5C4] leading-relaxed font-light">
+          Tell us what you're building, where your digital presence is today, and where you want it to go. We'll outline what it takes to elevate your business.
+        </p>
+
+        <div class="pt-2 flex flex-col sm:flex-row sm:items-center gap-4">
+          <a href="{{ whatsapp_url }}" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn-whatsapp inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-xs font-semibold tracking-wider uppercase font-mono shadow-lg"
+             id="finalWhatsAppCta">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.18-.077.355.101.174.45 1.082 1.341 1.564.444.24.78.361.954.417.174.056.276.049.378-.069.102-.118.434-.506.55-.679.116-.173.232-.144.39-.087.159.058 1.009.477 1.182.564.173.087.289.13.332.203.044.072.044.419-.1 0.824zM12.012 2C6.486 2 2 6.478 2 12c0 1.93.55 3.731 1.503 5.257L2 22l4.887-1.464C8.362 21.46 10.134 22 12.012 22c5.526 0 10.012-4.478 10.012-10S17.538 2 12.012 2zm0 18.257c-1.636 0-3.176-.464-4.493-1.267l-.322-.196-2.895.868.868-2.825-.213-.341C6.074 15.118 5.58 13.593 5.58 12c0-3.552 2.884-6.442 6.432-6.442 3.551 0 6.441 2.89 6.441 6.442 0 3.551-2.89 6.442-6.441 6.442z"/>
+            </svg>
+            <span>Chat on WhatsApp</span>
+          </a>
+
+          <button type="button" 
+                  id="toggleFormBtn" 
+                  class="px-6 py-3.5 rounded-xl border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono uppercase tracking-wider text-[#FAF8F5] transition-colors">
+            Or Send an Inquiry Form ↓
+          </button>
+        </div>
+
+        <div class="flex items-center gap-6 pt-2 text-xs font-mono text-[#8C8F9F]">
+          <div>Direct: <span class="text-white">{{ whatsapp_number }}</span></div>
+          <div>Email: <span class="text-white">{{ business_email }}</span></div>
+        </div>
+      </div>
+
+      <!-- Secondary Inquiry Form (Toggled/Responsive) -->
+      <div id="inquiryFormWrap" class="lg:col-span-6 bg-[#0E1015] border border-white/[0.08] p-6 sm:p-8 rounded-2xl shadow-xl transition-all">
+        <div class="mb-4">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-[#E4C388] block mb-1">Direct Form</span>
+          <h3 class="text-lg font-bold text-[#FAF8F5]">Send a Direct Studio Inquiry</h3>
+        </div>
+
+        <form id="leadInquiryForm" class="flex flex-col gap-3">
+          {% csrf_token %}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="leadName" class="block text-[11px] font-mono text-[#8C8F9F] mb-1">Your Name *</label>
+              <input type="text" id="leadName" name="name" required class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded px-3 py-2 text-xs text-[#FAF8F5] outline-none">
+            </div>
+            <div>
+              <label for="leadEmail" class="block text-[11px] font-mono text-[#8C8F9F] mb-1">Email *</label>
+              <input type="email" id="leadEmail" name="email" required class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded px-3 py-2 text-xs text-[#FAF8F5] outline-none">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="leadBusiness" class="block text-[11px] font-mono text-[#8C8F9F] mb-1">Business Name</label>
+              <input type="text" id="leadBusiness" name="business_name" class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded px-3 py-2 text-xs text-[#FAF8F5] outline-none">
+            </div>
+            <div>
+              <label for="leadType" class="block text-[11px] font-mono text-[#8C8F9F] mb-1">Sector</label>
+              <select id="leadType" name="business_type" class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded px-3 py-2 text-xs text-[#FAF8F5] outline-none">
+                <option value="salon">Hair / Beauty Salon</option>
+                <option value="aesthetic_clinic">Aesthetic Clinic / Medspa</option>
+                <option value="hairstylist">Independent Stylist</option>
+                <option value="nail_lash">Nail / Lash Studio</option>
+                <option value="spa_wellness">Spa & Wellness</option>
+                <option value="beauty_brand">Beauty Brand</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="leadMessage" class="block text-[11px] font-mono text-[#8C8F9F] mb-1">How can Quorv assist you? *</label>
+            <textarea id="leadMessage" name="message" rows="3" required placeholder="Tell us about your brand and current digital goals..." class="w-full bg-[#08090C] border border-white/[0.08] focus:border-[#E4C388] rounded px-3 py-2 text-xs text-[#FAF8F5] outline-none resize-none"></textarea>
+          </div>
+
+          <button type="submit" id="formSubmitBtn" class="mt-1 w-full py-2.5 rounded bg-white/[0.06] hover:bg-[#E4C388] hover:text-[#08090C] border border-white/[0.1] text-xs font-mono uppercase tracking-wider font-semibold text-[#FAF8F5] transition-all">
+            Submit Inquiry
+          </button>
+          
+          <div id="formStatusMsg" class="hidden text-xs font-mono text-center py-1"></div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Interactive Services Category Tabs
+    const tabBtns = document.querySelectorAll('.category-tab-btn');
+    const panels = document.querySelectorAll('.category-panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const catCode = btn.getAttribute('data-cat-code');
+
+        tabBtns.forEach(b => {
+          b.className = 'category-tab-btn px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap bg-white/[0.04] text-[#8C8F9F] hover:text-white border border-white/[0.06]';
+        });
+        btn.className = 'category-tab-btn px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap bg-[#E4C388] text-[#08090C] font-semibold';
+
+        panels.forEach(p => p.classList.add('hidden'));
+        const activePanel = document.getElementById('panel-' + catCode);
+        if (activePanel) activePanel.classList.remove('hidden');
+      });
+    });
+
+    // 2. Interactive Sector Spotlight
+    const sectorBtns = document.querySelectorAll('.sector-btn');
+    const sectorCards = document.querySelectorAll('.sector-content-card');
+
+    sectorBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = btn.getAttribute('data-sector-index');
+
+        sectorBtns.forEach(b => {
+          b.className = 'sector-btn text-left p-4 rounded-xl transition-all border flex items-center justify-between group bg-[#0E1015]/40 border-white/[0.04] text-[#8C8F9F] hover:text-white hover:border-white/[0.15]';
+        });
+        btn.className = 'sector-btn text-left p-4 rounded-xl transition-all border flex items-center justify-between group bg-[#0E1015] border-[#E4C388]/50 text-white';
+
+        sectorCards.forEach(c => c.classList.add('hidden'));
+        const activeCard = document.getElementById('sector-content-' + idx);
+        if (activeCard) activeCard.classList.remove('hidden');
+      });
+    });
+
+    // 3. FAQ Accordion
+    const toggles = document.querySelectorAll('.faq-toggle');
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const item = toggle.closest('.faq-item');
+        const content = item.querySelector('.faq-content');
+        const chevron = item.querySelector('.faq-chevron');
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+        toggle.setAttribute('aria-expanded', !isExpanded);
+        if (isExpanded) {
+          content.classList.add('hidden');
+          if (chevron) chevron.classList.remove('rotate-180');
+          item.classList.remove('border-[#E4C388]/40');
+        } else {
+          content.classList.remove('hidden');
+          if (chevron) chevron.classList.add('rotate-180');
+          item.classList.add('border-[#E4C388]/40');
+        }
+      });
+    });
+
+    // 4. Lead Inquiry Form AJAX
+    const form = document.getElementById('leadInquiryForm');
+    const statusMsg = document.getElementById('formStatusMsg');
+    const submitBtn = document.getElementById('formSubmitBtn');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+          const res = await fetch("{% url 'lead_submit' %}", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
+            },
+            body: JSON.stringify(data),
+          });
+
+          const json = await res.json();
+          statusMsg.classList.remove('hidden');
+
+          if (res.ok && json.status === 'success') {
+            statusMsg.className = 'text-xs font-mono text-center py-1 text-[#E4C388]';
+            statusMsg.textContent = '✓ ' + json.message;
+            form.reset();
+          } else {
+            statusMsg.className = 'text-xs font-mono text-center py-1 text-red-400';
+            statusMsg.textContent = '⚠ ' + (json.message || 'Submission failed. Please message via WhatsApp.');
+          }
+        } catch (err) {
+          statusMsg.classList.remove('hidden');
+          statusMsg.className = 'text-xs font-mono text-center py-1 text-red-400';
+          statusMsg.textContent = '⚠ Network error. Please message us directly on WhatsApp.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Inquiry';
+        }
+      });
+    }
+
+    // 5. Scroll smoothly to form when clicking toggle
+    const toggleFormBtn = document.getElementById('toggleFormBtn');
+    if (toggleFormBtn) {
+      toggleFormBtn.addEventListener('click', () => {
+        const formWrap = document.getElementById('inquiryFormWrap');
+        if (formWrap) {
+          formWrap.scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('leadName')?.focus();
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}
