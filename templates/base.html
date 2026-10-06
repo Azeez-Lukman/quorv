@@ -92,10 +92,14 @@
       border-color: rgba(228, 195, 136, 0.6);
     }
 
-    /* WhatsApp Button Treatment: Elegant, restrained luxury with recognizable accent */
+    /* Instagram & Action Button Treatment: Elegant gold accent, single-line always */
     .btn-whatsapp {
       background: #E4C388;
       color: #08090C;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .btn-whatsapp:hover {
@@ -130,6 +134,9 @@
         "description": "Quorv builds premium websites and connected digital systems for salons, aesthetic clinics, med spas, beauty clinics and beauty businesses.",
         "telephone": "+447352789073",
         "email": "quorv911@gmail.com",
+        "sameAs": [
+          "https://www.instagram.com/quorv_01"
+        ],
         "areaServed": [
           "United Kingdom",
           "United States",
@@ -210,17 +217,17 @@
         <a href="/#faq" class="hover:text-white transition-colors duration-200">FAQ</a>
       </nav>
 
-      <!-- Desktop Primary CTA: Elegant WhatsApp Link -->
+      <!-- Desktop Primary CTA: Instagram Direct -->
       <div class="hidden sm:flex items-center gap-4">
-        <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business." 
+        <a href="{{ instagram_url }}" 
            target="_blank" 
            rel="noopener noreferrer" 
            class="btn-whatsapp inline-flex items-center gap-2.5 px-5 py-2.5 rounded-lg text-xs font-semibold tracking-wider uppercase font-mono shadow-sm"
-           aria-label="Chat on WhatsApp with Quorv">
+           aria-label="Connect with Quorv on Instagram">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.18-.077.355.101.174.45 1.082 1.341 1.564.444.24.78.361.954.417.174.056.276.049.378-.069.102-.118.434-.506.55-.679.116-.173.232-.144.39-.087.159.058 1.009.477 1.182.564.173.087.289.13.332.203.044.072.044.419-.1 0.824zM12.012 2C6.486 2 2 6.478 2 12c0 1.93.55 3.731 1.503 5.257L2 22l4.887-1.464C8.362 21.46 10.134 22 12.012 22c5.526 0 10.012-4.478 10.012-10S17.538 2 12.012 2zm0 18.257c-1.636 0-3.176-.464-4.493-1.267l-.322-.196-2.895.868.868-2.825-.213-.341C6.074 15.118 5.58 13.593 5.58 12c0-3.552 2.884-6.442 6.432-6.442 3.551 0 6.441 2.89 6.441 6.442 0 3.551-2.89 6.442-6.441 6.442z"/>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
-          <span>Chat on WhatsApp</span>
+          <span>DM ON IG</span>
         </a>
       </div>
 
@@ -234,7 +241,7 @@
     </div>
 
     <!-- Mobile Dropdown Drawer -->
-    <div id="mobileDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#0B0D12] px-6 py-6 transition-all duration-300">
+    <div id="mobileDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#0B0D12] px-6 py-6 transition-all duration-300 max-h-[calc(100vh-5rem)] overflow-y-auto">
       <nav class="flex flex-col gap-4 text-base font-medium text-[#FAF8F5]">
         <a href="/#system" class="py-2 border-b border-white/5 hover:text-[#E4C388]">The System</a>
         <a href="/#services" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Services</a>
@@ -244,11 +251,14 @@
         <a href="/#process" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Process</a>
         <a href="/#faq" class="py-2 border-b border-white/5 hover:text-[#E4C388]">FAQ</a>
         <div class="pt-4">
-          <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business." 
+          <a href="{{ instagram_url }}" 
              target="_blank" 
              rel="noopener noreferrer" 
              class="btn-whatsapp w-full flex items-center justify-center gap-2 py-3 rounded-lg text-xs font-semibold tracking-wider uppercase font-mono">
-            <span>Chat on WhatsApp</span>
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span>DM ON IG</span>
           </a>
         </div>
       </nav>
@@ -261,17 +271,16 @@
     {% endblock %}
   </main>
 
-  <!-- Persistent Contextual WhatsApp Trigger for Mobile (Subtle & Restrained) -->
+  <!-- Persistent Contextual Instagram Trigger for Mobile (Subtle & Restrained) -->
   <div class="fixed bottom-6 right-6 z-40 md:hidden">
-    <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business." 
+    <a href="{{ instagram_url }}" 
        target="_blank" 
        rel="noopener noreferrer" 
-       class="flex items-center gap-2 bg-[#E4C388] text-[#08090C] px-4 py-2.5 rounded-full shadow-lg font-mono text-xs font-semibold uppercase tracking-wider"
-       aria-label="Direct WhatsApp message to Quorv">
-      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.18-.077.355.101.174.45 1.082 1.341 1.564.444.24.78.361.954.417.174.056.276.049.378-.069.102-.118.434-.506.55-.679.116-.173.232-.144.39-.087.159.058 1.009.477 1.182.564.173.087.289.13.332.203.044.072.044.419-.1 0.824zM12.012 2C6.486 2 2 6.478 2 12c0 1.93.55 3.731 1.503 5.257L2 22l4.887-1.464C8.362 21.46 10.134 22 12.012 22c5.526 0 10.012-4.478 10.012-10S17.538 2 12.012 2zm0 18.257c-1.636 0-3.176-.464-4.493-1.267l-.322-.196-2.895.868.868-2.825-.213-.341C6.074 15.118 5.58 13.593 5.58 12c0-3.552 2.884-6.442 6.432-6.442 3.551 0 6.441 2.89 6.441 6.442 0 3.551-2.89 6.442-6.441 6.442z"/>
+       class="w-12 h-12 rounded-full bg-[#E4C388] text-[#08090C] flex items-center justify-center shadow-xl shadow-black/50 hover:scale-105 active:scale-95 transition-transform"
+       aria-label="Direct Instagram message to Quorv">
+      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
       </svg>
-      <span>WhatsApp</span>
     </a>
   </div>
 
@@ -334,9 +343,9 @@
           <h4 class="font-mono text-xs uppercase tracking-widest text-[#E4C388] mb-5">Start a Dialogue</h4>
           <ul class="flex flex-col gap-3.5 text-sm text-[#8C8F9F]">
             <li>
-              <span class="block text-xs font-mono text-white/50 mb-1">Direct WhatsApp</span>
-              <a href="https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business." target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#E4C388] transition-colors font-mono">
-                +44 7352 789073
+              <span class="block text-xs font-mono text-white/50 mb-1">Direct Instagram</span>
+              <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#E4C388] transition-colors font-mono">
+                @quorv_01
               </a>
             </li>
             <li>
@@ -376,16 +385,65 @@
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('mobileMenuBtn');
       const drawer = document.getElementById('mobileDrawer');
+      const iconPath = document.querySelector('#menuIcon path');
+
+      const hamburgerPath = "M4 6h16M4 12h16M4 18h16";
+      const closePath = "M6 18L18 6M6 6l12 12";
+
+      function openDrawer() {
+        btn.setAttribute('aria-expanded', 'true');
+        drawer.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        if (iconPath) iconPath.setAttribute('d', closePath);
+      }
+
+      function closeDrawer() {
+        btn.setAttribute('aria-expanded', 'false');
+        drawer.classList.add('hidden');
+        document.body.style.overflow = '';
+        if (iconPath) iconPath.setAttribute('d', hamburgerPath);
+      }
+
       if (btn && drawer) {
-        btn.addEventListener('click', () => {
-          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-          btn.setAttribute('aria-expanded', !isExpanded);
-          drawer.classList.toggle('hidden');
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isClosed = drawer.classList.contains('hidden');
+          if (isClosed) {
+            openDrawer();
+          } else {
+            closeDrawer();
+          }
+        });
+
+        // Close dropdown when any link inside is clicked
+        drawer.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            closeDrawer();
+          });
+        });
+
+        // Close dropdown if clicking outside the menu
+        document.addEventListener('click', (e) => {
+          if (!drawer.classList.contains('hidden') && !drawer.contains(e.target) && !btn.contains(e.target)) {
+            closeDrawer();
+          }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !drawer.classList.contains('hidden')) {
+            closeDrawer();
+          }
+        });
+
+        // Reset state on page show (e.g. Back/Forward navigation)
+        window.addEventListener('pageshow', () => {
+          closeDrawer();
         });
       }
     });
 
-    // Lightweight Conversion Event Tracker (WhatsApp, Email)
+    // Lightweight Conversion Event Tracker (Instagram, WhatsApp, Email)
     (function() {
       function logConversion(eventType, eventLabel) {
         try {
@@ -412,7 +470,10 @@
         if (!anchor) return;
         const href = anchor.getAttribute('href') || '';
 
-        if (href.includes('wa.me')) {
+        if (href.includes('instagram.com')) {
+          const label = anchor.getAttribute('aria-label') || anchor.innerText.trim() || anchor.id || 'Instagram Link';
+          logConversion('instagram_click', label.substring(0, 100));
+        } else if (href.includes('wa.me')) {
           const label = anchor.getAttribute('aria-label') || anchor.innerText.trim() || anchor.id || 'WhatsApp Link';
           logConversion('whatsapp_click', label.substring(0, 100));
         } else if (href.startsWith('mailto:')) {

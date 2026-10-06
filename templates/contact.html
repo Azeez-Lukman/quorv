@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}Start a Dialogue | QUORV Brand Studio{% endblock %}
-{% block meta_description %}Connect with Quorv to elevate the digital presence of your salon, aesthetic clinic, or beauty practice. Direct WhatsApp and inquiry form.{% endblock %}
+{% block meta_description %}Connect with Quorv to elevate the digital presence of your salon, aesthetic clinic, or beauty practice. Direct Instagram dialogue and inquiry form.{% endblock %}
 
 {% block content %}
 <section class="py-20 md:py-28 border-b border-white/[0.06]">
@@ -20,20 +20,16 @@
           Whether you're launching a new salon, upgrading an established aesthetic practice, or eliminating manual booking headaches, we’re ready to help.
         </p>
 
-        <!-- Primary Action -->
-        <div class="pt-2">
-          <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp inline-flex items-center gap-3 px-8 py-4 rounded-xl text-xs font-semibold tracking-wider uppercase font-mono shadow-md w-full justify-center sm:w-auto">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.18-.077.355.101.174.45 1.082 1.341 1.564.444.24.78.361.954.417.174.056.276.049.378-.069.102-.118.434-.506.55-.679.116-.173.232-.144.39-.087.159.058 1.009.477 1.182.564.173.087.289.13.332.203.044.072.044.419-.1 0.824zM12.012 2C6.486 2 2 6.478 2 12c0 1.93.55 3.731 1.503 5.257L2 22l4.887-1.464C8.362 21.46 10.134 22 12.012 22c5.526 0 10.012-4.478 10.012-10S17.538 2 12.012 2zm0 18.257c-1.636 0-3.176-.464-4.493-1.267l-.322-.196-2.895.868.868-2.825-.213-.341C6.074 15.118 5.58 13.593 5.58 12c0-3.552 2.884-6.442 6.432-6.442 3.551 0 6.441 2.89 6.441 6.442 0 3.551-2.89 6.442-6.441 6.442z"/>
-            </svg>
-            <span>Chat Directly on WhatsApp</span>
-          </a>
-        </div>
-
         <div class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.06] flex flex-col gap-4 text-xs font-mono text-[#8C8F9F]">
           <div>
-            <span class="block text-white/50 text-[10px] uppercase tracking-widest mb-1">WhatsApp Hotline</span>
-            <span class="text-white text-sm">+44 7352 789073</span>
+            <span class="block text-white/50 text-[10px] uppercase tracking-widest mb-1">Instagram Direct</span>
+            <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-white hover:text-[#E4C388] text-sm transition-colors group">
+              <svg class="w-3.5 h-3.5 text-[#E4C388] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              <span>@quorv_01</span>
+              <span class="text-[10px] text-white/40 group-hover:text-[#E4C388] transition-colors">↗</span>
+            </a>
           </div>
           <div>
             <span class="block text-white/50 text-[10px] uppercase tracking-widest mb-1">Studio Email</span>
@@ -151,12 +147,12 @@
             form.reset();
           } else {
             statusMsg.className = 'text-xs font-mono text-center py-2 text-red-400';
-            statusMsg.textContent = '⚠ ' + (json.message || 'Submission failed. Please message via WhatsApp.');
+            statusMsg.textContent = '⚠ ' + (json.message || 'Submission failed. Please message us on Instagram @quorv_01.');
           }
         } catch (err) {
           statusMsg.classList.remove('hidden');
           statusMsg.className = 'text-xs font-mono text-center py-2 text-red-400';
-          statusMsg.textContent = '⚠ Network error. Please message us directly on WhatsApp.';
+          statusMsg.textContent = '⚠ Network error. Please message us directly on Instagram @quorv_01.';
         } finally {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Inquiry';

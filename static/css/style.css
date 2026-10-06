@@ -71,7 +71,7 @@ body {
   background-color: var(--bg-deep);
   color: var(--text-primary);
   line-height: 1.65;
-  overflow-x: hidden;
+  overflow-x: clip;
   background-image: 
     radial-gradient(circle at 15% 10%, rgba(230, 194, 128, 0.08) 0%, transparent 40%),
     radial-gradient(circle at 85% 35%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),

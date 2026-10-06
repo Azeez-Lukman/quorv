@@ -86,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.studio_settings',
             ],
         },
     },
@@ -201,7 +202,8 @@ else:
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'QUORV Brand Studio <noreply@quorv.com>')
 STUDIO_NOTIFICATION_EMAIL = os.environ.get('STUDIO_NOTIFICATION_EMAIL', 'quorv911@gmail.com')
 
-# Studio Brand & WhatsApp Constants
+# Studio Brand & Social Constants
+QUORV_INSTAGRAM_URL = "https://www.instagram.com/quorv_01?utm_source=qr&stkn=MWFrdDBjYmZvazBqdA=="
 QUORV_WHATSAPP_NUMBER = "+447352789073"
 QUORV_WHATSAPP_URL = "https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business."
 

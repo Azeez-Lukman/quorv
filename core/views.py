@@ -192,8 +192,8 @@ Thank you for reaching out to QUORV Brand Studio.
 
 We have received your details and are reviewing your business requirements. One of our directors will follow up with you within 24 hours.
 
-If your inquiry is time-sensitive or you prefer direct communication, you can message us anytime directly on WhatsApp:
-https://wa.me/447352789073
+If your inquiry is time-sensitive or you prefer direct communication, you can message us anytime directly on Instagram:
+https://www.instagram.com/quorv_01?utm_source=qr&stkn=MWFrdDBjYmZvazBqdA==
 
 Warm regards,
 QUORV Brand Studio
@@ -214,7 +214,7 @@ quorv911@gmail.com
         response['X-Robots-Tag'] = 'noindex, nofollow, noarchive'
         return response
     except Exception:
-        response = JsonResponse({'status': 'error', 'message': 'Something went wrong. Please chat with us directly on WhatsApp.'}, status=500)
+        response = JsonResponse({'status': 'error', 'message': 'Something went wrong. Please connect with us directly on Instagram @quorv_01.'}, status=500)
         response['X-Robots-Tag'] = 'noindex, nofollow, noarchive'
         return response
 
