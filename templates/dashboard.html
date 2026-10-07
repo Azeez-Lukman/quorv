@@ -120,16 +120,16 @@
         </div>
       </div>
 
-      <!-- Card 2: WhatsApp Conversions -->
-      <div class="p-6 rounded-xl bg-[#0E1015] border border-[#25D366]/30 flex flex-col justify-between">
+      <!-- Card 2: Instagram Conversions -->
+      <div class="p-6 rounded-xl bg-[#0E1015] border border-[#E1306C]/40 flex flex-col justify-between">
         <div class="flex items-center justify-between mb-2">
-          <span class="text-[11px] font-mono uppercase tracking-widest text-emerald-400">WhatsApp Clicks</span>
-          <span class="text-xs">💬</span>
+          <span class="text-[11px] font-mono uppercase tracking-widest text-[#E1306C] font-semibold">Instagram Clicks</span>
+          <span class="text-xs">📸</span>
         </div>
-        <div class="text-3xl font-bold text-white tracking-tight my-1">{{ total_whatsapp }}</div>
+        <div class="text-3xl font-bold text-white tracking-tight my-1">{{ total_instagram }}</div>
         <div class="text-[11px] font-mono text-[#8C8F9F] flex items-center justify-between pt-2 border-t border-white/[0.04]">
           <span>Primary Conversion</span>
-          <span class="text-emerald-400">+44 7352 789073</span>
+          <a href="https://www.instagram.com/quorv_01" target="_blank" rel="noopener noreferrer" class="text-[#E1306C] hover:underline font-medium">@quorv_01 ↗</a>
         </div>
       </div>
 
@@ -141,8 +141,8 @@
         </div>
         <div class="text-3xl font-bold text-white tracking-tight my-1">{{ total_events }}</div>
         <div class="text-[11px] font-mono text-[#8C8F9F] flex items-center justify-between pt-2 border-t border-white/[0.04]">
-          <span>Events Today: <strong class="text-white">{{ events_today }}</strong></span>
-          <span>Emails: <strong class="text-white">{{ total_emails }}</strong></span>
+          <span>Today: <strong class="text-white">+{{ events_today }}</strong></span>
+          <span>WhatsApp: <strong class="text-emerald-400">{{ total_whatsapp }}</strong></span>
         </div>
       </div>
 
@@ -273,7 +273,9 @@
             {% for ev in recent_events %}
             <div class="p-3 rounded-lg bg-[#08090C] border border-white/[0.04] flex items-start justify-between gap-3 text-xs">
               <div class="flex items-start gap-2.5">
-                {% if ev.event_type == 'whatsapp_click' %}
+                {% if ev.event_type == 'instagram_click' %}
+                <span class="text-[#E1306C] font-bold mt-0.5 text-sm">📸</span>
+                {% elif ev.event_type == 'whatsapp_click' %}
                 <span class="text-emerald-400 font-bold mt-0.5 text-sm">💬</span>
                 {% elif ev.event_type == 'lead_submit' %}
                 <span class="text-amber-400 font-bold mt-0.5 text-sm">✉</span>
@@ -300,16 +302,16 @@
             </div>
             {% empty %}
             <div class="text-center py-8 text-[#8C8F9F] font-mono text-xs">
-              No live events logged yet. Clicks on WhatsApp CTAs across your site will stream here.
+              No live events logged yet. Clicks on Instagram &amp; WhatsApp CTAs across your site will stream here.
             </div>
             {% endfor %}
           </div>
         </div>
 
-        <!-- Top Performing WhatsApp CTA Locations -->
+        <!-- Top Performing Conversion Triggers -->
         <div class="bg-[#0E1015] border border-white/[0.08] rounded-2xl p-6 sm:p-7 flex flex-col gap-4">
           <div class="pb-3 border-b border-white/[0.08]">
-            <h3 class="text-sm font-bold text-white tracking-wide">Top WhatsApp Conversion Triggers</h3>
+            <h3 class="text-sm font-bold text-white tracking-wide">Top Conversion Triggers</h3>
             <p class="text-[11px] font-mono text-[#8C8F9F]">Which buttons and services convert the most visitors</p>
           </div>
 
@@ -321,7 +323,7 @@
                 <span class="text-[#E4C388] font-bold">{{ cta.total }} clicks</span>
               </div>
               <div class="w-full bg-[#08090C] h-1.5 rounded-full overflow-hidden border border-white/[0.04]">
-                <div class="bg-[#E4C388] h-full rounded-full" style="width: {% widthratio cta.total total_whatsapp 100 %}%;"></div>
+                <div class="bg-[#E4C388] h-full rounded-full" style="width: 100%;"></div>
               </div>
             </div>
             {% empty %}

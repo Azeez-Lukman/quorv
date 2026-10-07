@@ -266,20 +266,24 @@ def audit_submit(request):
         final_score = max(38, min(89, base_score))
         vuln_text = "\n".join(vulnerabilities)
 
-        audit = DigitalAuditSubmission.objects.create(
-            business_name=business_name,
-            website_or_instagram=website_or_instagram,
-            contact_name=contact_name,
-            email=email,
-            phone=phone,
-            business_type=business_type,
-            booking_software=booking_software,
-            primary_challenge=primary_challenge,
-            current_monthly_revenue=current_monthly_revenue,
-            calculated_score=final_score,
-            key_vulnerabilities=vuln_text,
-            status='pending'
-        )
+        try:
+            audit = DigitalAuditSubmission.objects.create(
+                business_name=business_name,
+                website_or_instagram=website_or_instagram,
+                contact_name=contact_name,
+                email=email,
+                phone=phone,
+                business_type=business_type,
+                booking_software=booking_software,
+                primary_challenge=primary_challenge,
+                current_monthly_revenue=current_monthly_revenue,
+                calculated_score=final_score,
+                key_vulnerabilities=vuln_text,
+                status='pending'
+            )
+        except Exception as db_err:
+            import logging
+            logging.getLogger(__name__).error(f"Audit DB save error: {db_err}")
 
         # Log analytics
         try:
@@ -385,6 +389,7 @@ def studio_dashboard(request):
     in_discussion_leads = Lead.objects.filter(status='in_discussion').count()
     closed_leads = Lead.objects.filter(status='closed').count()
 
+    total_instagram = AnalyticsEvent.objects.filter(event_type='instagram_click').count()
     total_whatsapp = AnalyticsEvent.objects.filter(event_type='whatsapp_click').count()
     total_emails = AnalyticsEvent.objects.filter(event_type='email_click').count()
     total_events = AnalyticsEvent.objects.count()
@@ -397,7 +402,7 @@ def studio_dashboard(request):
     recent_leads = Lead.objects.all()[:15]
 
     top_ctas = (
-        AnalyticsEvent.objects.filter(event_type='whatsapp_click')
+        AnalyticsEvent.objects.filter(event_type__in=['instagram_click', 'whatsapp_click'])
         .values('event_label')
         .annotate(total=Count('id'))
         .order_by('-total')[:6]
@@ -420,6 +425,7 @@ def studio_dashboard(request):
         'contacted_leads': contacted_leads,
         'in_discussion_leads': in_discussion_leads,
         'closed_leads': closed_leads,
+        'total_instagram': total_instagram,
         'total_whatsapp': total_whatsapp,
         'total_emails': total_emails,
         'total_events': total_events,

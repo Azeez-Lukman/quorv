@@ -121,6 +121,7 @@ class AnalyticsEventAdmin(admin.ModelAdmin):
 
     def event_type_badge(self, obj):
         colors = {
+            'instagram_click': '#e1306c',
             'whatsapp_click': '#22c55e',
             'lead_submit': '#eab308',
             'email_click': '#3b82f6',

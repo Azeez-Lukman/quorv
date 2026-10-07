@@ -167,6 +167,7 @@ class Lead(models.Model):
 
 class AnalyticsEvent(models.Model):
     EVENT_TYPE_CHOICES = [
+        ('instagram_click', 'Instagram DM CTA Click'),
         ('whatsapp_click', 'WhatsApp CTA Click'),
         ('email_click', 'Email CTA Click'),
         ('lead_submit', 'Lead Form Submission'),
