@@ -301,7 +301,8 @@ def audit_submit(request):
         # Send instant notification to Studio Director
         try:
             notification_email = getattr(settings, 'STUDIO_NOTIFICATION_EMAIL', 'quorv911@gmail.com')
-            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'QUORV Studio <noreply@quorv.org>')
+            host_user = getattr(settings, 'EMAIL_HOST_USER', '')
+            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None) or (f"QUORV Studio <{host_user}>" if host_user else 'quorv911@gmail.com')
             subject = f"[QUORV Audit Lead] {business_name} requested a Digital Audit (Score: {final_score}/100)"
             body = f"""New Digital System Audit generated:
 
@@ -327,10 +328,11 @@ View in Admin:
                 message=body,
                 from_email=from_email,
                 recipient_list=[notification_email],
-                fail_silently=True
+                fail_silently=False
             )
-        except Exception:
-            pass
+        except Exception as mail_err:
+            import logging
+            logging.getLogger(__name__).error(f"Audit notification email error: {mail_err}")
 
         return JsonResponse({
             'status': 'success',

@@ -207,7 +207,7 @@ if EMAIL_HOST:
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'QUORV Brand Studio <noreply@quorv.com>')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL') or (f"QUORV Studio <{EMAIL_HOST_USER}>" if EMAIL_HOST_USER else 'quorv911@gmail.com')
 STUDIO_NOTIFICATION_EMAIL = os.environ.get('STUDIO_NOTIFICATION_EMAIL', 'quorv911@gmail.com')
 
 # Studio Brand & Social Constants
