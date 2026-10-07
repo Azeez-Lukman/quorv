@@ -196,18 +196,19 @@ X_FRAME_OPTIONS = 'DENY'
 
 # Email Configuration
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'quorv911@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+
 if EMAIL_HOST:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-    EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'False').lower() in ('true', '1')
-    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() in ('true', '1') and not EMAIL_USE_SSL
+    EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 465))
+    EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'True').lower() in ('true', '1')
+    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'False').lower() in ('true', '1') and not EMAIL_USE_SSL
     EMAIL_TIMEOUT = 10
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL') or (f"QUORV Studio <{EMAIL_HOST_USER}>" if EMAIL_HOST_USER else 'quorv911@gmail.com')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL') or f"QUORV Studio <{EMAIL_HOST_USER}>"
 STUDIO_NOTIFICATION_EMAIL = os.environ.get('STUDIO_NOTIFICATION_EMAIL', 'quorv911@gmail.com')
 
 # Studio Brand & Social Constants
