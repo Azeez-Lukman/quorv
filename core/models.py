@@ -217,3 +217,34 @@ class Insight(models.Model):
     def __str__(self):
         return self.title
 
+
+class DigitalAuditSubmission(models.Model):
+    AUDIT_STATUS_CHOICES = [
+        ('pending', 'Audit Pending Review'),
+        ('analyzed', 'Score Generated / Sent'),
+        ('booked_consult', 'Booked Consultation'),
+        ('closed', 'Closed'),
+    ]
+
+    business_name = models.CharField(max_length=150)
+    website_or_instagram = models.CharField(max_length=200, help_text="Current website URL or @handle")
+    contact_name = models.CharField(max_length=120)
+    email = models.EmailField()
+    phone = models.CharField(max_length=50, blank=True)
+    business_type = models.CharField(max_length=80, help_text="e.g. Aesthetic Clinic, Salon, Medspa")
+    booking_software = models.CharField(max_length=80, help_text="e.g. Fresha, Phorest, Vagaro, Boulevard, None")
+    primary_challenge = models.CharField(max_length=150, help_text="e.g. Look outdated, low booking conversion, poor Google ranking")
+    current_monthly_revenue = models.CharField(max_length=80, blank=True)
+    calculated_score = models.IntegerField(default=68, help_text="Calculated health score out of 100")
+    key_vulnerabilities = models.TextField(blank=True, help_text="Identified leakages e.g. Booking friction, mobile bounce")
+    status = models.CharField(max_length=30, choices=AUDIT_STATUS_CHOICES, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Digital Audit Submission"
+        verbose_name_plural = "Digital Audit Submissions"
+
+    def __str__(self):
+        return f"{self.business_name} (Score: {self.calculated_score}/100) - {self.get_status_display()}"
+

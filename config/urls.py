@@ -16,6 +16,7 @@ urlpatterns = [
     path('about/', views.about_view, name='about'),
     path('contact/', views.contact_view, name='contact'),
     path('api/leads/submit/', views.lead_submit, name='lead_submit'),
+    path('api/audit/submit/', views.audit_submit, name='audit_submit'),
     path('api/analytics/event/', views.analytics_event, name='analytics_event'),
 
     # Studio Owner Analytics Dashboard

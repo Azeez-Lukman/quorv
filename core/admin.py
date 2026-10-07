@@ -2,7 +2,9 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 import urllib.parse
-from .models import ServiceCategory, Service, Industry, PortfolioConcept, FAQ, Lead, AnalyticsEvent, Insight
+from .models import (
+    ServiceCategory, Service, Industry, PortfolioConcept, FAQ, Lead, AnalyticsEvent, Insight, DigitalAuditSubmission
+)
 
 
 admin.site.site_header = mark_safe('QUORV Brand Studio &nbsp;•&nbsp; <a href="/dashboard/" style="background: #E4C388; color: #08090C; font-size: 11px; padding: 4px 10px; border-radius: 4px; text-decoration: none; font-weight: bold; vertical-align: middle;">📊 Launch Intelligence Dashboard ↗</a>')
@@ -142,3 +144,36 @@ class InsightAdmin(admin.ModelAdmin):
     search_fields = ('title', 'subtitle', 'summary', 'content')
     prepopulated_fields = {'slug': ('title',)}
     list_editable = ('is_featured', 'order')
+
+
+@admin.register(DigitalAuditSubmission)
+class DigitalAuditSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('created_at', 'business_name', 'contact_name', 'business_type', 'booking_software', 'score_badge', 'status_badge')
+    list_filter = ('status', 'business_type', 'booking_software', 'created_at')
+    search_fields = ('business_name', 'contact_name', 'email', 'phone', 'website_or_instagram')
+    readonly_fields = ('created_at', 'calculated_score', 'key_vulnerabilities')
+    list_per_page = 25
+
+    def score_badge(self, obj):
+        score = obj.calculated_score
+        bg = '#ef4444' if score < 60 else ('#eab308' if score < 80 else '#22c55e')
+        return format_html(
+            '<span style="background-color: {}; color: #000; padding: 2px 8px; border-radius: 9999px; font-weight: bold; font-size: 11px;">{}/100</span>',
+            bg, score
+        )
+    score_badge.short_description = "Audit Score"
+
+    def status_badge(self, obj):
+        colors = {
+            'pending': '#eab308',
+            'analyzed': '#3b82f6',
+            'booked_consult': '#22c55e',
+            'closed': '#6b7280',
+        }
+        color = colors.get(obj.status, '#94a3b8')
+        return format_html(
+            '<span style="background-color: {}; color: #fff; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 600;">{}</span>',
+            color, obj.get_status_display()
+        )
+    status_badge.short_description = "Status"
+

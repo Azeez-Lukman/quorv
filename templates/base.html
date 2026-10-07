@@ -10,7 +10,7 @@
   <meta name="keywords" content="beauty website design, salon website design, med spa website design, aesthetic clinic web design, beauty clinic digital systems, salon booking integrations, Fresha website integration">
   <meta name="author" content="Quorv">
   <meta name="robots" content="{% block robots %}index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1{% endblock %}">
-  <link rel="canonical" href="https://quorv.com{{ request.path }}">
+  <link rel="canonical" href="https://quorv.org{{ request.path }}">
 
   <!-- Favicon using the authentic Quorv emblem -->
   <link rel="icon" type="image/jpeg" href="{% static 'images/quorv-logo.jpg' %}">
@@ -21,8 +21,8 @@
   <meta property="og:site_name" content="Quorv">
   <meta property="og:title" content="{% block og_title %}Quorv · The Digital System Behind Premium Beauty Businesses{% endblock %}">
   <meta property="og:description" content="{% block og_description %}Quorv builds premium websites and connected digital experiences for salons, aesthetic clinics, med spas, beauty clinics and premium beauty businesses.{% endblock %}">
-  <meta property="og:image" content="https://quorv.com{% static 'images/quorv-logo.jpg' %}">
-  <meta property="og:url" content="https://quorv.com{{ request.path }}">
+  <meta property="og:image" content="https://quorv.org{% static 'images/quorv-logo.jpg' %}">
+  <meta property="og:url" content="https://quorv.org{{ request.path }}">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Google Fonts: Italiana (Editorial Display Serif), Plus Jakarta Sans (Clean Modern Sans), Space Grotesk (Understated Utility) -->
@@ -108,6 +108,181 @@
       box-shadow: 0 8px 24px rgba(228, 195, 136, 0.25);
     }
 
+    /* =========================================================
+       LUXURY LIGHT MODE (WARM ALABASTER & BRUSHED BRASS)
+       ========================================================= */
+    html.light {
+      color-scheme: light;
+    }
+
+    html.light body {
+      background-color: #FAF8F5 !important;
+      color: #12141C !important;
+    }
+
+    html.light ::selection {
+      background: #E4C388;
+      color: #12141C;
+    }
+
+    /* Light Theme Nav & Surfaces */
+    html.light #mainHeader {
+      background-color: rgba(250, 248, 245, 0.88) !important;
+      border-color: rgba(18, 20, 28, 0.08) !important;
+    }
+
+    html.light .border-b,
+    html.light .border-t,
+    html.light .border {
+      border-color: rgba(18, 20, 28, 0.08) !important;
+    }
+
+    /* Neutralize Dark Mode Hexes into Luxury Ivory/Travertine */
+    html.light .bg-\[\#08090C\],
+    html.light .bg-\[\#050608\],
+    html.light .bg-\[\#0B0D12\] {
+      background-color: #FAF8F5 !important;
+      color: #12141C !important;
+    }
+
+    html.light .bg-\[\#0E1015\],
+    html.light .bg-\[\#0E1017\],
+    html.light .bg-\[\#12141C\],
+    html.light .bg-\[\#141620\],
+    html.light .bg-\[\#181A24\] {
+      background-color: #FFFFFF !important;
+      color: #12141C !important;
+      box-shadow: 0 4px 20px rgba(18, 20, 28, 0.04) !important;
+    }
+
+    html.light .text-\[\#FAF8F5\],
+    html.light .text-white {
+      color: #12141C !important;
+    }
+
+    /* Fix translucent white text in light mode so it doesn't wash out against alabaster */
+    html.light [class*="text-white/"] {
+      color: #8C8F9F !important;
+    }
+
+    html.light .text-white\/80 {
+      color: #2D313F !important;
+    }
+
+    html.light .text-white\/70,
+    html.light .text-white\/60 {
+      color: #717585 !important;
+    }
+
+    html.light .text-white\/50,
+    html.light .text-white\/40,
+    html.light .text-white\/30 {
+      color: #A0A3B1 !important;
+    }
+
+    html.light .text-\[\#B2B5C4\],
+    html.light .text-\[\#8C8F9F\] {
+      color: #5F6375 !important;
+    }
+
+    html.light .text-\[\#D8DAE5\] {
+      color: #2D313F !important;
+    }
+
+    /* Strikethrough lines & gold decorations */
+    html.light .decoration-\[\#E4C388\]\/50 {
+      text-decoration-color: rgba(168, 129, 60, 0.45) !important;
+    }
+
+    /* Brass & Warm Gold Accents in Light Mode */
+    html.light .text-\[\#E4C388\] {
+      color: #A8813C !important;
+    }
+
+    html.light .btn-whatsapp {
+      background: #A8813C !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 16px rgba(168, 129, 60, 0.22) !important;
+    }
+    html.light .btn-whatsapp:hover {
+      background: #906B2B !important;
+      color: #FFFFFF !important;
+    }
+
+    html.light #mobileDrawer {
+      background-color: #FAF8F5 !important;
+    }
+
+    /* Image Overlay Cards: In light mode, make surface frosted alabaster and text dark obsidian, OR keep high-contrast frosted slate */
+    html.light .image-editorial-card {
+      background-color: rgba(255, 255, 255, 0.94) !important;
+      border-color: rgba(18, 20, 28, 0.12) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    }
+    html.light .image-editorial-card p {
+      color: #12141C !important;
+      font-weight: 500 !important;
+    }
+    html.light .image-editorial-card span {
+      color: #A8813C !important;
+      font-weight: 600 !important;
+    }
+
+    /* Modal Styling in Light Mode */
+    html.light #auditModal > div {
+      background-color: #FFFFFF !important;
+      border-color: rgba(168, 129, 60, 0.25) !important;
+      color: #12141C !important;
+      box-shadow: 0 25px 50px -12px rgba(18, 20, 28, 0.15) !important;
+    }
+
+    html.light #auditModal input {
+      background-color: #FAF8F5 !important;
+      color: #12141C !important;
+      border-color: rgba(18, 20, 28, 0.12) !important;
+    }
+
+    html.light #auditModal label:has(input[type="radio"]) {
+      background-color: #FAF8F5 !important;
+      color: #12141C !important;
+      border-color: rgba(18, 20, 28, 0.1) !important;
+    }
+
+    /* Sector Blueprint List Buttons (Who We Serve) in Light Mode */
+    html.light .sector-btn {
+      background-color: #FFFFFF !important;
+      border-color: rgba(18, 20, 28, 0.08) !important;
+      color: #5F6375 !important;
+      box-shadow: 0 2px 8px rgba(18, 20, 28, 0.03) !important;
+    }
+    html.light .sector-btn:hover {
+      background-color: #F8F6F2 !important;
+      border-color: rgba(168, 129, 60, 0.35) !important;
+      color: #12141C !important;
+    }
+    html.light .sector-btn.active,
+    html.light .sector-btn[class*="border-\[\#E4C388\]"] {
+      background-color: #FFFFFF !important;
+      border-color: #A8813C !important;
+      color: #12141C !important;
+      box-shadow: 0 4px 16px rgba(168, 129, 60, 0.12) !important;
+    }
+    html.light .sector-btn span.font-mono {
+      color: #A8813C !important;
+    }
+
+    /* Theme Switcher Button Micro-Styling */
+    .theme-toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
     /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, ::before, ::after {
@@ -126,11 +301,11 @@
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://quorv.com/#organization",
+        "@id": "https://quorv.org/#organization",
         "name": "Quorv",
         "alternateName": ["QUORV Digital Studio", "QUORV"],
-        "url": "https://quorv.com",
-        "logo": "https://quorv.com{% static 'images/quorv-logo.jpg' %}",
+        "url": "https://quorv.org",
+        "logo": "https://quorv.org{% static 'images/quorv-logo.jpg' %}",
         "description": "Quorv builds premium websites and connected digital systems for salons, aesthetic clinics, med spas, beauty clinics and beauty businesses.",
         "telephone": "+447352789073",
         "email": "quorv911@gmail.com",
@@ -169,11 +344,11 @@
       },
       {
         "@type": "WebSite",
-        "@id": "https://quorv.com/#website",
-        "url": "https://quorv.com",
+        "@id": "https://quorv.org/#website",
+        "url": "https://quorv.org",
         "name": "Quorv",
         "publisher": {
-          "@id": "https://quorv.com/#organization"
+          "@id": "https://quorv.org/#organization"
         },
         "description": "The digital system behind premium beauty businesses."
       }
@@ -209,16 +384,33 @@
       <!-- Desktop Navigation Links -->
       <nav class="hidden lg:flex items-center gap-7 text-sm font-medium tracking-wide text-[#B2B5C4]" aria-label="Primary Navigation">
         <a href="/#system" class="hover:text-white transition-colors duration-200">The System</a>
-        <a href="/#services" class="hover:text-white transition-colors duration-200">Services</a>
-        <a href="/#industries" class="hover:text-white transition-colors duration-200">Who We Serve</a>
+        <a href="{% url 'services_index' %}" class="hover:text-white transition-colors duration-200">Services</a>
+        <a href="{% url 'industries_index' %}" class="hover:text-white transition-colors duration-200">Who We Serve</a>
         <a href="{% url 'insights_index' %}" class="hover:text-white transition-colors duration-200">Insights</a>
-        <a href="/#work" class="hover:text-white transition-colors duration-200">Concepts</a>
-        <a href="/#process" class="hover:text-white transition-colors duration-200">Process</a>
-        <a href="/#faq" class="hover:text-white transition-colors duration-200">FAQ</a>
+        <a href="{% url 'work_index' %}" class="hover:text-white transition-colors duration-200">Concepts</a>
+        <a href="{% url 'process' %}" class="hover:text-white transition-colors duration-200">Process</a>
+        <button type="button" class="open-audit-modal text-[#E4C388] hover:text-white transition-colors duration-200 font-mono text-xs font-semibold cursor-pointer">
+          ✦ Free Audit
+        </button>
       </nav>
 
-      <!-- Desktop Primary CTA: Instagram Direct -->
-      <div class="hidden sm:flex items-center gap-4">
+      <!-- Desktop Primary CTA & Theme Toggle -->
+      <div class="hidden sm:flex items-center gap-3">
+        <!-- Minimalist Luxury Theme Toggle -->
+        <button id="themeToggleBtn" 
+                class="theme-toggle-btn border border-white/10 hover:border-[#E4C388]/60 text-white/80 hover:text-[#E4C388] bg-white/[0.04] transition-all" 
+                aria-label="Toggle Luxury Light/Dark Palette" 
+                title="Switch between Obsidian Dark and Alabaster Light">
+          <!-- Sun Icon (shows in dark mode to switch to light) -->
+          <svg id="sunIcon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24">
+            <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+          </svg>
+          <!-- Moon Icon (shows in light mode to switch to dark) -->
+          <svg id="moonIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12.3 2a10 10 0 0 0-.19 20 10.04 10.04 0 0 0 9.89-7.55 1 1 0 0 0-1.19-1.22 8 8 0 1 1-9.72-9.72 1 1 0 0 0-1.22-1.19A9.9 9.9 0 0 0 12.3 2z"/>
+          </svg>
+        </button>
+
         <a href="{{ instagram_url }}" 
            target="_blank" 
            rel="noopener noreferrer" 
@@ -232,11 +424,20 @@
       </div>
 
       <!-- Mobile Menu Button -->
-      <button id="mobileMenuBtn" class="lg:hidden p-2 text-[#FAF8F5] focus:outline-none" aria-label="Toggle mobile menu" aria-expanded="false">
-        <svg id="menuIcon" class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
+      <div class="flex items-center gap-2 lg:hidden">
+        <button id="themeToggleMobileBtn" 
+                class="theme-toggle-btn border border-white/10 text-white/80" 
+                aria-label="Toggle Light/Dark">
+          <svg class="w-4 h-4 fill-current theme-icon-mobile" viewBox="0 0 24 24">
+            <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+          </svg>
+        </button>
+        <button id="mobileMenuBtn" class="p-2 text-[#FAF8F5] focus:outline-none" aria-label="Toggle mobile menu" aria-expanded="false">
+          <svg id="menuIcon" class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
 
     </div>
 
@@ -244,12 +445,14 @@
     <div id="mobileDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#0B0D12] px-6 py-6 transition-all duration-300 max-h-[calc(100vh-5rem)] overflow-y-auto">
       <nav class="flex flex-col gap-4 text-base font-medium text-[#FAF8F5]">
         <a href="/#system" class="py-2 border-b border-white/5 hover:text-[#E4C388]">The System</a>
-        <a href="/#services" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Services</a>
-        <a href="/#industries" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Who We Serve</a>
+        <a href="{% url 'services_index' %}" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Services</a>
+        <a href="{% url 'industries_index' %}" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Who We Serve</a>
         <a href="{% url 'insights_index' %}" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Insights</a>
-        <a href="/#work" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Concepts</a>
-        <a href="/#process" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Process</a>
-        <a href="/#faq" class="py-2 border-b border-white/5 hover:text-[#E4C388]">FAQ</a>
+        <a href="{% url 'work_index' %}" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Concepts</a>
+        <a href="{% url 'process' %}" class="py-2 border-b border-white/5 hover:text-[#E4C388]">Process</a>
+        <button type="button" class="open-audit-modal text-left py-2 border-b border-white/5 text-[#E4C388] font-mono text-sm font-semibold">
+          ✦ Free Digital Audit
+        </button>
         <div class="pt-4">
           <a href="{{ instagram_url }}" 
              target="_blank" 
@@ -441,6 +644,41 @@
           closeDrawer();
         });
       }
+
+      // ========================================================
+      // LUXURY LIGHT / DARK MODE CONTROLLER
+      // ========================================================
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeToggleMobileBtn = document.getElementById('themeToggleMobileBtn');
+      const sunIcon = document.getElementById('sunIcon');
+      const moonIcon = document.getElementById('moonIcon');
+      const htmlEl = document.documentElement;
+
+      function applyTheme(theme) {
+        if (theme === 'light') {
+          htmlEl.classList.add('light');
+          if (sunIcon) sunIcon.classList.remove('hidden');
+          if (moonIcon) moonIcon.classList.add('hidden');
+          localStorage.setItem('quorv_theme', 'light');
+        } else {
+          htmlEl.classList.remove('light');
+          if (sunIcon) sunIcon.classList.add('hidden');
+          if (moonIcon) moonIcon.classList.remove('hidden');
+          localStorage.setItem('quorv_theme', 'dark');
+        }
+      }
+
+      // Check saved preference or default to dark
+      const savedTheme = localStorage.getItem('quorv_theme') || 'dark';
+      applyTheme(savedTheme);
+
+      function toggleTheme() {
+        const isCurrentLight = htmlEl.classList.contains('light');
+        applyTheme(isCurrentLight ? 'dark' : 'light');
+      }
+
+      if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+      if (themeToggleMobileBtn) themeToggleMobileBtn.addEventListener('click', toggleTheme);
     });
 
     // Lightweight Conversion Event Tracker (Instagram, WhatsApp, Email)
@@ -483,8 +721,14 @@
     })();
   </script>
 
+  <!-- Include Interactive Beauty Digital Audit Modal -->
+  {% include 'includes/audit_modal.html' %}
+
+  <script src="{% static 'js/audit-quiz.js' %}"></script>
+
   {% block extra_scripts %}
   {% endblock %}
 </body>
 </html>
+
 
