@@ -4,14 +4,17 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Count
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.conf import settings
 from django.utils import timezone
+from django.urls import reverse
 from .models import (
     ServiceCategory, Service, Industry, FAQ, PortfolioConcept, Lead, AnalyticsEvent, Insight, DigitalAuditSubmission
 )
+from django.db import connection, OperationalError
 import json
 import csv
+import urllib.parse
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -22,9 +25,38 @@ def get_client_ip(request):
     return ip
 
 
+def get_safe_industries():
+    try:
+        return list(Industry.objects.all())
+    except OperationalError as e:
+        if 'image_url' in str(e).lower():
+            try:
+                with connection.cursor() as cursor:
+                    cursor.execute("ALTER TABLE core_industry ADD COLUMN image_url varchar(500) DEFAULT '';")
+                return list(Industry.objects.all())
+            except Exception:
+                pass
+        raise e
+
+
+def get_safe_industry(slug):
+    try:
+        return get_object_or_404(Industry, slug=slug)
+    except OperationalError as e:
+        if 'image_url' in str(e).lower():
+            try:
+                with connection.cursor() as cursor:
+                    cursor.execute("ALTER TABLE core_industry ADD COLUMN image_url varchar(500) DEFAULT '';")
+                return get_object_or_404(Industry, slug=slug)
+            except Exception:
+                pass
+        raise e
+
+
 def home(request):
     categories = ServiceCategory.objects.prefetch_related('services').all()
-    industries = Industry.objects.all()
+    industries = get_safe_industries()
+
     faqs = FAQ.objects.all()
     concepts = PortfolioConcept.objects.filter(is_concept=True)[:3]
     featured_insights = Insight.objects.filter(is_featured=True)[:3]
@@ -67,12 +99,12 @@ def service_detail(request, slug):
 
 
 def industries_index(request):
-    industries = Industry.objects.all()
+    industries = get_safe_industries()
     return render(request, 'industries.html', {'industries': industries})
 
 
 def industry_detail(request, slug):
-    industry = get_object_or_404(Industry, slug=slug)
+    industry = get_safe_industry(slug)
     return render(request, 'industry_detail.html', {'industry': industry})
 
 
@@ -92,6 +124,119 @@ def about_view(request):
 def contact_view(request):
     return render(request, 'contact.html', {
         'whatsapp_url': "https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business."
+    })
+
+
+LOCATION_HUBS = {
+    'london': {
+        'slug': 'london',
+        'city': 'London',
+        'country': 'United Kingdom',
+        'country_code': 'GB',
+        'region': 'Greater London',
+        'geo_region': 'GB-LND',
+        'lat': '51.5074',
+        'lng': '-0.1278',
+        'hero_title': 'Bespoke Digital Systems for Luxury Salons & Clinics in London',
+        'hero_tagline': 'From Mayfair and Chelsea to Marylebone, Quorv builds bespoke websites that reflect the world-class prestige of London’s premier aesthetic and hair studios.',
+        'seo_title': 'Luxury Salon & Aesthetic Clinic Web Design London · Quorv',
+        'meta_description': 'Quorv builds bespoke websites, booking system integrations, and local SEO for luxury hair salons, medspas, and aesthetic clinics across London (Mayfair, Chelsea, Marylebone).',
+        'currency': 'GBP (£)',
+        'neighborhoods': ['Mayfair', 'Chelsea', 'Knightsbridge', 'Marylebone', 'Soho', 'Covent Garden', 'Kensington', 'Notting Hill'],
+        'market_insights': 'London is one of the world’s most competitive luxury beauty markets. Discerning clientele in Mayfair and Chelsea expect flawless digital journeys that match opulent interiors. Generic templates and disjointed booking redirects immediately erode confidence for £200+ haircuts and £500+ cosmetic treatments.',
+        'recommended_booking': 'Fresha, Phorest UK, Boulevard, Acuity Scheduling',
+        'case_angle': 'High-ticket Mayfair salon with automated deposit capture and Chelsea aesthetic clinic consultation screening.',
+    },
+    'new-york': {
+        'slug': 'new-york',
+        'city': 'New York',
+        'country': 'United States',
+        'country_code': 'US',
+        'region': 'New York State',
+        'geo_region': 'US-NY',
+        'lat': '40.7128',
+        'lng': '-74.0060',
+        'hero_title': 'Digital Systems for Premier Medspas & Salons in New York City',
+        'hero_tagline': 'From Soho and Tribeca to the Upper East Side, Quorv builds high-converting digital architecture for NYC’s top beauty and cosmetic practices.',
+        'seo_title': 'Medspa & Salon Website Design New York City · Quorv',
+        'meta_description': 'Bespoke web design, Boulevard and Jane App integrations, and local search dominance for high-end aesthetic clinics, medspas, and hair salons across Manhattan and Brooklyn.',
+        'currency': 'USD ($)',
+        'neighborhoods': ['SoHo', 'Upper East Side', 'Tribeca', 'Flatiron', 'Meatpacking District', 'Williamsburg', 'NoHo', 'West Village'],
+        'market_insights': 'New York clients demand instant mobile responsiveness, zero booking friction, and striking editorial aesthetics. Whether booking injectable treatments in Flatiron or bespoke hair extensions in SoHo, your website must establish immediate price authority before clients schedule.',
+        'recommended_booking': 'Boulevard, Jane App (HIPAA compliant), Fresha, Vagaro',
+        'case_angle': 'Upper East Side aesthetic dermatology clinic with seamless consultation intake and SoHo luxury studio deposit engine.',
+    },
+    'dubai': {
+        'slug': 'dubai',
+        'city': 'Dubai',
+        'country': 'United Arab Emirates',
+        'country_code': 'AE',
+        'region': 'Emirate of Dubai',
+        'geo_region': 'AE-DU',
+        'lat': '25.2048',
+        'lng': '55.2708',
+        'hero_title': 'Luxury Digital Architecture for Aesthetic Clinics & Salons in Dubai',
+        'hero_tagline': 'In the luxury capital of the Middle East—from Downtown and DIFC to Jumeirah and Palm Jumeirah—Quorv elevates the digital prestige of premier beauty practices.',
+        'seo_title': 'Luxury Aesthetic Clinic & Salon Web Design Dubai · Quorv',
+        'meta_description': 'Quorv builds ultra-luxury websites, booking workflows, and VIP consultation engines for high-end beauty salons, aesthetic clinics, and medspas across Dubai (DIFC, Jumeirah, Downtown).',
+        'currency': 'AED (د.إ)',
+        'neighborhoods': ['DIFC', 'Downtown Dubai', 'Jumeirah', 'Palm Jumeirah', 'Dubai Marina', 'Business Bay', 'City Walk', 'Al Wasl'],
+        'market_insights': 'Dubai beauty consumers demand ultra-high luxury aesthetics, bilingual sophistication, and VIP concierge intake workflows. With world-class aesthetic clinics concentrated across Jumeirah and Downtown, an exceptional digital presence is the foundation of high-ticket client acquisition.',
+        'recommended_booking': 'Phorest, Fresha, Custom VIP WhatsApp Intake & Deposit Gateways',
+        'case_angle': 'DIFC executive clinic with private consultation booking and Jumeirah bespoke beauty lounge appointment flow.',
+    },
+    'los-angeles': {
+        'slug': 'los-angeles',
+        'city': 'Los Angeles',
+        'country': 'United States',
+        'country_code': 'US',
+        'region': 'California',
+        'geo_region': 'US-CA',
+        'lat': '34.0522',
+        'lng': '-118.2437',
+        'hero_title': 'Editorial Web Design for Medspas & Stylists in Los Angeles',
+        'hero_tagline': 'From Beverly Hills and West Hollywood to Santa Monica, Quorv creates bespoke digital systems for LA’s most discerning cosmetic and beauty specialists.',
+        'seo_title': 'Beverly Hills & Los Angeles Salon & Medspa Web Design · Quorv',
+        'meta_description': 'Quorv designs bespoke websites, booking integrations, and SEO systems for celebrity stylists, luxury medspas, and aesthetic doctors in Beverly Hills, West Hollywood, and LA.',
+        'currency': 'USD ($)',
+        'neighborhoods': ['Beverly Hills', 'West Hollywood', 'Santa Monica', 'Brentwood', 'Silver Lake', 'Melrose', 'Studio City', 'Century City'],
+        'market_insights': 'In Los Angeles, aesthetic credibility is visual and immediate. Clients booking in Beverly Hills or West Hollywood expect cinematic treatment presentation, celebrity-grade confidentiality, and effortless scheduling on mobile.',
+        'recommended_booking': 'Boulevard, Jane App, Fresha, Vagaro',
+        'case_angle': 'Beverly Hills dermal practice with pre-consultation medical workflows and West Hollywood studio booking integration.',
+    }
+}
+
+
+def locations_index(request):
+    """
+    Renders overview directory of Quorv's key international luxury beauty hubs.
+    """
+    return render(request, 'locations.html', {
+        'locations': list(LOCATION_HUBS.values()),
+        'whatsapp_url': "https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27d%20like%20to%20discuss%20a%20project%20for%20my%20beauty%20business.",
+    })
+
+
+def location_detail(request, city_slug):
+    """
+    Renders dedicated localized landing page for a target city.
+    Provides local business schema, neighborhood targeting, and booking integration guidance.
+    """
+    from django.http import Http404
+    loc = LOCATION_HUBS.get(city_slug.lower())
+    if not loc:
+        raise Http404(f"Location '{city_slug}' not found.")
+    
+    industries = get_safe_industries()
+    services = Service.objects.all()[:6]
+    other_locations = [l for slug, l in LOCATION_HUBS.items() if slug != city_slug.lower()]
+
+    return render(request, 'location_detail.html', {
+        'loc': loc,
+        'industries': industries,
+        'services': services,
+        'other_locations': other_locations,
+        'whatsapp_url': f"https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20elevating%20my%20beauty%20business%20in%20{loc['city']}.",
     })
 
 
@@ -246,26 +391,37 @@ def audit_submit(request):
         base_score = 65
         vulnerabilities = []
 
-        if booking_software.lower() in ('none', 'dm only', 'whatsapp only'):
+        booking_lower = booking_software.lower()
+        if any(term in booking_lower for term in ('none', 'dm only', 'whatsapp only')):
             base_score -= 18
-            vulnerabilities.append("Friction Point: No automated booking engine causing high drop-off during off-hours.")
-        elif booking_software.lower() in ('fresha', 'vagaro', 'phorest'):
+            vulnerabilities.append("Friction Point: Lack of automated booking infrastructure causes high client abandonment during evening & weekend hours.")
+        elif any(term in booking_lower for term in ('fresha', 'vagaro', 'phorest')):
             base_score += 8
-            vulnerabilities.append("Integration Gap: Generic marketplace redirect dilutes brand equity & luxury positioning.")
+            vulnerabilities.append("Integration Gap: Generic marketplace redirect dilutes client perception and exposes your clientele to nearby competitors.")
 
-        if 'outdated' in primary_challenge.lower():
+        challenge_lower = primary_challenge.lower()
+        if 'outdated' in challenge_lower or 'design' in challenge_lower:
             base_score -= 10
-            vulnerabilities.append("Brand Disconnect: Visual aesthetic fails to justify premium or high-ticket service rates.")
-        if 'ranking' in primary_challenge.lower() or 'google' in primary_challenge.lower():
+            vulnerabilities.append("Brand Disconnect: Current visual aesthetic does not justify high-ticket or premium service price points.")
+        if 'ranking' in challenge_lower or 'google' in challenge_lower or 'search' in challenge_lower:
             base_score -= 8
-            vulnerabilities.append("Visibility Leak: Incomplete local GEO schema prevents discovery in high-intent local searches.")
-        if 'conversion' in primary_challenge.lower():
+            vulnerabilities.append("Visibility Leak: Incomplete local GEO schema prevents client discovery in high-intent local searches.")
+        if 'conversion' in challenge_lower or 'drop-off' in challenge_lower or 'drop' in challenge_lower:
             base_score -= 12
-            vulnerabilities.append("Mobile Conversion Friction: Multi-click client pathway resulting in booking abandonment.")
+            vulnerabilities.append("Mobile Pathway Friction: Multi-step booking pathway causing client fatigue and booking abandonment.")
+
+        if not vulnerabilities:
+            vulnerabilities.append("Optimization Opportunity: Service architecture and booking touchpoints require bespoke luxury positioning.")
 
         final_score = max(38, min(89, base_score))
-        vuln_text = "\n".join(vulnerabilities)
+        vuln_text = "\n".join(f"• {v}" for v in vulnerabilities)
+        submission_time_str = timezone.now().strftime('%Y-%m-%d %H:%M:%S UTC')
+        client_ip = get_client_ip(request)
+        user_agent = request.META.get('HTTP_USER_AGENT', 'Unknown')[:300]
+        referrer = request.META.get('HTTP_REFERER', 'Direct')[:400]
 
+        # 1. Save Digital Audit Submission
+        audit = None
         try:
             audit = DigitalAuditSubmission.objects.create(
                 business_name=business_name,
@@ -285,63 +441,294 @@ def audit_submit(request):
             import logging
             logging.getLogger(__name__).error(f"Audit DB save error: {db_err}")
 
-        # Log analytics
+        # 2. Mirror into Lead Pipeline (so it shows in operator dashboard)
+        lead_biz_type = 'salon'
+        btype_lower = business_type.lower()
+        if 'aesthetic' in btype_lower or 'medspa' in btype_lower or 'clinic' in btype_lower:
+            lead_biz_type = 'aesthetic'
+        elif 'hair' in btype_lower:
+            lead_biz_type = 'salon'
+        elif 'nail' in btype_lower or 'lash' in btype_lower:
+            lead_biz_type = 'nail_lash'
+        elif 'barber' in btype_lower:
+            lead_biz_type = 'barber'
+        elif 'spa' in btype_lower or 'wellness' in btype_lower:
+            lead_biz_type = 'spa_wellness'
+        elif 'brand' in btype_lower:
+            lead_biz_type = 'beauty_brand'
+        else:
+            lead_biz_type = 'other'
+
+        try:
+            Lead.objects.create(
+                name=contact_name,
+                email=email,
+                phone=phone or '',
+                business_name=business_name,
+                business_type=lead_biz_type,
+                country='',
+                service_interest=f"Digital Audit Health Score ({final_score}/100)",
+                message=(
+                    f"FREE DIGITAL AUDIT REPORT\n"
+                    f"Score: {final_score}/100\n"
+                    f"Sector: {business_type}\n"
+                    f"Website/IG: {website_or_instagram or 'Not provided'}\n"
+                    f"Booking System: {booking_software}\n"
+                    f"Primary Challenge: {primary_challenge}\n"
+                    f"Revenue: {current_monthly_revenue or 'Not provided'}\n\n"
+                    f"Identified Friction Points:\n{vuln_text}"
+                ),
+                source="Digital Audit Engine",
+                status='new'
+            )
+        except Exception as lead_err:
+            import logging
+            logging.getLogger(__name__).error(f"Audit Lead mirror error: {lead_err}")
+
+        # 3. Log Analytics Event
         try:
             AnalyticsEvent.objects.create(
                 event_type='lead_submit',
                 event_label=f"Audit Request: {business_name} ({final_score}/100)",
                 page_url=request.build_absolute_uri(),
-                referrer=request.META.get('HTTP_REFERER', '')[:500],
-                ip_address=get_client_ip(request),
-                user_agent=request.META.get('HTTP_USER_AGENT', '')[:400]
+                referrer=referrer,
+                ip_address=client_ip,
+                user_agent=user_agent
             )
         except Exception:
             pass
 
-        # Send instant notification to Studio Director
+        # 4. Prepare Formatted Message for Instagram Direct Message
+        dm_message = (
+            f"Hi Quorv, I just completed a digital audit on quorv.org for {business_name}.\n\n"
+            f"Health Score: {final_score}/100\n"
+            f"Primary Challenge: {primary_challenge}\n\n"
+            f"Friction points noted:\n"
+            f"{vuln_text}\n\n"
+            f"I would like to discuss fixing these issues and upgrading our digital setup."
+        )
+
+        dm_url = "https://ig.me/m/quorv_01"
+        wa_url = f"https://wa.me/447352789073?text={urllib.parse.quote(dm_message)}"
+
+        admin_audit_url = request.build_absolute_uri(reverse('admin:core_digitalauditsubmission_changelist'))
+        dashboard_url = request.build_absolute_uri('/dashboard/')
+
+        # 5. Send High-Priority Studio Notification Email with ALL submitted details
         try:
             notification_email = getattr(settings, 'STUDIO_NOTIFICATION_EMAIL', 'quorv911@gmail.com')
-            host_user = getattr(settings, 'EMAIL_HOST_USER', '')
-            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None) or (f"QUORV Studio <{host_user}>" if host_user else 'quorv911@gmail.com')
-            subject = f"[QUORV Audit Lead] {business_name} requested a Digital Audit (Score: {final_score}/100)"
-            body = f"""New Digital System Audit generated:
+            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None) or 'QUORV Brand Studio <quorv911@gmail.com>'
+            subject = f"[🚨 NEW AUDIT LEAD] {business_name} - Score {final_score}/100 ({business_type})"
 
-Business: {business_name}
-Contact: {contact_name}
-Email: {email}
-Phone/WhatsApp: {phone or 'Not provided'}
-Website/IG: {website_or_instagram or 'Not provided'}
-Sector: {business_type}
-Booking Software: {booking_software}
-Primary Challenge: {primary_challenge}
+            plain_body = f"""==================================================
+NEW DIGITAL AUDIT SUBMISSION — QUORV BRAND STUDIO
+==================================================
 
-Diagnostic Score: {final_score}/100
-Vulnerabilities:
+HEALTH INDEX SCORE: {final_score} / 100
+SUBMISSION TIME:    {submission_time_str}
+
+--------------------------------------------------
+CLIENT & BUSINESS PROFILE:
+--------------------------------------------------
+• Business / Clinic Name: {business_name}
+• Contact Person:         {contact_name}
+• Work Email:             {email}
+• Phone / WhatsApp:       {phone or 'Not provided'}
+• Website / Instagram:    {website_or_instagram or 'Not provided'}
+• Sector Specialization:  {business_type}
+• Current Booking Engine: {booking_software}
+• Primary Challenge:      {primary_challenge}
+• Monthly Revenue:        {current_monthly_revenue or 'Not specified'}
+
+--------------------------------------------------
+IDENTIFIED SYSTEM FRICTION POINTS:
+--------------------------------------------------
 {vuln_text}
 
----
-View in Admin:
-{request.build_absolute_uri('/admin/core/digitalauditsubmission/')}
+--------------------------------------------------
+DIAGNOSTIC METADATA:
+--------------------------------------------------
+• IP Address: {client_ip}
+• Referrer:   {referrer}
+• User Agent: {user_agent}
+
+--------------------------------------------------
+DIRECT OPERATOR ACTIONS:
+--------------------------------------------------
+• Message on Instagram DM:  {dm_url}
+• Reply via Email:          mailto:{email}?subject=Your%20QUORV%20Digital%20Audit%20Results
+• Django Admin (Audits):    {admin_audit_url}
+• Studio Operator Pipeline: {dashboard_url}
+
+==================================================
+QUORV Brand Studio · Automated Intelligence System
 """
-            send_mail(
+
+            vuln_html_items = "".join(f"<li style='margin-bottom:8px;color:#FAF8F5;'>{v}</li>" for v in vulnerabilities)
+            score_color = "#ef4444" if final_score < 55 else ("#eab308" if final_score < 75 else "#22c55e")
+            phone_clean = phone.replace(' ', '').replace('+', '').replace('-', '') if phone else ''
+
+            html_body = f"""<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Digital Audit Lead</title>
+</head>
+<body style="margin:0;padding:24px;background-color:#08090C;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#FAF8F5;">
+  <div style="max-width:620px;margin:0 auto;background-color:#0E1015;border:1px solid #E4C388;border-radius:12px;padding:32px;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
+    
+    <!-- Header -->
+    <div style="border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:18px;margin-bottom:24px;">
+      <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.25em;color:#E4C388;font-weight:600;display:block;margin-bottom:6px;">Quorv Brand Studio · Lead Intelligence</span>
+      <h1 style="margin:0;font-size:22px;color:#FAF8F5;font-weight:700;">New Digital System Audit</h1>
+      <p style="margin:6px 0 0;font-size:12px;color:#8C8F9F;">Submitted on {submission_time_str}</p>
+    </div>
+
+    <!-- Health Score Pill -->
+    <div style="background-color:#141620;border:1px solid rgba(228,195,136,0.3);border-radius:10px;padding:20px;text-align:center;margin-bottom:28px;">
+      <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:#8C8F9F;display:block;">Digital Health Index</span>
+      <div style="font-size:48px;font-weight:800;color:{score_color};line-height:1.1;margin:6px 0;">
+        {final_score} <span style="font-size:18px;color:#8C8F9F;font-weight:400;">/ 100</span>
+      </div>
+      <span style="display:inline-block;padding:3px 12px;background-color:rgba(255,255,255,0.05);border-radius:20px;font-size:11px;color:#FAF8F5;font-weight:600;">
+        {business_name} ({business_type})
+      </span>
+    </div>
+
+    <!-- Submitted Details Table -->
+    <h2 style="font-size:13px;text-transform:uppercase;letter-spacing:0.15em;color:#E4C388;margin:0 0 14px;border-bottom:1px solid rgba(228,195,136,0.2);padding-bottom:6px;">
+      All Submitted Lead Details
+    </h2>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:28px;">
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;width:40%;font-weight:500;">Business / Clinic:</td>
+        <td style="padding:10px 6px;color:#FAF8F5;font-weight:700;">{business_name}</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;font-weight:500;">Contact Person:</td>
+        <td style="padding:10px 6px;color:#FAF8F5;font-weight:600;">{contact_name}</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;font-weight:500;">Work Email:</td>
+        <td style="padding:10px 6px;"><a href="mailto:{email}" style="color:#E4C388;text-decoration:none;font-weight:600;">{email}</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;font-weight:500;">Phone Number:</td>
+        <td style="padding:10px 6px;color:#FAF8F5;">{f'<a href="tel:{phone}" style="color:#22c55e;text-decoration:none;">{phone}</a>' if phone else '<span style="color:#8C8F9F;">Not provided</span>'}</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;font-weight:500;">Website / Instagram:</td>
+        <td style="padding:10px 6px;color:#FAF8F5;">{website_or_instagram or '<span style="color:#8C8F9F;">Not provided</span>'}</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;font-weight:500;">Sector Specialization:</td>
+        <td style="padding:10px 6px;color:#FAF8F5;">{business_type}</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;font-weight:500;">Current Booking Engine:</td>
+        <td style="padding:10px 6px;color:#FAF8F5;">{booking_software}</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;font-weight:500;">Primary Challenge:</td>
+        <td style="padding:10px 6px;color:#FAF8F5;">{primary_challenge}</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;font-weight:500;">Monthly Revenue:</td>
+        <td style="padding:10px 6px;color:#FAF8F5;">{current_monthly_revenue or '<span style="color:#8C8F9F;">Not specified</span>'}</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:10px 6px;color:#8C8F9F;font-weight:500;">Visitor IP / Origin:</td>
+        <td style="padding:10px 6px;color:#8C8F9F;font-size:11px;">{client_ip}</td>
+      </tr>
+    </table>
+
+    <!-- Vulnerabilities Section -->
+    <h2 style="font-size:13px;text-transform:uppercase;letter-spacing:0.15em;color:#E4C388;margin:0 0 12px;border-bottom:1px solid rgba(228,195,136,0.2);padding-bottom:6px;">
+      Identified Friction Points
+    </h2>
+    <div style="background-color:#141620;border-left:3px solid #E4C388;padding:14px 18px;border-radius:6px;margin-bottom:28px;">
+      <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.6;">
+        {vuln_html_items}
+      </ul>
+    </div>
+
+    <!-- Quick Operator Action Buttons -->
+    <div style="text-align:center;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);">
+      <p style="font-size:11px;color:#8C8F9F;text-transform:uppercase;letter-spacing:0.18em;margin-bottom:14px;">Instant Actions</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+        <a href="{dm_url}" target="_blank" style="display:inline-block;background-color:#E1306C;color:#fff;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:12px;font-weight:700;margin:4px;">
+          📸 Open IG Direct Message
+        </a>
+        <a href="mailto:{email}?subject=Your%20QUORV%20Digital%20Audit%20Report" style="display:inline-block;background-color:#E4C388;color:#08090C;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:12px;font-weight:700;margin:4px;">
+          ✉️ Reply via Email
+        </a>
+        <a href="{admin_audit_url}" target="_blank" style="display:inline-block;background-color:#1A1D27;border:1px solid rgba(255,255,255,0.15);color:#FAF8F5;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:12px;margin:4px;">
+          ⚙️ Open Django Admin
+        </a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>"""
+
+            msg = EmailMultiAlternatives(
                 subject=subject,
-                message=body,
+                body=plain_body,
                 from_email=from_email,
-                recipient_list=[notification_email],
-                fail_silently=False
+                to=[notification_email]
             )
+            msg.attach_alternative(html_body, "text/html")
+            msg.send(fail_silently=False)
         except Exception as mail_err:
             import logging
             logging.getLogger(__name__).error(f"Audit notification email error: {mail_err}")
+
+        # 6. Send Client Diagnostic Receipt Email with Instagram DM Link
+        try:
+            client_subject = f"Your Digital System Audit Results · QUORV Brand Studio ({final_score}/100)"
+            client_body = f"""Dear {contact_name},
+
+Thank you for requesting a Digital System Audit for {business_name}.
+
+Your diagnostic health index score has been calculated at {final_score}/100.
+
+Key Findings & Friction Points:
+{vuln_text}
+
+To discuss repairing these booking and brand leakages with a Quorv director, you can direct message us immediately on Instagram:
+{dm_url}
+
+Warm regards,
+QUORV Brand Studio
+Dedicated Exclusively to High-Ticket Beauty & Aesthetics
+https://quorv.org
+quorv911@gmail.com
+"""
+            send_mail(
+                subject=client_subject,
+                message=client_body,
+                from_email=from_email,
+                recipient_list=[email],
+                fail_silently=True
+            )
+        except Exception:
+            pass
 
         return JsonResponse({
             'status': 'success',
             'score': final_score,
             'vulnerabilities': vulnerabilities,
+            'business_name': business_name,
+            'contact_name': contact_name,
+            'dm_url': dm_url,
+            'wa_url': wa_url,
+            'dm_message': dm_message,
             'message': f"Diagnostic analysis complete for {business_name}."
         })
     except Exception as e:
-        return JsonResponse({'status': 'error', 'message': 'Unable to process audit. Please reach out directly on Instagram @quorv_01.'}, status=500)
+        return JsonResponse({'status': 'error', 'message': 'Unable to process audit. Please reach out directly on Instagram DM @quorv_01.'}, status=500)
+
 
 
 
@@ -421,12 +808,17 @@ def studio_dashboard(request):
         for item in sector_counts_raw
     ]
 
+    total_audits = DigitalAuditSubmission.objects.count()
+    recent_audits = DigitalAuditSubmission.objects.all()[:10]
+
     context = {
         'total_leads': total_leads,
         'new_leads': new_leads,
         'contacted_leads': contacted_leads,
         'in_discussion_leads': in_discussion_leads,
         'closed_leads': closed_leads,
+        'total_audits': total_audits,
+        'recent_audits': recent_audits,
         'total_instagram': total_instagram,
         'total_whatsapp': total_whatsapp,
         'total_emails': total_emails,
@@ -543,29 +935,193 @@ def robots_txt(request):
         lines.append("Disallow: /api/")
         lines.append("")
 
-    lines.append("# Sitemaps")
+    lines.append("# Sitemaps & LLMs Discovery")
     lines.append("Sitemap: https://quorv.org/sitemap.xml")
+    lines.append("# AI Engine Documentation (LLMs Standard): https://quorv.org/llms.txt")
 
     return HttpResponse("\n".join(lines), content_type="text/plain; charset=utf-8")
+
+
+def llms_txt(request):
+    """
+    Standard /llms.txt specification endpoint for AI search & answer engines
+    (OpenAI ChatGPT Search, Perplexity AI, Claude, Google Gemini, Copilot).
+    Provides structured, markdown-formatted entity facts, service modules, and canonical links.
+    """
+    services = Service.objects.select_related('category').all()
+    industries = get_safe_industries()
+
+    doc = [
+        "# Quorv",
+        "",
+        "> Quorv is a specialized brand and digital systems studio dedicated exclusively to premium beauty businesses, aesthetic clinics, luxury salons, and medspas internationally.",
+        "",
+        "Quorv bridges the disconnect between physical luxury salon/clinic environments and high-converting digital ecosystems. We build bespoke editorial websites, implement frictionless booking platform integrations (Fresha, Phorest, Boulevard, Vagaro, Jane App, Acuity), execute local SEO dominance across major international luxury beauty hubs, and elevate client retention.",
+        "",
+        "## Key Studio Facts",
+        "- **Specialization**: Exclusively premium beauty, hair studios, aesthetic medicine, medspas, and wellness.",
+        "- **Headquarters & Service Hubs**: Operating internationally across London (UK), New York (US), Los Angeles (US), Dubai (UAE), Toronto (Canada), and Sydney (Australia).",
+        "- **Primary Contact**: Instagram Direct [@quorv_01](https://www.instagram.com/quorv_01) | Email: quorv911@gmail.com | Phone/WhatsApp: +44 7352 789073",
+        "- **Website**: https://quorv.org",
+        "",
+        "## The 3-Pillar Digital System",
+        "1. **Look Premium**: Bespoke editorial visual architecture, dark luxury aesthetic, responsive mobile typography, elevated imagery presentation, and distinct brand positioning that justifies premium price points.",
+        "2. **Get Discovered**: High-intent search engine optimization (SEO) and generative engine optimization (GEO) targeting clients actively searching for high-end beauty services in specific cities.",
+        "3. **Get Booked**: Frictionless booking engine integrations and consultation inquiry workflows that eliminate WhatsApp/DM back-and-forth and capture upfront deposits.",
+        "",
+        "## Supported Booking Engine & Practice Management Integrations",
+        "- **Fresha**: Custom website embeds, stylized booking buttons, and seamless deep-links preserving brand prestige.",
+        "- **Phorest Salon Software**: Enterprise integration for multi-chair salons, automated client retention, and salon branches.",
+        "- **Boulevard**: Precision booking flows and modern point-of-sale integration for luxury salons and spas.",
+        "- **Vagaro**: Intuitive appointment and package booking flows for boutique salons and independent stylists.",
+        "- **Jane App**: HIPAA/GDPR-compliant chart and appointment workflows for aesthetic medical clinics and dermal doctors.",
+        "- **Acuity Scheduling**: Flexible automated booking and pre-payment workflows.",
+        "",
+        "## Sector Specializations",
+    ]
+
+    for ind in industries:
+        doc.append(f"- **{ind.title}**: {ind.subtitle} [Read Overview](https://quorv.org/industries/{ind.slug}/)")
+
+    doc.extend([
+        "",
+        "## Core Services",
+    ])
+
+    for s in services:
+        doc.append(f"- **{s.title}** ({s.category.name}): {s.outcome} [Details](https://quorv.org/services/{s.slug}/)")
+
+    doc.extend([
+        "",
+        "## Canonical Resources & Documentation",
+        "- [Home](https://quorv.org/): Studio overview, portfolio concepts, and digital audit tool.",
+        "- [Services Directory](https://quorv.org/services/): Full suite of brand and digital services.",
+        "- [Industries Directory](https://quorv.org/industries/): Dedicated industry blueprints.",
+        "- [The 5-Stage Process](https://quorv.org/process/): How Quorv executes from audit to launch.",
+        "- [Studio Insights](https://quorv.org/insights/): Case studies, conversion teardowns, and salon growth frameworks.",
+        "- [About Quorv](https://quorv.org/about/): Studio manifesto and philosophy.",
+        "- [Start a Dialogue](https://quorv.org/contact/): Consultation request and contact points.",
+        "- [International Location Hubs](https://quorv.org/locations/): London, New York, Dubai, Los Angeles.",
+        "",
+        "## Key International City Hubs",
+    ])
+
+    for c_slug, c_info in LOCATION_HUBS.items():
+        doc.append(f"- **{c_info['city']} ({c_info['country']})**: {c_info['hero_tagline']} [City Hub](https://quorv.org/locations/{c_slug}/)")
+
+    doc.extend([
+        "",
+        "## Full Machine-Readable Knowledge Base",
+        "- [Full LLM Context (llms-full.txt)](https://quorv.org/llms-full.txt): Comprehensive deep-dive documentation.",
+    ])
+
+    return HttpResponse("\n".join(doc), content_type="text/plain; charset=utf-8")
+
+
+def llms_full_txt(request):
+    """
+    Extended /llms-full.txt documentation providing full depth on methodology,
+    FAQ, technical specifications, and client criteria for AI answer synthesis.
+    """
+    services = Service.objects.select_related('category').all()
+    industries = get_safe_industries()
+    faqs = FAQ.objects.all()
+    insights = Insight.objects.all()
+
+    full_doc = [
+        "# Quorv · Comprehensive Digital Studio Knowledge Base",
+        "",
+        "## About Quorv",
+        "Quorv (https://quorv.org) is a premier brand studio and digital architecture consultancy operating internationally. Quorv operates exclusively within the beauty, aesthetic medicine, and luxury wellness sectors. The studio addresses the prevalent industry disconnect where businesses with world-class physical salons or clinical premises have dated, generic, or fragmented websites that fail to convert high-ticket clients.",
+        "",
+        "## The 5-Stage Studio Process",
+        "1. **Stage 1: Discovery & Digital Audit**: Comprehensive audit of current conversion leaks, local search footprint, booking drop-off points, and competitor positioning.",
+        "2. **Stage 2: Visual & Brand Blueprint**: Bespoke editorial design direction, luxury dark palette, typography pairing (Italiana serif + Plus Jakarta Sans + Space Grotesk mono), and asset curation.",
+        "3. **Stage 3: Technical Architecture**: Clean, semantic, high-speed engineering with responsive mobile layouts, SEO meta frameworks, and micro-interactions.",
+        "4. **Stage 4: Booking & Workflow Integration**: Direct connection with Fresha, Phorest, Boulevard, Vagaro, or Jane App. Deposit capture, consultation pre-screening forms, and automated confirmation flows.",
+        "5. **Stage 5: Launch & Local Search Activation**: Search console submission, XML sitemap indexing, local business schema deployment, and Google My Business synchronization.",
+        "",
+        "## Detailed Service Breakdown",
+    ]
+
+    for s in services:
+        full_doc.extend([
+            f"### {s.title} (Category: {s.category.name})",
+            f"**Outcome**: {s.outcome}",
+            f"**Overview**: {s.full_description or s.outcome}",
+            f"**URL**: https://quorv.org/services/{s.slug}/",
+            "",
+        ])
+
+    full_doc.extend([
+        "## Industry Blueprints & Solutions",
+    ])
+
+    for ind in industries:
+        full_doc.extend([
+            f"### {ind.title}",
+            f"**Focus**: {ind.key_focus}",
+            f"**Subtitle**: {ind.subtitle}",
+            f"**Challenge**: {ind.the_challenge}",
+            f"**Quorv Solution**: {ind.the_solution}",
+            f"**URL**: https://quorv.org/industries/{ind.slug}/",
+            "",
+        ])
+
+    full_doc.extend([
+        "## Studio Insights & Publications",
+    ])
+
+    for ins in insights:
+        full_doc.extend([
+            f"- **{ins.title}** ({ins.category} · {ins.read_time}): {ins.summary} [Read Article](https://quorv.org/insights/{ins.slug}/)",
+        ])
+
+    full_doc.extend([
+        "",
+        "## Frequently Asked Questions",
+    ])
+
+    for faq in faqs:
+        full_doc.extend([
+            f"### Q: {faq.question}",
+            f"**A**: {faq.answer}",
+            "",
+        ])
+
+    full_doc.extend([
+        "## Contact & Working With Quorv",
+        "- **Instagram**: Direct message [@quorv_01](https://www.instagram.com/quorv_01)",
+        "- **Email**: quorv911@gmail.com",
+        "- **Phone/WhatsApp**: +44 7352 789073",
+        "- **Website Inquiry Form**: https://quorv.org/contact/",
+        "- **Audit Engine**: https://quorv.org/#audit",
+        "- **Geographic Footprint**: United Kingdom, United States, Canada, United Arab Emirates, Australia.",
+    ])
+
+    return HttpResponse("\n".join(full_doc), content_type="text/plain; charset=utf-8")
+
 
 
 def sitemap_xml(request):
     """
     Dynamically generates the XML Sitemap conforming to sitemaps.org protocol 0.9.
-    Includes all public marketing, service, industry, FAQ, work, process, and insight pages.
+    Includes all public marketing, service, industry, FAQ, work, process, and insight pages
+    with RFC 3339 lastmod timestamps for accelerated search indexing.
     """
+    today_str = timezone.now().strftime('%Y-%m-%d')
     pages = [
-        # (path, priority, changefreq)
-        ("/", "1.0", "weekly"),
-        ("/services/", "0.9", "weekly"),
-        ("/industries/", "0.9", "weekly"),
-        ("/insights/", "0.9", "daily"),
-        ("/work/", "0.8", "weekly"),
-        ("/process/", "0.8", "monthly"),
-        ("/about/", "0.7", "monthly"),
-        ("/contact/", "0.8", "monthly"),
-        ("/privacy/", "0.3", "yearly"),
-        ("/terms/", "0.3", "yearly"),
+        # (path, priority, changefreq, lastmod)
+        ("/", "1.0", "weekly", today_str),
+        ("/services/", "0.9", "weekly", today_str),
+        ("/industries/", "0.9", "weekly", today_str),
+        ("/insights/", "0.9", "daily", today_str),
+        ("/work/", "0.8", "weekly", today_str),
+        ("/process/", "0.8", "monthly", today_str),
+        ("/about/", "0.7", "monthly", today_str),
+        ("/contact/", "0.8", "monthly", today_str),
+        ("/privacy/", "0.3", "yearly", today_str),
+        ("/terms/", "0.3", "yearly", today_str),
     ]
 
     services = Service.objects.all()
@@ -573,23 +1129,44 @@ def sitemap_xml(request):
     insights = Insight.objects.all()
 
     for s in services:
-        pages.append((f"/services/{s.slug}/", "0.9", "weekly"))
+        pages.append((f"/services/{s.slug}/", "0.9", "weekly", today_str))
     for ind in industries:
-        pages.append((f"/industries/{ind.slug}/", "0.9", "weekly"))
+        pages.append((f"/industries/{ind.slug}/", "0.9", "weekly", today_str))
     for ins in insights:
-        pages.append((f"/insights/{ins.slug}/", "0.8", "weekly"))
+        ins_date = ins.published_date.strftime('%Y-%m-%d') if ins.published_date else today_str
+        pages.append((f"/insights/{ins.slug}/", "0.8", "weekly", ins_date))
+
+    pages.append(("/locations/", "0.8", "weekly", today_str))
+    for c_slug in LOCATION_HUBS:
+        pages.append((f"/locations/{c_slug}/", "0.9", "weekly", today_str))
 
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ]
-    for path, priority, freq in pages:
+    for path, priority, freq, lastmod in pages:
         xml_lines.append("  <url>")
         xml_lines.append(f"    <loc>https://quorv.org{path}</loc>")
+        xml_lines.append(f"    <lastmod>{lastmod}</lastmod>")
         xml_lines.append(f"    <changefreq>{freq}</changefreq>")
         xml_lines.append(f"    <priority>{priority}</priority>")
         xml_lines.append("  </url>")
     xml_lines.append("</urlset>")
 
     return HttpResponse("\n".join(xml_lines), content_type="application/xml; charset=utf-8")
+
+
+def custom_404_view(request, exception=None):
+    """
+    Renders custom branded luxury 404 error page.
+    """
+    return render(request, '404.html', status=404)
+
+
+def custom_500_view(request):
+    """
+    Renders custom branded luxury 500 server error page.
+    """
+    return render(request, '500.html', status=500)
+
 

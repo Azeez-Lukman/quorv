@@ -13,21 +13,37 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS v4 Runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <style type="text/tailwindcss">
-    @theme {
-      --color-obsidian-950: #08090C;
-      --color-obsidian-900: #0E1015;
-      --color-obsidian-850: #12141C;
-      --color-obsidian-800: #181A24;
-      --color-champagne-400: #E4C388;
-      --color-champagne-500: #CBA565;
-      --font-serif: 'Italiana', Georgia, serif;
-      --font-sans: 'Plus Jakarta Sans', sans-serif;
-      --font-mono: 'Space Grotesk', monospace;
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <!-- Tailwind CSS Engine (Stable Production Play CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              950: '#08090C',
+              900: '#0E1015',
+              850: '#12141C',
+              800: '#181A24',
+            },
+            champagne: {
+              400: '#E4C388',
+              500: '#CBA565',
+            }
+          },
+          fontFamily: {
+            serif: ['Italiana', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+          }
+        }
+      }
     }
-  </style>
+  </script>
 
   <style>
     body {
@@ -72,6 +88,10 @@
         <a href="{% url 'home' %}" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono text-[#FAF8F5] transition-colors">
           <span>Public Website</span>
           <span class="text-[#E4C388]">↗</span>
+        </a>
+        <a href="/admin/core/digitalauditsubmission/" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E4C388]/30 hover:border-[#E4C388] bg-[#E4C388]/10 text-xs font-mono text-[#E4C388] transition-colors">
+          <span>Audits ({{ total_audits }})</span>
+          <span>↗</span>
         </a>
         <a href="/admin/" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono text-[#FAF8F5] transition-colors">
           <span>Django Admin</span>
@@ -197,6 +217,11 @@
                 <span class="font-bold text-white text-sm">{{ lead.name }}</span>
                 {% if lead.business_name %}
                 <span class="text-xs font-mono text-[#E4C388]">({{ lead.business_name }})</span>
+                {% endif %}
+                {% if lead.source == "Digital Audit Engine" %}
+                <span class="px-2 py-0.5 rounded-full bg-[#E4C388]/15 border border-[#E4C388]/40 text-[#E4C388] text-[10px] font-mono font-semibold">
+                  📊 Free Digital Audit
+                </span>
                 {% endif %}
               </div>
 

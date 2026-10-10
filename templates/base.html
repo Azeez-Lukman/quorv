@@ -22,43 +22,79 @@
   <meta property="og:title" content="{% block og_title %}Quorv · The Digital System Behind Premium Beauty Businesses{% endblock %}">
   <meta property="og:description" content="{% block og_description %}Quorv builds premium websites and connected digital experiences for salons, aesthetic clinics, med spas, beauty clinics and premium beauty businesses.{% endblock %}">
   <meta property="og:image" content="https://quorv.org{% static 'images/quorv-logo.jpg' %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Quorv · Dedicated Brand Studio for Premium Beauty Businesses">
   <meta property="og:url" content="https://quorv.org{{ request.path }}">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@quorv_01">
+  <meta name="twitter:creator" content="@quorv_01">
 
-  <!-- Google Fonts: Italiana (Editorial Display Serif), Plus Jakarta Sans (Clean Modern Sans), Space Grotesk (Understated Utility) -->
+  <!-- Geographic & Local Search Entity Directives (Key Luxury Beauty Hubs) -->
+  <meta name="geo.region" content="GB-LND">
+  <meta name="geo.placename" content="London">
+  <meta name="geo.position" content="51.5074;-0.1278">
+  <meta name="ICBM" content="51.5074, -0.1278">
+
+  <!-- AI Answer Engines & LLM Context Discovery -->
+  <link rel="alternate" type="text/plain" href="https://quorv.org/llms.txt" title="Quorv LLMs Profile">
+
+  <!-- Preconnect & DNS-Prefetch for Core Web Vitals & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS v4 Browser Runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <style type="text/tailwindcss">
-    @theme {
-      --color-obsidian-950: #08090C;
-      --color-obsidian-900: #0E1015;
-      --color-obsidian-850: #12141C;
-      --color-obsidian-800: #181A24;
-      --color-obsidian-700: #232635;
-      
-      --color-champagne-300: #F5E5C9;
-      --color-champagne-400: #E4C388;
-      --color-champagne-500: #CBA565;
-      --color-champagne-600: #A8813C;
+  <!-- Master Stylesheet (Reset, design tokens, buttons, glassmorphism) -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-      --color-cream-50: #FAF8F5;
-      --color-cream-100: #F3EFE9;
-      --color-cream-200: #E8E1D5;
-      --color-cream-300: #D8CEBE;
-
-      --color-charcoal-400: #8C8F9F;
-      --color-charcoal-300: #B2B5C4;
-      --color-charcoal-200: #D8DAE5;
-
-      --font-serif: 'Italiana', Georgia, serif;
-      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'Space Grotesk', monospace;
+  <!-- Tailwind CSS Engine (Stable Production Play CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              950: '#08090C',
+              900: '#0E1015',
+              850: '#12141C',
+              800: '#181A24',
+              700: '#232635',
+            },
+            champagne: {
+              300: '#F5E5C9',
+              400: '#E4C388',
+              500: '#CBA565',
+              600: '#A8813C',
+            },
+            cream: {
+              50: '#FAF8F5',
+              100: '#F3EFE9',
+              200: '#E8E1D5',
+              300: '#D8CEBE',
+            },
+            charcoal: {
+              400: '#8C8F9F',
+              300: '#B2B5C4',
+              200: '#D8DAE5',
+            }
+          },
+          fontFamily: {
+            serif: ['Italiana', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+          }
+        }
+      }
     }
-  </style>
+  </script>
 
   <style>
     /* Custom Micro-Styling & Transitions */
@@ -127,8 +163,40 @@
 
     /* Light Theme Nav & Surfaces */
     html.light #mainHeader {
-      background-color: rgba(250, 248, 245, 0.88) !important;
+      background-color: rgba(250, 248, 245, 0.92) !important;
       border-color: rgba(18, 20, 28, 0.08) !important;
+    }
+
+    /* Primary Header Navigation: Resolve hover-to-white issue in light mode */
+    html.light #mainHeader nav a {
+      color: #5F6375 !important;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+    html.light #mainHeader nav a:hover {
+      color: #12141C !important;
+    }
+    html.light #mainHeader nav a.active {
+      color: #A8813C !important;
+      font-weight: 600;
+    }
+    html.light #mainHeader nav .open-audit-modal {
+      color: #A8813C !important;
+    }
+    html.light #mainHeader nav .open-audit-modal:hover {
+      color: #12141C !important;
+    }
+
+    /* Universal safety: ensure any hover:text-white darkens cleanly in light mode */
+    html.light .hover\:text-white:hover {
+      color: #12141C !important;
+    }
+
+    /* Breadcrumbs & Footer Links hover states in Light Mode */
+    html.light nav[aria-label="Breadcrumb"] a:hover {
+      color: #12141C !important;
+    }
+    html.light footer a:hover {
+      color: #12141C !important;
     }
 
     html.light .border-b,
@@ -271,6 +339,21 @@
       color: #A8813C !important;
     }
 
+    /* Industry Card Action Button in Light Mode */
+    html.light .industry-card-btn {
+      background-color: #F8F6F2 !important;
+      border-color: rgba(18, 20, 28, 0.08) !important;
+      color: #12141C !important;
+    }
+    html.light .industry-card-btn:hover {
+      background-color: #A8813C !important;
+      border-color: #A8813C !important;
+      color: #FFFFFF !important;
+    }
+    html.light .industry-card-btn:hover span {
+      color: #FFFFFF !important;
+    }
+
     /* Theme Switcher Button Micro-Styling */
     .theme-toggle-btn {
       width: 36px;
@@ -300,24 +383,78 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
+        "@type": "ProfessionalService",
         "@id": "https://quorv.org/#organization",
         "name": "Quorv",
-        "alternateName": ["QUORV Digital Studio", "QUORV"],
+        "alternateName": ["QUORV Digital Studio", "QUORV", "Quorv Brand Studio"],
         "url": "https://quorv.org",
-        "logo": "https://quorv.org{% static 'images/quorv-logo.jpg' %}",
-        "description": "Quorv builds premium websites and connected digital systems for salons, aesthetic clinics, med spas, beauty clinics and beauty businesses.",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://quorv.org{% static 'images/quorv-logo.jpg' %}",
+          "width": 1200,
+          "height": 630
+        },
+        "image": "https://quorv.org{% static 'images/quorv-logo.jpg' %}",
+        "description": "Quorv is a specialized brand and digital systems studio dedicated exclusively to premium beauty businesses, aesthetic clinics, luxury salons, and medspas internationally.",
         "telephone": "+447352789073",
         "email": "quorv911@gmail.com",
+        "priceRange": "$$$$",
+        "currenciesAccepted": "GBP, USD, EUR, CAD, AED, AUD",
+        "paymentAccepted": "Bank Transfer, Stripe, Credit Card",
         "sameAs": [
           "https://www.instagram.com/quorv_01"
         ],
         "areaServed": [
-          "United Kingdom",
-          "United States",
-          "Canada",
-          "United Arab Emirates",
-          "Australia"
+          {
+            "@type": "City",
+            "name": "London",
+            "sameAs": "https://en.wikipedia.org/wiki/London"
+          },
+          {
+            "@type": "City",
+            "name": "New York",
+            "sameAs": "https://en.wikipedia.org/wiki/New_York_City"
+          },
+          {
+            "@type": "City",
+            "name": "Los Angeles",
+            "sameAs": "https://en.wikipedia.org/wiki/Los_Angeles"
+          },
+          {
+            "@type": "City",
+            "name": "Dubai",
+            "sameAs": "https://en.wikipedia.org/wiki/Dubai"
+          },
+          {
+            "@type": "City",
+            "name": "Toronto",
+            "sameAs": "https://en.wikipedia.org/wiki/Toronto"
+          },
+          {
+            "@type": "City",
+            "name": "Sydney",
+            "sameAs": "https://en.wikipedia.org/wiki/Sydney"
+          },
+          {
+            "@type": "Country",
+            "name": "United Kingdom"
+          },
+          {
+            "@type": "Country",
+            "name": "United States"
+          },
+          {
+            "@type": "Country",
+            "name": "United Arab Emirates"
+          },
+          {
+            "@type": "Country",
+            "name": "Canada"
+          },
+          {
+            "@type": "Country",
+            "name": "Australia"
+          }
         ],
         "knowsAbout": [
           "Salon Website Design",
@@ -331,14 +468,64 @@
           "Boulevard Integration",
           "Jane App Integration",
           "Acuity Scheduling Integration",
-          "Beauty Business Local SEO"
+          "Beauty Business Local SEO",
+          "Generative Engine Optimization (GEO)",
+          "Conversion Rate Optimization for Salons",
+          "HIPAA and GDPR Compliance for Clinics"
         ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Quorv Digital Systems Suite",
+          "itemListElement": [
+            {
+              "@type": "OfferCatalog",
+              "name": "Look Premium",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Bespoke Beauty Web Design & Visual Architecture"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "Get Discovered",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Local SEO & Generative Engine Optimization for Beauty Clinics"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "Get Booked",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Frictionless Booking Platform Integration & Deposit Flow"
+                  }
+                }
+              ]
+            }
+          ]
+        },
         "contactPoint": [
           {
             "@type": "ContactPoint",
             "telephone": "+447352789073",
             "contactType": "customer service",
-            "availableLanguage": ["English"]
+            "email": "quorv911@gmail.com",
+            "availableLanguage": ["English"],
+            "areaServed": ["GB", "US", "CA", "AE", "AU"]
           }
         ]
       },
@@ -363,7 +550,12 @@
     <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#E4C388]"></span>
     <span>Specialist Brand & Digital Studio for Premium Beauty Businesses</span>
     <span class="hidden md:inline text-white/30">•</span>
-    <span class="hidden md:inline text-[#8C8F9F]">London • New York • Dubai • Toronto • Sydney</span>
+    <span class="hidden md:inline text-[#8C8F9F]">
+      <a href="{% url 'location_detail' 'london' %}" class="hover:text-[#E4C388] transition-colors">London</a> • 
+      <a href="{% url 'location_detail' 'new-york' %}" class="hover:text-[#E4C388] transition-colors">New York</a> • 
+      <a href="{% url 'location_detail' 'dubai' %}" class="hover:text-[#E4C388] transition-colors">Dubai</a> • 
+      <a href="{% url 'location_detail' 'los-angeles' %}" class="hover:text-[#E4C388] transition-colors">Los Angeles</a>
+    </span>
   </div>
 
   <!-- Main Navigation -->
@@ -384,11 +576,11 @@
       <!-- Desktop Navigation Links -->
       <nav class="hidden lg:flex items-center gap-7 text-sm font-medium tracking-wide text-[#B2B5C4]" aria-label="Primary Navigation">
         <a href="/#system" class="hover:text-white transition-colors duration-200">The System</a>
-        <a href="{% url 'services_index' %}" class="hover:text-white transition-colors duration-200">Services</a>
-        <a href="{% url 'industries_index' %}" class="hover:text-white transition-colors duration-200">Who We Serve</a>
-        <a href="{% url 'insights_index' %}" class="hover:text-white transition-colors duration-200">Insights</a>
-        <a href="{% url 'work_index' %}" class="hover:text-white transition-colors duration-200">Concepts</a>
-        <a href="{% url 'process' %}" class="hover:text-white transition-colors duration-200">Process</a>
+        <a href="{% url 'services_index' %}" class="{% if '/services/' in request.path %}active text-[#E4C388]{% else %}hover:text-white{% endif %} transition-colors duration-200">Services</a>
+        <a href="{% url 'industries_index' %}" class="{% if '/industries/' in request.path %}active text-[#E4C388]{% else %}hover:text-white{% endif %} transition-colors duration-200">Who We Serve</a>
+        <a href="{% url 'insights_index' %}" class="{% if '/insights/' in request.path %}active text-[#E4C388]{% else %}hover:text-white{% endif %} transition-colors duration-200">Insights</a>
+        <a href="{% url 'work_index' %}" class="{% if '/work/' in request.path %}active text-[#E4C388]{% else %}hover:text-white{% endif %} transition-colors duration-200">Concepts</a>
+        <a href="{% url 'process' %}" class="{% if '/process/' in request.path %}active text-[#E4C388]{% else %}hover:text-white{% endif %} transition-colors duration-200">Process</a>
         <button type="button" class="open-audit-modal text-[#E4C388] hover:text-white transition-colors duration-200 font-mono text-xs font-semibold cursor-pointer">
           ✦ Free Audit
         </button>
@@ -419,7 +611,7 @@
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
-          <span>DM ON IG</span>
+          <span>Instagram Studio</span>
         </a>
       </div>
 
@@ -461,7 +653,7 @@
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
             </svg>
-            <span>DM ON IG</span>
+            <span>Message on Instagram</span>
           </a>
         </div>
       </nav>
@@ -558,8 +750,10 @@
               </a>
             </li>
             <li>
-              <span class="block text-xs font-mono text-white/50 mb-1">Primary Markets</span>
-              <span class="text-xs text-[#8C8F9F]">UK • US • Canada • UAE • Australia</span>
+              <span class="block text-xs font-mono text-white/50 mb-1">Global Studio Hubs</span>
+              <a href="{% url 'locations_index' %}" class="text-xs text-[#E4C388] hover:underline font-mono">
+                London • New York • Dubai • Los Angeles →
+              </a>
             </li>
           </ul>
         </div>
@@ -572,6 +766,8 @@
           © 2026 QUORV BRAND STUDIO. All rights reserved.
         </div>
         <div class="flex items-center gap-4 flex-wrap">
+          <a href="{% url 'locations_index' %}" class="hover:text-white transition-colors">Global Hubs</a>
+          <span>·</span>
           <a href="{% url 'privacy_policy' %}" class="hover:text-white transition-colors">Privacy Policy</a>
           <span>·</span>
           <a href="{% url 'terms_of_service' %}" class="hover:text-white transition-colors">Terms of Engagement</a>
@@ -724,7 +920,7 @@
   <!-- Include Interactive Beauty Digital Audit Modal -->
   {% include 'includes/audit_modal.html' %}
 
-  <script src="{% static 'js/audit-quiz.js' %}"></script>
+  <script src="{% static 'js/audit-quiz.js' %}?v=2.0"></script>
 
   {% block extra_scripts %}
   {% endblock %}

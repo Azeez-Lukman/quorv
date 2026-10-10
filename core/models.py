@@ -59,12 +59,31 @@ class Industry(models.Model):
     the_challenge = models.TextField(help_text="Common digital mismatch for this beauty sector")
     the_solution = models.TextField(help_text="How Quorv connects branding, web, and booking")
     key_focus = models.CharField(max_length=200, help_text="e.g. Visual distinction, local search, frictionless booking")
+    image_url = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text="Sector showcase image URL or static path"
+    )
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['order', 'title']
         verbose_name = "Industry Specialization"
         verbose_name_plural = "Industry Specializations"
+
+    @property
+    def get_image_url(self):
+        if self.image_url and self.image_url.strip():
+            return self.image_url
+        defaults = {
+            'salons': 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80',
+            'aesthetic-clinics': 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80',
+            'hairstylists': 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80',
+            'nail-lash-studios': 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=1200&q=80',
+            'spas': 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
+            'beauty-professionals': 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80',
+        }
+        return defaults.get(self.slug, 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80')
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -82,7 +101,11 @@ class PortfolioConcept(models.Model):
     category = models.CharField(max_length=80, default="Brand & Digital System")
     concept_summary = models.TextField()
     deliverables = models.CharField(max_length=255, help_text="e.g. Visual Identity, Web Architecture, Booking Experience")
-    image_url = models.URLField(max_length=500, blank=True)
+    image_url = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text="Image URL or static path (e.g. /static/... or https://...)"
+    )
     is_concept = models.BooleanField(
         default=True,
         help_text="Clearly distinguishes design concepts from client work until case studies exist."
@@ -95,9 +118,17 @@ class PortfolioConcept(models.Model):
         verbose_name = "Portfolio Concept"
         verbose_name_plural = "Portfolio Concepts"
 
+    @property
+    def display_image_url(self):
+        if not self.image_url or "photo-1512290900672" in str(self.image_url):
+            return "/static/images/elan-dermatology.jpg"
+        return self.image_url
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        if self.image_url and "photo-1512290900672" in str(self.image_url):
+            self.image_url = "/static/images/elan-dermatology.jpg"
         super().save(*args, **kwargs)
 
     def __str__(self):

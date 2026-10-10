@@ -54,3 +54,6 @@ Desktop.ini
 
 # Static files collected for production
 staticfiles/
+
+# Archive files
+*.zip

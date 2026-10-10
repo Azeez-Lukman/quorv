@@ -134,6 +134,7 @@ def seed_data():
         the_challenge="Many exceptional salons rely entirely on Instagram and word-of-mouth. While the work is stunning, the booking journey requires chaotic DM chats, and the brand looks identical to every standard high-street salon.",
         the_solution="We craft an editorial brand identity and high-converting website that showcases your stylists' artistry, organizes your service tiers, and seamlessly directs appointments into your booking platform.",
         key_focus="Stylist portfolios, transparent service menus, frictionless booking, and local search visibility.",
+        image_url="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80",
         order=1
     )
     Industry.objects.create(
@@ -143,6 +144,7 @@ def seed_data():
         the_challenge="Aesthetic treatments require immense trust, medical credibility, and clinical elegance. Outdated, clinical-looking or generic spa templates fail to communicate high practitioner skill and patient safety.",
         the_solution="We engineer a calm, prestigious digital presence with clear treatment education, consultation booking funnels, practitioner accreditations, and refined aesthetic hierarchy.",
         key_focus="Clinical credibility, consultation funnels, patient education, and luxury restraint.",
+        image_url="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80",
         order=2
     )
     Industry.objects.create(
@@ -152,6 +154,7 @@ def seed_data():
         the_challenge="Independent professionals often lose hours every week managing DMs, sending manual price lists, and fielding clients who aren't the right fit for their price point.",
         the_solution="A sleek, single-destination portfolio and booking portal that filters for ideal clients, displays exact policy details, and elevates your personal brand.",
         key_focus="Curated transformation showcases, clear boundary communication, and automated inquiries.",
+        image_url="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80",
         order=3
     )
     Industry.objects.create(
@@ -161,6 +164,7 @@ def seed_data():
         the_challenge="High volume, rapid appointment cycles, and visual trend-driven clients who need to see precise portfolio quality before booking.",
         the_solution="Tactile, high-aesthetic digital experiences highlighting attention to detail, hygienic standards, and direct booking links.",
         key_focus="Visual texture, rapid mobile booking, and distinct brand personality.",
+        image_url="https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=1200&q=80",
         order=4
     )
     Industry.objects.create(
@@ -170,6 +174,7 @@ def seed_data():
         the_challenge="Communicating serenity, sensory atmosphere, and multi-treatment packages without feeling cluttered or overwhelming.",
         the_solution="Spacious editorial layouts, gentle pacing, sensory visual hierarchy, and intuitive package reservations.",
         key_focus="Atmospheric visual storytelling, package exploration, and gift card / reservation flows.",
+        image_url="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
         order=5
     )
     Industry.objects.create(
@@ -179,6 +184,7 @@ def seed_data():
         the_challenge="Competing with conglomerate beauty brands requires an unmistakable point of view, tactile packaging aesthetics, and credible digital storytelling.",
         the_solution="Full-spectrum brand positioning, digital flagships, and commercial clarity engineered to convert curious scrollers into loyal advocates.",
         key_focus="Brand storytelling, ingredient transparency, and premium retail conversion.",
+        image_url="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80",
         order=6
     )
 
@@ -251,7 +257,7 @@ def seed_data():
         category="Medical Aesthetics Web Flagship & Local SEO",
         concept_summary="A reassuring, clinical digital flagship for a physician-led dermatology and skin rejuvenation practice, featuring interactive consultation pre-screening and localized search supremacy.",
         deliverables="Clinical Web Flagship, Consultation Funnel, Doctor Credentials Architecture, Local SEO Architecture",
-        image_url="https://images.unsplash.com/photo-1512290900672-1f41ec430c00?auto=format&fit=crop&w=1200&q=80",
+        image_url="/static/images/elan-dermatology.jpg",
         is_concept=True,
         order=5
     )

@@ -121,25 +121,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = await res.json();
         if (data.status === 'success') {
-          displayAuditResults(data.score, data.vulnerabilities, payload.business_name);
+          displayAuditResults(data.score, data.vulnerabilities, payload.business_name, data.dm_url, data.wa_url, data.dm_message);
         } else {
           alert(data.message || 'Something went wrong. Please reach out via Instagram.');
           if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.innerHTML = '<span>Generate Health Score →</span>';
+            submitBtn.innerHTML = '<span>Calculate Health Score →</span>';
           }
         }
       } catch (err) {
         alert('Network error. Please contact Quorv on Instagram.');
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span>Generate Health Score →</span>';
+          submitBtn.innerHTML = '<span>Calculate Health Score →</span>';
         }
       }
     });
   }
 
-  function displayAuditResults(score, vulnerabilities, businessName) {
+  function displayAuditResults(score, vulnerabilities, businessName, dmUrl, waUrl, dmMessage) {
     if (step1) step1.classList.add('hidden');
     if (step2) step2.classList.add('hidden');
     if (step3) step3.classList.add('hidden');
@@ -150,6 +150,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const scoreRating = document.getElementById('auditScoreRating');
       const scoreDesc = document.getElementById('auditScoreDesc');
       const vulnList = document.getElementById('auditVulnList');
+      const messagePreview = document.getElementById('auditMessagePreview');
+      const copyBtn = document.getElementById('copyAuditTextBtn');
+      const copyBtnText = document.getElementById('copyBtnText');
+      const openDmBtn = document.getElementById('openAuditDmBtn');
+      const waBtn = document.getElementById('auditWaBtn');
+      const toast = document.getElementById('auditClipboardToast');
+      const toastMessage = document.getElementById('toastMessage');
 
       if (scoreNum) scoreNum.textContent = score;
 
@@ -174,11 +181,89 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (vulnList && vulnerabilities) {
         vulnList.innerHTML = vulnerabilities.map(v => `
-          <li class="flex items-start gap-2.5 text-xs text-[#FAF8F5]/85 font-mono">
-            <span class="text-[#E4C388] font-bold mt-0.5">⚠️</span>
-            <span>${v}</span>
+          <li class="flex items-start gap-2.5 text-xs font-mono audit-vuln-item">
+            <span class="text-[#E4C388] font-bold mt-0.5 flex-shrink-0">⚠️</span>
+            <span class="vuln-text leading-relaxed font-medium">${v}</span>
           </li>
         `).join('');
+      }
+
+      const formattedMessage = dmMessage || `Hi Quorv, I just completed a digital audit on quorv.org for ${businessName}.
+
+Health Score: ${score}/100
+
+Friction points noted:
+${(vulnerabilities || []).map(v => `• ${v}`).join('\n')}
+
+I'd like to discuss fixing these issues and upgrading our digital systems.`;
+
+      if (messagePreview) {
+        messagePreview.textContent = formattedMessage;
+      }
+
+      const instagramDmTarget = dmUrl || 'https://ig.me/m/quorv_01';
+
+      // Pre-copy results to clipboard so it's instantly ready
+      copyToClipboard(formattedMessage);
+
+      function showToast(msg) {
+        if (!toast) return;
+        if (toastMessage) toastMessage.textContent = msg;
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 3500);
+      }
+
+      function copyToClipboard(text, cb) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            if (cb) cb();
+          }).catch(() => {
+            fallbackCopy(text, cb);
+          });
+        } else {
+          fallbackCopy(text, cb);
+        }
+      }
+
+      function fallbackCopy(text, cb) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try {
+          document.execCommand('copy');
+          if (cb) cb();
+        } catch (e) {
+          console.warn('Copy error:', e);
+        }
+        document.body.removeChild(ta);
+      }
+
+      if (copyBtn) {
+        copyBtn.onclick = (e) => {
+          e.preventDefault();
+          copyToClipboard(formattedMessage, () => {
+            if (copyBtnText) copyBtnText.textContent = '✓ Copied!';
+            showToast('✓ Summary copied to clipboard!');
+            setTimeout(() => {
+              if (copyBtnText) copyBtnText.textContent = 'Copy Summary';
+            }, 2500);
+          });
+        };
+      }
+
+      if (openDmBtn) {
+        openDmBtn.href = instagramDmTarget;
+        openDmBtn.onclick = function() {
+          copyToClipboard(formattedMessage);
+          showToast('✓ Summary copied! Opening @quorv_01 in Instagram...');
+          return true; // Allows native anchor target="_blank" to open immediately without popup blockers
+        };
       }
     }
   }

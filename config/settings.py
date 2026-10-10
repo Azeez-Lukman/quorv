@@ -179,7 +179,7 @@ STORAGES = {
 CSRF_TRUSTED_ORIGINS = [
     origin.strip() for origin in os.environ.get(
         'DJANGO_CSRF_TRUSTED_ORIGINS',
-        'http://127.0.0.1:8000,http://localhost:8000,https://quorv.com,https://www.quorv.com,https://*.onrender.com'
+        'http://127.0.0.1:8000,http://localhost:8000,https://quorv.org,https://www.quorv.org,https://quorv.com,https://www.quorv.com,https://*.onrender.com'
     ).split(',') if origin.strip()
 ]
 if RENDER_EXTERNAL_HOSTNAME:
@@ -213,6 +213,7 @@ STUDIO_NOTIFICATION_EMAIL = os.environ.get('STUDIO_NOTIFICATION_EMAIL', 'quorv91
 
 # Studio Brand & Social Constants
 QUORV_INSTAGRAM_URL = "https://www.instagram.com/quorv_01?utm_source=qr&stkn=MWFrdDBjYmZvazBqdA=="
+QUORV_INSTAGRAM_DM_URL = os.environ.get('QUORV_INSTAGRAM_DM_URL', "https://ig.me/m/quorv_01")
 QUORV_WHATSAPP_NUMBER = "+447352789073"
 QUORV_WHATSAPP_URL = "https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business."
 

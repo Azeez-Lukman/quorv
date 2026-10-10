@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}International Beauty Studio Hubs · London, New York, Dubai, Los Angeles · Quorv{% endblock %}
+{% block meta_description %}Quorv engineers bespoke websites, booking integrations, and local search dominance for luxury salons and aesthetic clinics across London, New York, Dubai, and Los Angeles.{% endblock %}
+
+{% block content %}
+<!-- Editorial Hero -->
+<section class="py-20 md:py-28 border-b border-white/[0.06] bg-[#08090C] relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="w-2 h-2 rounded-full bg-[#E4C388] animate-pulse"></span>
+      <span class="font-mono text-xs uppercase tracking-[0.24em] text-[#E4C388]">Global Studio Footprint</span>
+    </div>
+
+    <h1 class="text-4xl sm:text-6xl font-medium tracking-tight text-[#FAF8F5] mb-6 max-w-4xl leading-[1.12]">
+      Digital architecture engineered for the world’s luxury beauty capitals.
+    </h1>
+
+    <p class="text-lg sm:text-xl text-[#B2B5C4] font-light leading-relaxed max-w-3xl mb-12">
+      Every luxury market has its own client psychology, treatment expectations, and booking behaviors. Quorv operates directly across four flagship beauty capitals, delivering bespoke digital systems aligned with local high-ticket clientele.
+    </p>
+
+    <!-- Quick Stats Strip -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-white/[0.08]">
+      <div class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="block text-2xl font-mono font-bold text-[#FAF8F5] mb-1">4 Hubs</span>
+        <span class="text-[11px] font-mono text-[#E4C388] uppercase tracking-wider">Flagship Cities</span>
+      </div>
+      <div class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="block text-2xl font-mono font-bold text-[#FAF8F5] mb-1">100%</span>
+        <span class="text-[11px] font-mono text-[#E4C388] uppercase tracking-wider">Beauty Dedicated</span>
+      </div>
+      <div class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="block text-2xl font-mono font-bold text-[#FAF8F5] mb-1">Local SEO</span>
+        <span class="text-[11px] font-mono text-[#E4C388] uppercase tracking-wider">City Rank Signals</span>
+      </div>
+      <div class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="block text-2xl font-mono font-bold text-[#FAF8F5] mb-1">Multi-Currency</span>
+        <span class="text-[11px] font-mono text-[#E4C388] uppercase tracking-wider">GBP · USD · AED</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location Cards Grid -->
+<section class="py-20 md:py-24 bg-[#0B0D12]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {% for loc in locations %}
+      <div class="p-8 sm:p-10 rounded-2xl bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388]/50 transition-all duration-300 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between gap-4 mb-4">
+            <span class="font-mono text-xs uppercase tracking-widest text-[#E4C388]">{{ loc.country }} · {{ loc.currency }}</span>
+            <span class="font-mono text-[10px] uppercase text-white/40 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.06]">
+              {{ loc.geo_region }}
+            </span>
+          </div>
+
+          <h2 class="text-3xl font-medium text-[#FAF8F5] mb-3 group-hover:text-[#E4C388] transition-colors">
+            {{ loc.city }}
+          </h2>
+
+          <p class="text-sm text-[#B2B5C4] leading-relaxed font-light mb-6">
+            {{ loc.hero_tagline }}
+          </p>
+
+          <div class="mb-6">
+            <span class="block text-[10px] font-mono uppercase tracking-widest text-white/40 mb-2">Prime Districts & Neighborhoods:</span>
+            <div class="flex flex-wrap gap-1.5">
+              {% for hood in loc.neighborhoods|slice:":5" %}
+              <span class="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.05] text-[11px] font-mono text-[#B2B5C4]">
+                {{ hood }}
+              </span>
+              {% endfor %}
+              {% if loc.neighborhoods|length > 5 %}
+              <span class="px-2 py-1 rounded-md bg-white/[0.02] text-[11px] font-mono text-white/40">
+                +{{ loc.neighborhoods|length|add:"-5" }} more
+              </span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-white/[0.06] flex items-center justify-between">
+          <span class="text-xs font-mono text-white/60">Dedicated City Blueprint</span>
+          <a href="{% url 'location_detail' loc.slug %}" class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#E4C388] group-hover:translate-x-1 transition-transform">
+            <span>Explore {{ loc.city }} Hub</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Direct Conversation CTA -->
+    <div class="mt-16 p-10 rounded-2xl bg-[#08090C] border border-[#E4C388]/30 text-center max-w-3xl mx-auto">
+      <span class="text-xs font-mono uppercase tracking-widest text-[#E4C388] block mb-2">Global Coordination</span>
+      <h3 class="text-2xl sm:text-3xl font-medium text-[#FAF8F5] mb-4">
+        Operating in a different luxury market?
+      </h3>
+      <p class="text-sm text-[#B2B5C4] leading-relaxed mb-6 font-light max-w-xl mx-auto">
+        Quorv works with premier salons, aesthetic practices, and cosmetic surgeons internationally across Toronto, Sydney, Paris, and Zurich.
+      </p>
+      <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp px-8 py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold inline-flex items-center gap-2">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        <span>Message Studio on Instagram</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Schema.org CollectionPage & Breadcrumbs -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://quorv.org/locations/#collection",
+      "url": "https://quorv.org/locations/",
+      "name": "International Beauty Studio Hubs · Quorv",
+      "description": "Quorv builds bespoke websites, booking integrations, and local search dominance for luxury salons and aesthetic clinics across London, New York, Dubai, and Los Angeles.",
+      "isPartOf": {
+        "@id": "https://quorv.org/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://quorv.org/locations/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://quorv.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Locations",
+          "item": "https://quorv.org/locations/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}

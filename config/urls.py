@@ -15,6 +15,8 @@ urlpatterns = [
     path('process/', views.process_view, name='process'),
     path('about/', views.about_view, name='about'),
     path('contact/', views.contact_view, name='contact'),
+    path('locations/', views.locations_index, name='locations_index'),
+    path('locations/<slug:city_slug>/', views.location_detail, name='location_detail'),
     path('api/leads/submit/', views.lead_submit, name='lead_submit'),
     path('api/audit/submit/', views.audit_submit, name='audit_submit'),
     path('api/analytics/event/', views.analytics_event, name='analytics_event'),
@@ -32,9 +34,14 @@ urlpatterns = [
 
     path('robots.txt', views.robots_txt, name='robots_txt'),
     path('sitemap.xml', views.sitemap_xml, name='sitemap_xml'),
+    path('llms.txt', views.llms_txt, name='llms_txt'),
+    path('llms-full.txt', views.llms_full_txt, name='llms_full_txt'),
 ]
 
 
 
 if settings.DEBUG and settings.STATICFILES_DIRS:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+
+handler404 = 'core.views.custom_404_view'
+handler500 = 'core.views.custom_500_view'

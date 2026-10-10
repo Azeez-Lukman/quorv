@@ -161,4 +161,42 @@
     }
   });
 </script>
+
+<!-- ContactPage & BreadcrumbList Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://quorv.org/contact/#contactpage",
+      "url": "https://quorv.org/contact/",
+      "name": "Start a Dialogue | Quorv Brand Studio",
+      "description": "Connect with Quorv to elevate the digital presence of your salon, aesthetic clinic, or beauty practice.",
+      "mainEntity": {
+        "@type": "ProfessionalService",
+        "@id": "https://quorv.org/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://quorv.org/contact/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://quorv.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://quorv.org/contact/"
+        }
+      ]
+    }
+  ]
+}
+</script>
 {% endblock %}

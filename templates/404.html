@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}404 · Page Not Found · Quorv Brand Studio{% endblock %}
+{% block robots %}noindex, follow{% endblock %}
+{% block meta_description %}The requested page could not be found. Explore Quorv's bespoke digital systems, services, and sector blueprints for premium beauty businesses.{% endblock %}
+
+{% block content %}
+<section class="min-h-[75vh] flex items-center justify-center py-20 px-6 bg-[#08090C] relative overflow-hidden">
+  
+  <!-- Subtle ambient glow background -->
+  <div class="absolute w-96 h-96 rounded-full bg-[#E4C388]/5 blur-3xl pointer-events-none -top-10 left-1/2 -translate-x-1/2"></div>
+
+  <div class="max-w-2xl mx-auto text-center relative z-10">
+    
+    <!-- Status indicator badge -->
+    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] mb-8">
+      <span class="w-2 h-2 rounded-full bg-[#E4C388]/80"></span>
+      <span class="font-mono text-xs uppercase tracking-[0.24em] text-[#E4C388]">Error 404 · Disconnected Path</span>
+    </div>
+
+    <h1 class="text-4xl sm:text-6xl font-medium tracking-tight text-[#FAF8F5] mb-6 leading-tight">
+      This page is outside the system.
+    </h1>
+
+    <p class="text-base sm:text-lg text-[#B2B5C4] font-light leading-relaxed mb-10 max-w-lg mx-auto">
+      The destination you requested has been relocated, renamed, or never existed. Use the pathways below to reconnect with our studio.
+    </p>
+
+    <!-- Recovery Pathways Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10 text-left">
+      <a href="{% url 'home' %}" class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388] transition-all group flex items-center justify-between">
+        <div>
+          <span class="block text-sm font-medium text-[#FAF8F5] group-hover:text-[#E4C388] transition-colors">Studio Homepage</span>
+          <span class="text-xs font-mono text-[#8C8F9F]">Overview, concepts & audit</span>
+        </div>
+        <span class="text-[#E4C388] group-hover:translate-x-1 transition-transform">→</span>
+      </a>
+
+      <a href="{% url 'services_index' %}" class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388] transition-all group flex items-center justify-between">
+        <div>
+          <span class="block text-sm font-medium text-[#FAF8F5] group-hover:text-[#E4C388] transition-colors">Services Directory</span>
+          <span class="text-xs font-mono text-[#8C8F9F]">Look Premium, Discovered, Booked</span>
+        </div>
+        <span class="text-[#E4C388] group-hover:translate-x-1 transition-transform">→</span>
+      </a>
+
+      <a href="{% url 'industries_index' %}" class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388] transition-all group flex items-center justify-between">
+        <div>
+          <span class="block text-sm font-medium text-[#FAF8F5] group-hover:text-[#E4C388] transition-colors">Sector Blueprints</span>
+          <span class="text-xs font-mono text-[#8C8F9F]">Salons, aesthetic clinics, medspas</span>
+        </div>
+        <span class="text-[#E4C388] group-hover:translate-x-1 transition-transform">→</span>
+      </a>
+
+      <a href="{% url 'locations_index' %}" class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.08] hover:border-[#E4C388] transition-all group flex items-center justify-between">
+        <div>
+          <span class="block text-sm font-medium text-[#FAF8F5] group-hover:text-[#E4C388] transition-colors">Global Studio Hubs</span>
+          <span class="text-xs font-mono text-[#8C8F9F]">London, New York, Dubai, LA</span>
+        </div>
+        <span class="text-[#E4C388] group-hover:translate-x-1 transition-transform">→</span>
+      </a>
+    </div>
+
+    <!-- Direct Dialogue Support -->
+    <div class="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-mono">
+      <span class="text-white/50">Need direct assistance?</span>
+      <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="text-[#E4C388] hover:underline flex items-center gap-1.5">
+        <span>Message Studio on Instagram (@quorv_01)</span>
+        <span>↗</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

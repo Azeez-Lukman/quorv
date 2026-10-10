@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ loc.seo_title }}{% endblock %}
+{% block meta_description %}{{ loc.meta_description }}{% endblock %}
+
+{% block content %}
+<!-- City Hero Section -->
+<section class="py-20 md:py-28 border-b border-white/[0.06] bg-[#08090C] relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+    
+    <!-- Breadcrumb Nav -->
+    <nav class="flex items-center gap-2 text-xs font-mono text-[#8C8F9F] mb-8" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}" class="hover:text-white transition-colors">Home</a>
+      <span>/</span>
+      <a href="{% url 'locations_index' %}" class="hover:text-white transition-colors">Locations</a>
+      <span>/</span>
+      <span class="text-[#E4C388]">{{ loc.city }}</span>
+    </nav>
+
+    <div class="flex items-center gap-3 mb-6">
+      <span class="w-2.5 h-2.5 rounded-full bg-[#E4C388]"></span>
+      <span class="font-mono text-xs uppercase tracking-[0.24em] text-[#E4C388]">{{ loc.city }} Studio Hub · {{ loc.country }}</span>
+      <span class="text-white/30">•</span>
+      <span class="font-mono text-xs text-white/50">{{ loc.currency }}</span>
+    </div>
+
+    <h1 class="text-4xl sm:text-6xl font-medium tracking-tight text-[#FAF8F5] mb-6 max-w-4xl leading-[1.14]">
+      {{ loc.hero_title }}
+    </h1>
+
+    <p class="text-lg sm:text-xl text-[#B2B5C4] font-light leading-relaxed max-w-3xl mb-12">
+      {{ loc.hero_tagline }}
+    </p>
+
+    <!-- Key Location Signals Strip -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-white/[0.08]">
+      <div class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="block text-2xl font-mono font-bold text-[#FAF8F5] mb-1">{{ loc.city }}</span>
+        <span class="text-[11px] font-mono text-[#E4C388] uppercase tracking-wider">Primary Market</span>
+      </div>
+      <div class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="block text-2xl font-mono font-bold text-[#FAF8F5] mb-1">{{ loc.currency }}</span>
+        <span class="text-[11px] font-mono text-[#E4C388] uppercase tracking-wider">Local Currency</span>
+      </div>
+      <div class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="block text-2xl font-mono font-bold text-[#FAF8F5] mb-1">Local SEO</span>
+        <span class="text-[11px] font-mono text-[#E4C388] uppercase tracking-wider">Map & Rank Dominance</span>
+      </div>
+      <div class="p-4 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="block text-2xl font-mono font-bold text-[#FAF8F5] mb-1">Direct Sync</span>
+        <span class="text-[11px] font-mono text-[#E4C388] uppercase tracking-wider">Live Booking Engine</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Market Dynamics & Local Context -->
+<section class="py-20 md:py-24 bg-[#0B0D12] border-b border-white/[0.06]">
+  <div class="max-w-6xl mx-auto px-6">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
+      
+      <!-- Left: Market Context -->
+      <div class="lg:col-span-7 flex flex-col gap-6">
+        <span class="font-mono text-xs uppercase tracking-widest text-[#E4C388]">Local Market Analysis</span>
+        <h2 class="text-3xl sm:text-4xl font-medium text-[#FAF8F5] leading-tight">
+          Why {{ loc.city }} beauty businesses need dedicated digital architecture.
+        </h2>
+        <p class="text-base text-[#B2B5C4] leading-relaxed font-light">
+          {{ loc.market_insights }}
+        </p>
+        <p class="text-sm text-[#8C8F9F] leading-relaxed font-light">
+          When clients in {{ loc.city }} search for luxury aesthetic medicine, bespoke hair coloring, or premium spa experiences, they make split-second evaluations. If your digital presence feels generic or sends them to an unbranded booking screen, they move to a competitor whose website mirrors the high-end reality of their salon.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+          <a href="{% url 'contact' %}" class="btn-whatsapp px-8 py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold w-full sm:w-auto text-center">
+            Discuss Your {{ loc.city }} Space →
+          </a>
+          <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono uppercase tracking-wider text-[#FAF8F5] transition-colors w-full sm:w-auto text-center">
+            Message on Instagram
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Prime Neighborhood Targeting -->
+      <div class="lg:col-span-5 bg-[#0E1015] border border-white/[0.08] p-8 sm:p-10 rounded-2xl shadow-xl">
+        <span class="font-mono text-xs uppercase tracking-widest text-[#E4C388] block mb-2">Geo-Targeting Coverage</span>
+        <h3 class="text-xl font-bold text-[#FAF8F5] mb-4">Prime {{ loc.city }} Districts We Serve</h3>
+        <p class="text-xs text-[#8C8F9F] mb-6 font-light leading-relaxed">
+          Our local SEO structures are specifically tuned to capture high-intent localized search queries originating across these core areas:
+        </p>
+
+        <div class="flex flex-wrap gap-2 mb-8">
+          {% for hood in loc.neighborhoods %}
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#08090C] border border-white/[0.06] text-xs font-mono text-[#FAF8F5]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#E4C388]"></span>
+            <span>{{ hood }}</span>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="pt-6 border-t border-white/[0.06] text-xs font-mono text-[#8C8F9F]">
+          <span class="block text-white/50 text-[10px] uppercase tracking-wider mb-1">Recommended Booking Integrations:</span>
+          <span class="text-white">{{ loc.recommended_booking }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- The 3 Pillars for This City -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 border-t border-white/[0.06]">
+      <div class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="font-mono text-xs text-[#E4C388] block mb-2 font-bold">01 · LOOK PREMIUM</span>
+        <h4 class="text-base font-bold text-[#FAF8F5] mb-2 font-mono uppercase text-xs">Editorial Visual Prestige</h4>
+        <p class="text-xs text-[#8C8F9F] leading-relaxed">
+          Tactile beauty aesthetics, bespoke dark palettes, and refined typography that justify high-ticket treatments in {{ loc.city }}.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="font-mono text-xs text-[#E4C388] block mb-2 font-bold">02 · GET DISCOVERED</span>
+        <h4 class="text-base font-bold text-[#FAF8F5] mb-2 font-mono uppercase text-xs">Local {{ loc.city }} Search</h4>
+        <p class="text-xs text-[#8C8F9F] leading-relaxed">
+          Targeted local keywords and Generative Engine Optimization (GEO) so Google, Perplexity, and ChatGPT recommend your practice.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.06]">
+        <span class="font-mono text-xs text-[#E4C388] block mb-2 font-bold">03 · GET BOOKED</span>
+        <h4 class="text-base font-bold text-[#FAF8F5] mb-2 font-mono uppercase text-xs">Frictionless Appointments</h4>
+        <p class="text-xs text-[#8C8F9F] leading-relaxed">
+          Seamlessly connected to {{ loc.recommended_booking }} with upfront deposit workflows that eliminate no-shows.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Sector Blueprints Available in This City -->
+<section class="py-20 bg-[#08090C] border-b border-white/[0.06]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl mb-12">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-2">Specializations</span>
+      <h2 class="text-3xl font-medium text-[#FAF8F5]">
+        Dedicated systems by beauty sector in {{ loc.city }}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for ind in industries|slice:":6" %}
+      <div class="p-6 rounded-xl bg-[#0E1015] border border-white/[0.06] hover:border-[#E4C388]/40 transition-colors flex flex-col justify-between">
+        <div>
+          <h3 class="text-lg font-bold text-[#FAF8F5] mb-2">{{ ind.title }}</h3>
+          <p class="text-xs text-[#8C8F9F] leading-relaxed mb-4 font-light">
+            {{ ind.subtitle }}
+          </p>
+        </div>
+        <a href="{% url 'industry_detail' ind.slug %}" class="text-xs font-mono uppercase tracking-wider text-[#E4C388] inline-flex items-center gap-1.5 hover:underline">
+          <span>View Blueprint</span>
+          <span>→</span>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Switch Between Other Hubs -->
+<section class="py-16 bg-[#0B0D12]">
+  <div class="max-w-6xl mx-auto px-6">
+    <span class="font-mono text-xs uppercase tracking-widest text-[#8C8F9F] block mb-6">Explore Other Quorv Flagship Hubs:</span>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {% for other in other_locations %}
+      <a href="{% url 'location_detail' other.slug %}" class="p-5 rounded-xl bg-[#0E1015] border border-white/[0.06] hover:border-[#E4C388] transition-all flex items-center justify-between group">
+        <div>
+          <span class="block text-base font-medium text-[#FAF8F5] group-hover:text-[#E4C388] transition-colors">{{ other.city }}</span>
+          <span class="text-xs font-mono text-[#8C8F9F]">{{ other.country }} · {{ other.currency }}</span>
+        </div>
+        <span class="text-[#E4C388] group-hover:translate-x-1 transition-transform">→</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Schema.org Structured Data for LocalBusiness & Breadcrumbs -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://quorv.org/locations/{{ loc.slug }}/#localbusiness",
+      "name": "Quorv · {{ loc.city }} Studio Hub",
+      "url": "https://quorv.org/locations/{{ loc.slug }}/",
+      "description": "{{ loc.meta_description }}",
+      "parentOrganization": {
+        "@id": "https://quorv.org/#organization"
+      },
+      "telephone": "+447352789073",
+      "email": "quorv911@gmail.com",
+      "priceRange": "$$$$",
+      "currenciesAccepted": "{{ loc.currency }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ loc.city }}",
+        "addressRegion": "{{ loc.region }}",
+        "addressCountry": "{{ loc.country_code }}"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "{{ loc.lat }}",
+        "longitude": "{{ loc.lng }}"
+      },
+      "areaServed": [
+        {% for hood in loc.neighborhoods %}
+        {
+          "@type": "AdministrativeArea",
+          "name": "{{ hood }}"
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://quorv.org/locations/{{ loc.slug }}/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://quorv.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Locations",
+          "item": "https://quorv.org/locations/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ loc.city }}",
+          "item": "https://quorv.org/locations/{{ loc.slug }}/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://quorv.org/locations/{{ loc.slug }}/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why choose Quorv for {{ loc.city }} salon and aesthetic clinic web design?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quorv specializes exclusively in the premium beauty and cosmetic sector. In {{ loc.city }}, our websites establish immediate price authority, reflect luxury physical spaces, and integrate directly with premier scheduling platforms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What booking platforms does Quorv integrate for {{ loc.city }} beauty businesses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We integrate with {{ loc.recommended_booking }}, creating seamless booking journeys, upfront deposit capture, and zero manual DM messaging overhead."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}

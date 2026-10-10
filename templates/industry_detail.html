@@ -28,6 +28,12 @@
       </p>
     </div>
 
+    <!-- Sector Visual Hero Banner -->
+    <div class="aspect-[21/9] sm:aspect-[24/9] rounded-2xl overflow-hidden relative mb-12 border border-white/[0.08]">
+      <img src="{{ industry.get_image_url }}" alt="{{ industry.title }}" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-[#08090C] via-transparent to-transparent"></div>
+    </div>
+
     <!-- Direct Answer Block for AI and Human Visitors -->
     <div class="p-8 rounded-2xl bg-[#0E1015] border border-white/[0.08] mb-12">
       <span class="font-mono text-xs text-[#E4C388] uppercase tracking-wider block mb-2">Direct Overview</span>
@@ -66,7 +72,7 @@
       <span class="font-mono text-xs uppercase tracking-[0.22em] text-[#E4C388] block mb-2">Booking Infrastructure</span>
       <h2 class="text-2xl font-bold text-[#FAF8F5] mb-3">How booking systems integrate with your website</h2>
       <p class="text-sm text-[#B2B5C4] leading-relaxed font-light mb-6">
-        We connect your website directly with your preferred scheduling platform: including <strong>Fresha, Phorest, Vagaro, Boulevard, Jane App, or Acuity Scheduling</strong>. If you do not have software yet, we set up the ideal platform or establish a direct automated WhatsApp reservation flow with deposit links.
+        We connect your website directly with your preferred scheduling platform: including <strong>Fresha, Phorest, Vagaro, Boulevard, Jane App, or Acuity Scheduling</strong>. If you do not have software yet, we set up the ideal platform or establish a direct automated reservation flow with deposit links.
       </p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-white/[0.06] text-xs">
@@ -82,6 +88,53 @@
             We guide you in selecting the right software for your team or create an automated direct booking pipeline with consultation intake and deposit requests.
           </p>
         </div>
+      </div>
+
+      <!-- Booking Platform Integration Matrix (High Information-Gain GEO Table) -->
+      <div class="mt-8 pt-6 border-t border-white/[0.06] overflow-x-auto">
+        <h4 class="font-mono text-xs uppercase tracking-wider text-[#E4C388] mb-4">Supported Booking Architectures & Workflow Capabilities</h4>
+        <table class="w-full text-left text-xs font-mono border-collapse min-w-[550px]">
+          <thead>
+            <tr class="border-b border-white/[0.1] text-white/50">
+              <th class="py-2.5 pr-4 font-normal">Platform</th>
+              <th class="py-2.5 px-4 font-normal">Best For</th>
+              <th class="py-2.5 px-4 font-normal">Integration Method</th>
+              <th class="py-2.5 pl-4 font-normal">Deposit & Card Capture</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/[0.04] text-[#B2B5C4]">
+            <tr>
+              <td class="py-3 pr-4 font-bold text-white">Fresha</td>
+              <td class="py-3 px-4">Salons, Hair Studios & Spas</td>
+              <td class="py-3 px-4">Direct Deep-Link & Modal Embed</td>
+              <td class="py-3 pl-4 text-emerald-400">Automated Guarantee</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 font-bold text-white">Phorest</td>
+              <td class="py-3 px-4">Multi-Branch Clinics & Salons</td>
+              <td class="py-3 px-4">Custom Branded Booking Portal</td>
+              <td class="py-3 pl-4 text-emerald-400">Full Card Authorization</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 font-bold text-white">Boulevard</td>
+              <td class="py-3 px-4">High-End Luxury Salons & Medspas</td>
+              <td class="py-3 px-4">Seamless Precision API Widget</td>
+              <td class="py-3 pl-4 text-emerald-400">Custom Upfront Deposits</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 font-bold text-white">Jane App</td>
+              <td class="py-3 px-4">Aesthetic Clinics & Medical Spas</td>
+              <td class="py-3 px-4">HIPAA/GDPR Medical Chart Embed</td>
+              <td class="py-3 pl-4 text-emerald-400">Integrated Intake & Pay</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 font-bold text-white">Vagaro / Acuity</td>
+              <td class="py-3 px-4">Independent Stylists & Studios</td>
+              <td class="py-3 px-4">Responsive Seamless Flow</td>
+              <td class="py-3 pl-4 text-emerald-400">Stripe / Square Protected</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -124,12 +177,9 @@
         </p>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0">
-        <a href="{% url 'contact' %}" class="btn-whatsapp px-7 py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold">
+      <div class="flex-shrink-0">
+        <a href="{% url 'contact' %}" class="btn-whatsapp px-8 py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold inline-block">
           Start a Project →
-        </a>
-        <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl border border-white/[0.1] hover:border-[#E4C388] text-xs font-mono uppercase tracking-wider text-[#FAF8F5] transition-colors">
-          DM ON IG
         </a>
       </div>
     </div>
@@ -144,35 +194,35 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://quorv.com/industries/{{ industry.slug }}/#webpage",
-      "url": "https://quorv.com/industries/{{ industry.slug }}/",
+      "@id": "https://quorv.org/industries/{{ industry.slug }}/#webpage",
+      "url": "https://quorv.org/industries/{{ industry.slug }}/",
       "name": "Premium Websites for {{ industry.title }} · Quorv",
       "description": "Quorv builds premium websites and connected digital systems for {{ industry.title|lower }}.",
       "isPartOf": {
-        "@id": "https://quorv.com/#website"
+        "@id": "https://quorv.org/#website"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://quorv.com/industries/{{ industry.slug }}/#breadcrumbs",
+      "@id": "https://quorv.org/industries/{{ industry.slug }}/#breadcrumbs",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://quorv.com/"
+          "item": "https://quorv.org/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Industries",
-          "item": "https://quorv.com/industries/"
+          "item": "https://quorv.org/industries/"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "{{ industry.title }}",
-          "item": "https://quorv.com/industries/{{ industry.slug }}/"
+          "item": "https://quorv.org/industries/{{ industry.slug }}/"
         }
       ]
     },
@@ -180,10 +230,32 @@
       "@type": "Service",
       "name": "Digital Systems & Websites for {{ industry.title }}",
       "provider": {
-        "@id": "https://quorv.com/#organization"
+        "@id": "https://quorv.org/#organization"
       },
       "serviceType": "Beauty Business Website Design & Digital Architecture",
       "description": "{{ industry.the_solution }}"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://quorv.org/industries/{{ industry.slug }}/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does Quorv integrate booking software for {{ industry.title }}?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quorv connects your website directly to your preferred scheduling system—including Fresha, Phorest, Boulevard, Vagaro, Jane App, or Acuity—ensuring smooth booking, card capture, and deposit workflows without disrupting ongoing operations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does a custom website help {{ industry.title|lower }} attract high-ticket clients?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By replacing generic templates with editorial typography, tactile visual storytelling, clear treatment menus, and local search dominance, Quorv establishes price authority and converts casual searchers into committed bookings."
+          }
+        }
+      ]
     }
   ]
 }
