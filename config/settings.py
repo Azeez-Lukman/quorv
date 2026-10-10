@@ -217,4 +217,9 @@ QUORV_INSTAGRAM_DM_URL = os.environ.get('QUORV_INSTAGRAM_DM_URL', "https://ig.me
 QUORV_WHATSAPP_NUMBER = "+447352789073"
 QUORV_WHATSAPP_URL = "https://wa.me/447352789073?text=Hi%20Quorv%2C%20I%27m%20interested%20in%20improving%20the%20digital%20presence%20of%20my%20beauty%20business."
 
+# Search Engine & Webmaster Verification
+GOOGLE_SITE_VERIFICATION = os.environ.get('GOOGLE_SITE_VERIFICATION', '')
+BING_SITE_VERIFICATION = os.environ.get('BING_SITE_VERIFICATION', '')
+
+
 
